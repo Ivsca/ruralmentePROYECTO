@@ -1,56 +1,54 @@
 <div>
+    <x-navbar-welcome :seeButton="2" :register="false" />
     <!-- Section Inicio -->
     <section class="relative w-full h-screen bg-cover bg-center bg-no-repeat"
             style="background-image: url('{{ asset('fondos_imagenes_video/ai-generated-8593083_1280.jpg') }}');">
 
         
-            <div class="absolute inset-0 bg-gradient-to-r from-gray-300/60 via-gray-300/30 to-transparent backdrop-blur-sm"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-gray-900/40 via-gray-700/20 to-transparent backdrop-blur-sm"></div>
 
             <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
                 <img src="{{ asset('logos/Ruralmente_blanco.png') }}"alt="Ruralmente Logo"class="w-30 md:w-64 object-contain mx-auto mb-6">
 
-                <h1 class="text-5xl md:text-6xl font-serif font-bold mb-4">
+                <h1 class="text-5xl md:text-6xl font-serif font-bold tracking-tight leading-snug mb-4">
                     Bienestar Rural – Café con Propósito
                 </h1>
+
                 
                 <p class="text-xl md:text-2xl italic mb-6 max-w-2xl">
                     Bienestar rural que transforma empresas y comunidades
                 </p>
                 
-                <p class="text-lg md:text-xl mb-8 max-w-3xl leading-relaxed">
-                    Brindamos servicios de bienestar y salud mental a mujeres campesinas, agricultores, ganaderos y caficultores mientras vendemos café premium producido por campesinos que priorizan su felicidad.
-                </p>
+                <div class="text-lg md:text-xl mb-8 max-w-3xl leading-relaxed space-y-2">
+                    <p>Brindamos servicios de bienestar y salud mental a: Mujeres campesinas, agricultores, ganaderos y caficultores. Mientras vendemos café premium producido por campesinos que priorizan su felicidad.</p>
+                    <p></p>
+                </div>
+
                 
-                <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                <div class="flex flex-col sm:flex-row gap-3 mb-8">
                     <a href="{{ route('about') }}" 
-                    class="bg-[#35452B] hover:bg-[#2a3722] text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                        Conoce nuestros servicios
+                    class="bg-[#2E8B57] hover:bg-[#267349] text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-leaf"></i> Conoce nuestros servicios
                     </a>
                     
                     <a href="{{ route('ruralCafe') }}" 
-                    class="bg-white hover:bg-[#2a3722] text-[#35452B] hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-
-                        Prueba el Café de Campesinos Felices
-                    </a>
-
-                     <a href="{{ route('ruralCafe') }}" 
-                    class="bg-white hover:bg-[#2a3722] text-[#35452B] hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-
-                        Perchas
+                    class="border-2 border-[#2E8B57] hover:bg-[#2E8B57] text-[#2E8B57] hover:text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-mug-hot"></i> Prueba el Café de Campesinos Felices
                     </a>
                 </div>
+
                 
                 <div class="flex flex-col sm:flex-row gap-8 text-center">
-                    <div class="flex flex-col items-center">
-                        <span class="text-3xl md:text-4xl font-bold">500+</span>
-                        <span class="text-lg">Campesinos acompañados</span>
+                    <div class="flex flex-col items-center bg-white/10 px-6 py-4 rounded-lg shadow-sm">
+                        <span class="text-4xl font-bold text-white">500+</span>
+                        <span class="text-lg text-white">Campesinos acompañados</span>
                     </div>
-                    <div class="flex flex-col items-center">
-                        <span class="text-3xl md:text-4xl font-bold">15+</span>
-                        <span class="text-lg">Empresas aliadas</span>
+                    <div class="flex flex-col items-center bg-white/10 px-6 py-4 rounded-lg shadow-sm">
+                        <span class="text-4xl font-bold text-white">15+</span>
+                        <span class="text-lg text-white">Empresas aliadas</span>
                     </div>
                 </div>
-            </div>
+
     </section>
 
 
