@@ -1,181 +1,131 @@
 <x-guest-layout>
+    <x-navbar-welcome :seeButton="2" :register="false" />
+    
+    <!-- Header específico de about -->
+    <header class="w-full py-20 text-white bg-gradient-to-b from-[#2E8B57] via-[#2E8B57]/80 to-transparent">
+      <div class="container mx-auto px-4 text-center">
+          <h1 class="text-4xl md:text-5xl font-serif font-bold mb-6">
+              Sobre Nosotros
+          </h1>
+          <p class="text-xl max-w-3xl mx-auto leading-relaxed">
+              Conoce la historia y propósito detrás de Ruralmente
+          </p>
+      </div>
+    </header>
 
-    <x-navbar-welcome :seeButton="2" :register=false/>
 
-      <!-- contenedor para la informacion -->
+    <!-- Contenido principal de about -->
+    <main class="w-full">
+        <!-- Sección 1: ¿Quiénes somos? -->
+        <section class="w-full py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Texto principal -->
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold text-[#8B4513] mb-8 leading-tight">
+                            Transformamos vidas rurales a través del bienestar y el café con propósito.
+                        </h2>
+                        
+                        <p class="text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto text-justify md:text-center">
+                            Ruralmente es una iniciativa colombiana que une empresas, comunidades rurales y profesionales del bienestar para generar impacto social sostenible. Trabajamos con campesinos, caficultores y ganaderos para mejorar su salud mental, fortalecer sus comunidades y crear productos con propósito.
+                        </p>
+                    </div>
 
-      <main class="top-11/12">
-        <!-- quienes somos -->
-        <section
-          class="w-full h-96 bg-cover bg-center bg-white bg-[url(/Public/fondos_imagenes_video/Fondo_atardecer.jpg)]">
-          <div class="flex flex-col justify-center w-1/2 h-full mx-auto">
-            <h1 class="text-5xl text-white font-display">Quienes Somos?</h1>
-            <p class="mt-2 text-white font-body">
-              <strong>Ruralmente</strong> es una empresa que impulsa el éxito personal y
-              laboral de los agricultores colombianos, con atención
-              psicosocial especializada y el uso de tecnología avanzada,
-              para la mejora de su productividad, satisfacción laboral,
-              relaciones comerciales, y bienestar
-            </p>
-          </div>
+                    <!-- Imagen de apoyo -->
+                    <div class="max-w-2xl mx-auto mb-12">
+                        <img 
+                            src="{{ asset('fondos_imagenes_video/agricultor.png') }}" 
+                            alt="Comunidad rural de Ruralmente" 
+                            class="w-full h-64 md:h-80 object-cover rounded-2xl shadow-lg"
+                        >
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <!-- cultura rural -->
+        <!-- Sección 2: Valores o pilares -->
+        <section class="w-full py-16 bg-[#ECE8DD]">
+            <div class="container mx-auto px-4">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#35452B] text-center mb-12">
+                        Nuestros Pilares Fundamentales
+                    </h2>
 
-        <section class="mt-16">
-          <article class="grid w-2/3 grid-cols-2 mx-auto">
-            <div class="flex p-4">
-              <hr class="w-3 h-full mr-4 bg-gray-300 rounded-lg">
-              <div>
-                <h1 class="text-3xl font-display">Misión</h1>
-                <p class="font-body">
-                  Nuestra misión es más que palabras, es un compromiso emocional. Visualiza un agro donde la salud mental es prioridad. Eso es lo que hacemos en Ruralmente
-                </p>
-              </div>
-            </div>
+                    <!-- Grid de valores -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        
+                        <!-- Valor 1: Bienestar emocional -->
+                        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 text-center">
+                            <div class="w-20 h-20 bg-[#2E8B57] rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-heart text-white text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-[#35452B] mb-3">Bienestar Emocional</h3>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                Promovemos la salud mental y el equilibrio emocional en las comunidades rurales a través de programas especializados y acompañamiento profesional.
+                            </p>
+                        </div>
 
-            <div class="flex p-4 ">
-              <hr class="w-3 h-full mr-4 bg-gray-300 rounded-lg">
-              <div>
-                <h1 class="text-3xl font-display">Visión</h1>
-                <p class="font-body">
-                  Convertirnos en la referencia mundial en el cuidado de la salud mental en el ámbito agrícola, marcando un impacto positivo en cada vida que tocamos.
-                </p>
-              </div>
-            </div>
-          </article>
+                        <!-- Valor 2: Desarrollo comunitario -->
+                        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 text-center">
+                            <div class="w-20 h-20 bg-[#8B4513] rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-users text-white text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-[#35452B] mb-3">Desarrollo Comunitario</h3>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                Fortalecemos el tejido social rural mediante proyectos colaborativos que empoderan a las comunidades y fomentan el trabajo en equipo.
+                            </p>
+                        </div>
 
-          <!-- segundo articulo donde estta valores -->
-          <article class="flex justify-center w-1/2 mx-auto mt-10">
-            <div class="flex p-4 ">
-              <hr class="w-2 h-full mr-4 bg-gray-300 rounded-lg">
-              <div>
-                <h1 class="text-3xl font-display">Valores</h1>
-                <p class="font-body">
-                  Nuestra ética corporativa impulsa la igualdad y el bienestar a través de la empatía, la innovación y un firme compromiso con el propósito de mejorar la vida de los demás.
-                </p>
-              </div>
-            </div>
-          </article>
-          <div class="flex flex-col items-center mt-20">
-            <h1 class="text-5xl font-display ">¿Que hacemos nosotros?</h1>
-            <div class="bg-black w-3/4 h-[1px] my-3"></div>
-            <p class="w-3/4 text-center font-body">¿Te gustaría saber exactamente qué hacemos para mejorar la salud mental en el agro? Permítenos mostrarte cómo cada paso que damos marca la diferencia.</p>
-          </div>
+                        <!-- Valor 3: Café con propósito -->
+                        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 text-center">
+                            <div class="w-20 h-20 bg-[#35452B] rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-mug-hot text-white text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-[#35452B] mb-3">Café con Propósito</h3>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                Comercializamos café premium producido por campesinos felices, donde cada taza cuenta una historia de bienestar y desarrollo rural.
+                            </p>
+                        </div>
 
-          <!-- que hacemos nosotros -->
-          <article class="flex flex-col items-center w-full">
-
-            <div class="grid w-3/4 grid-cols-2 mt-5">
-              <div
-                class="p-4 m-6 duration-500 ease-out bg-gray-100 shadow-lg hover:-translate-y-6 hover:rotate-2 shadow-slate-300 rounded-xl">
-                <h1 class="m-4 text-2xl font-display"></h1>
-                <p class="font-body"><span class="text-lg font-extrabold">Atención Integral en Salud Mental: </span>Proporcionamos servicios especializados para mejorar la salud mental en el sector agrícola. Desde la identificación de áreas afectadas hasta la conexión con profesionales a través de nuestra red de apoyo, nos enfocamos en brindar una atención integral.</p>
-              </div>
-              <!-- primera carta -->
-              <div
-                class="p-4 m-6 duration-500 ease-out bg-gray-100 shadow-lg hover:-translate-y-6 hover:-rotate-2 shadow-slate-300 rounded-xl">
-                <h1 class="m-4 text-2xl font-display"></h1>
-                <p class="font-body"><span class="text-lg font-extrabold">Planes Personalizados para Empresas Agro:</span> Desarrollamos planes adaptados a las necesidades de medianas y grandes empresas del sector agroalimentario, agropecuario y agroindustrial. Nuestros planes, como el Plan Semilla, Plan Cosecha y Plan Finca, abordan específicamente los desafíos del entorno laboral agrícola.</p>
-              </div>
-              <!-- segunda -->
-              <div
-                class="p-4 m-6 duration-500 ease-out bg-gray-100 shadow-lg hover:-translate-y-6 hover:rotate-2 shadow-slate-300 rounded-xl">
-                <h1 class="m-4 text-2xl font-display"></h1>
-                <p class="font-body"><span class="text-lg font-extrabold">Uso Innovador de Tecnologías:</span> Incorporamos tecnologías innovadoras, como Alma (nuestro chatbot por WhatsApp), para optimizar la identificación de áreas de vida afectadas, geolocalizar usuarios y mapear rutas de atención. Buscamos siempre estar a la vanguardia en la mejora del bienestar.</p>
-              </div>
-              <div
-                class="p-4 m-6 duration-500 ease-out bg-gray-100 shadow-lg hover:-translate-y-6 hover:-rotate-2 shadow-slate-300 rounded-xl">
-                <h1 class="m-4 text-2xl font-display"></h1>
-                <p class="font-body"><span class="text-lg font-extrabold">Promoción de la Sostenibilidad y Bienestar:</span> Nuestro enfoque va más allá de la salud mental. Trabajamos para promover la sostenibilidad, el bienestar y la igualdad en el sector agrícola. Nos esforzamos por ser agentes de cambio positivo en todas las comunidades agrícolas que servimos.</p>
-              </div>
-
-            </div>
-          </article>
-
-          <!-- como lo hacemos -->
-
-          <article class="flex flex-col items-center w-full h-auto">
-            <div class="flex flex-col items-center m-auto">
-              <h1 class="mt-8 text-5xl font-display">¿Como lo hacemos?</h1>
-              <hr class="w-80 h-[1px] bg-slate-700 my-5"/>
-            </div>
-            <!-- video y descripcion de que es lo que hacemos  -->
-            <div class="flex items-center w-3/4 p-8">
-              <!-- para el video -->
-              <div class="w-1/2 ">
-                <video controls src=" {{ asset('videos/2023_06_05_11_15_IMG_8636.mp4') }}"
-                  class="shadow-2xl rounded-3xl shadow-slate-600"></video>
-              </div>
-
-              <!-- la descripcion del video -->
-              <div class="w-1/2 p-5 f">
-                <p class="text-justify">Con el Plan Semilla, Plan Cosecha y Plan Finca, combinamos servicios de Alma, teleasistencia y días de campo grupales para abordar integralmente las necesidades de tu equipo. </p>
-              </div>
-            </div>
-          </article>
-
-          <!-- planes almacigo -->
-          <article id="planes" class="flex flex-col items-center w-full h-auto">
-
-
-            <div class="flex justify-around w-3/4 p-3 md:w-11/12 sm:w-full">
-              <!-- lado derecho -->
-              <div class="flex flex-col items-center justify-center w-1/3 p-4 ">
-                <div class="flex flex-col items-center justify-center">
-                  <h1 class="p-4 text-3xl font-display">Planes almácigo</h1>
-                  <p class="text-justify">
-                    Imagina ser un agricultor con acceso a una plataforma que no solo optimiza la productividad sino que también cuida tu bienestar. Esto es Almácigo
-                  </p>
+                        <!-- Valor 4: Alianzas empresariales -->
+                        <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 text-center">
+                            <div class="w-20 h-20 bg-[#2E8B57] rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-handshake text-white text-3xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-[#35452B] mb-3">Alianzas Empresariales</h3>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                Conectamos empresas comprometidas con comunidades rurales, creando sinergias que generan impacto social medible y sostenible.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="flex justify-between w-full mt-4">
-                  <a class="bg-[#35452B] hover:bg-[#010201] text-white p-2 rounded-lg " href="#">Terminos y condiciones</a>
-                  <a class="bg-[#35452B] hover:bg-[#31551b] text-white p-2 rounded-lg " href="#">Politicas de seguridad</a>
-                </div>
-              </div>
-
-              <!-- lado izquierdo -->
-              <div class="flex items-end justify-center w-1/2 ">
-                <div class="w-1/2 p-4 m-8 list-none bg-gray-100 shadow-sm shadow-gray-200 rounded-xl">
-                  <h1 class="p-4 mb-4 text-5xl text-center font-display">Plan Semilla</h1>
-                  <li class="flex items-center my-3"><img class="w-9" src="{{ asset('icon/Planes_almacigo/agricultor.png') }}" alt="">
-                    <p class="ml-2 font-display">1 producto</p>
-                  </li>
-                  <li class="flex items-center my-3"><img class="w-9" src="{{ asset('icon/Planes_almacigo/bot.png') }}" alt="">
-                    <p class="ml-2 text-start">Platadorma almácigo</p>
-                  </li>
-                  <li class="flex items-center my-3"><img class="w-9" src="{{ asset('icon/Planes_almacigo/servicio-al-cliente.png') }}"
-                      alt="">
-                    <p class="ml-2">4 Sesiones</p>
-                  </li>
-
-                </div>
-                <!-- plan cosecha  -->
-                <div class="w-1/2 p-5 m-8 list-none bg-gray-100 shadow-sm shadow-gray-200 rounded-xl">
-                  <h1 class="mb-4 text-5xl text-center font-display">Plan Cosecha</h1>
-                  <div class="my-8">
-                    <li class="flex items-center my-3 text-lg font-display"><img class="w-12 mr-2" src="{{ asset('icon/Planes_almacigo/campesinos_grup.png') }}" alt="">10-30 productores</li>
-                    <li class="flex items-center my-3"><img class="mt-3 mr-2 w-9" src="{{ asset('icon/Planes_almacigo/bot.png') }}"
-                        alt="">Plataforma Almácigo</li>
-                    <li class="flex items-center my-3 text-start"><img class="mr-2 w-9" src="{{ asset('icon/Planes_almacigo/servicio-al-cliente.png') }}" alt="">4 sesiones individuales de telepsicología:</li>
-                    <li class="flex items-center my-3 text-start"><img class="mr-2 w-9" src="{{ 'icon/Planes_almacigo/pasador-de-ubicacion.png' }}" alt="">
-                      <p>1 día de campo de elección</p>
-                      <div class="ml-8">
-                    <li class="ml-14">Bienestar Financiera</li>
-                    <li class="ml-14">Bienestar agrícola</li>
-                    <li class="ml-14">Bienestar Psicosocial</li>
-                  </div>
-                  </li>
-                </div>
-
-              </div>
             </div>
-            </div>
-          </article>
-
         </section>
 
-        <x-footer />
-      </main>
+        <!-- Sección 3: CTA adicional -->
+        <section class="w-full py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#35452B] mb-6">
+                        ¿Listo para ser parte del cambio?
+                    </h2>
+                    <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+                        Únete a nuestra iniciativa y descubre cómo puedes generar impacto real en las comunidades rurales colombianas.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="{{ route('ruralCafe') }}" 
+                           class="bg-[#35452B] hover:bg-[#2a3722] text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:-translate-y-1">
+                            Conoce nuestro café
+                        </a>
+                        <a href="#contacto" 
+                           class="border-2 border-[#35452B] text-[#35452B] hover:bg-[#35452B] hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:-translate-y-1">
+                            Contáctanos
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
+    <x-footer />
 </x-guest-layout>

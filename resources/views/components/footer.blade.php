@@ -1,20 +1,88 @@
-<footer class="grid grid-cols-3 bg-teal-600 mt-10 bottom-0">
-    <div class="flex justify-center">
-        <img class="w-1/2" src="{{ asset('Sello_Rural_Mente_Negro.png') }}" alt="">
-    </div>
-    <div class="mt-10">
-        <a class="cursor-pointer my-3">Terminos y condiciones</a>
-        <h1 class="cursor-pointer my-3">@livewire('modal.contact')</h1>
-    </div>  
-    <div class="mt-10">
-        <h1 class="font-extrabold m-2 text-center ">REDES SOCIALES</h1>
-        <div class="h-16 m-auto w-32 flex justify-between items-center">
-            <a href="#" class="group"> <i class="fa-brands fa-whatsapp rounded-sm h-5 w-5 hover:p-1 mt-3 ease-in-out duration-500 hidden group-hover:flex group-hover:text-black group-hover:absolute  fa-2xl"></i>
-                <i class="fa-brands fa-whatsapp fa-2xl group-hover:text-[#ffffff79]" class="hover:text-green-600"></i></i></a>
+<footer class="w-full bg-[#6F4E37] text-white py-12">
+    <div class="container mx-auto px-4">
+        <!-- Grid de tres columnas -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            
+            <!-- Columna izquierda - Logo + Misión -->
+            <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                <!-- Logo -->
+                <img 
+                    src="{{ asset('logos/Ruralmente_banco.png') }}" 
+                    alt="Ruralmente Logo" 
+                    class="w-32 h-32 mb-4 object-contain"
+                >
+                <!-- Misión -->
+                <p class="text-lg italic text-white opacity-90 leading-relaxed max-w-xs">
+                    Transformando vidas rurales a través del bienestar y el café con propósito.
+                </p>
+            </div>
 
-                <a href="#" class="group"> <i class="fa-regular fa-envelope rounded-sm h-5 w-5 hover:p-1 mt-3 ease-in-out duration-500 hidden group-hover:flex group-hover:text-black group-hover:absolute  fa-2xl"></i>
-                    <i class="fa-regular fa-envelope fa-2xl group-hover:text-[#ffffff79]" class="hover:text-green-600"></i></i></a>
+            <!-- Columna central - Contacto -->
+            <div class="flex flex-col items-center md:items-start">
+                <h3 class="text-xl font-bold mb-6 text-white">Contacto</h3>
+                <div class="space-y-4">
+                    <!-- Email -->
+                    <div class="flex items-center">
+                        <i class="fas fa-envelope text-white opacity-80 mr-3 w-5"></i>
+                        <a href="mailto:contacto@ruralmente.co" class="text-white opacity-90 hover:opacity-100 transition-opacity">
+                            contacto@ruralmente.co
+                        </a>
+                    </div>
+                    <!-- Teléfono -->
+                    <div class="flex items-center">
+                        <i class="fas fa-phone text-white opacity-80 mr-3 w-5"></i>
+                        <a href="tel:+573108126547" class="text-white opacity-90 hover:opacity-100 transition-opacity">
+                            +57 310 812 6547
+                        </a>
+                    </div>
+                    <!-- Ubicación -->
+                    <div class="flex items-center">
+                        <i class="fas fa-map-marker-alt text-white opacity-80 mr-3 w-5"></i>
+                        <span class="text-white opacity-90">Bogotá, Colombia</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna derecha - Nuestros Servicios -->
+            <div class="flex flex-col items-center md:items-start">
+                <h3 class="text-xl font-bold mb-6 text-white">Nuestros Servicios</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-center">
+                        <i class="fas fa-leaf text-white opacity-80 mr-3 w-5"></i>
+                        <span class="text-white opacity-90">Programas de Resiliencia 360</span>
+                    </li>
+                     <li class="flex items-center">
+                        <i class="fas fa-chart-line text-white opacity-80 mr-3 w-5"></i>
+
+                        <a href="{{ route('ruralCafe') }}" 
+                        class="text-white opacity-90 hover:opacity-100 hover:underline transition">
+                            Cafés Campesinos Felices
+                        </a>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-chart-line text-white opacity-80 mr-3 w-5"></i>
+
+                        <a href="{{ route('news.view') }}" 
+                        class="text-white opacity-90 hover:opacity-100 hover:underline transition">
+                            Consultoría en Impacto Social
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <!-- Línea divisoria -->
+        <div class="border-t border-white border-opacity-30 mt-8 pt-8 max-w-6xl mx-auto">
+            <!-- Texto de derechos de autor -->
+            <div class="text-center">
+                <p class="text-white opacity-80 text-sm">
+                    © 2023 Ruralmente. Todos los derechos reservados. 
+                    <span class="inline-flex items-center">
+                        Hecho con <i class="fas fa-heart text-red-400 mx-1"></i> para el campo colombiano.
+                    </span>
+                </p>
+            </div>
         </div>
     </div>
-
 </footer>

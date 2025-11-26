@@ -32,7 +32,7 @@
                     <select wire:model='documentType' class="w-full rounded-md border-gray-300">
                         <option selected hidden value="">Seleccione aquí</option>
                         <option value="C.C">Cedula de Ciudadania</option>
-                        <option value="T.I">Targeta de identidad</option>
+                        <option value="T.I">Tarjeta de identidad</option>
                         <option value="C.E">Cedula extrangeria</option>
                     </select>
                     <x-input-error for="documentType" />

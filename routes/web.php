@@ -45,6 +45,11 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::get('/news-view', function () {
+    return view('news-view');
+})->name('news.view');
+
+
 //antes de registrarse
 Route::view('/Quienes_somos', 'about')->name('about');
 Route::view('/Ruralmente_cafe', 'ruralmente-cafe')->name('ruralCafe');

@@ -1,277 +1,439 @@
 <div>
-    <div class="w-[100%]">
-        <video autoplay muted loop class="object-cover w-[100%] h-[100vh]"
-            src="{{ asset('videos/2023_06_05_11_13_IMG_8633.mp4') }}"></video>
-    </div>
-    <nav
-        class="z-30 absolute w-[100%] h-[17%] top-0 bg-gradient-to-b items-center from-black from-20%  text-gray-100 grid grid-cols-12 gap-4">
-        <ul class="col-span-3 ">
-            <img class="w-20 mx-auto" src="{{ asset('logos/Ruralmente_banco.png') }}" alt="imagen">
-        </ul>
-        <ul class="col-span-6">
-            <li class="mt-3 text-center">
-                <h1 class="text-xl">IMPACTOS</h1>
-            </li>
-            <li class="flex justify-center gap-2 mt-5 text-center align-middle">
-                <div class=" w-96">
-                    <h1 class="text-xl font-semibold">Agriculteres</h1>
-                    <h1>280 usuarios Atendidos</h1>
-                </div>
-                <div class="w-1 h-10 mt-2 bg-gray-500 rounded-lg"></div>
-                <div class="w-96 group ">
-                    <a href="#" class="flex justify-center text-xl font-semibold">
-                        <img class="w-12 " src="{{ asset('icon/graficos.png') }}" alt="">
+    <!-- Section Inicio -->
+    <section class="relative w-full h-screen bg-cover bg-center bg-no-repeat"
+            style="background-image: url('{{ asset('fondos_imagenes_video/ai-generated-8593083_1280.jpg') }}');">
+
+        
+            <div class="absolute inset-0 bg-gradient-to-r from-gray-300/60 via-gray-300/30 to-transparent backdrop-blur-sm"></div>
+
+            <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
+                <img src="{{ asset('logos/Ruralmente_blanco.png') }}"alt="Ruralmente Logo"class="w-30 md:w-64 object-contain mx-auto mb-6">
+
+                <h1 class="text-5xl md:text-6xl font-serif font-bold mb-4">
+                    Bienestar Rural – Café con Propósito
+                </h1>
+                
+                <p class="text-xl md:text-2xl italic mb-6 max-w-2xl">
+                    Bienestar rural que transforma empresas y comunidades
+                </p>
+                
+                <p class="text-lg md:text-xl mb-8 max-w-3xl leading-relaxed">
+                    Brindamos servicios de bienestar y salud mental a mujeres campesinas, agricultores, ganaderos y caficultores mientras vendemos café premium producido por campesinos que priorizan su felicidad.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                    <a href="{{ route('about') }}" 
+                    class="bg-[#35452B] hover:bg-[#2a3722] text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                        Conoce nuestros servicios
                     </a>
-                    <div
-                        class="w-full h-[400px] left-0 mt-3 hidden absolute group-hover:flex justify-center group-hover:text-white group-hover:bg-black backdrop-blur-md group-hover:bg-opacity-50  bg-opacity-70 items-center p-4 rounded-lg">
-                        <p class="w-6/12 text-justify p-2 text-lg font-semibold">El agro enfrenta desafíos en salud
-                            mental. Ruralmente no sólo aborda este problema, lo transforma. Descubre el impacto positivo
-                            que juntos estamos generando</p>
+                    
+                    <a href="{{ route('ruralCafe') }}" 
+                    class="bg-white hover:bg-[#2a3722] text-[#35452B] hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+
+                        Prueba el Café de Campesinos Felices
+                    </a>
+
+                     <a href="{{ route('ruralCafe') }}" 
+                    class="bg-white hover:bg-[#2a3722] text-[#35452B] hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+
+                        Perchas
+                    </a>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-8 text-center">
+                    <div class="flex flex-col items-center">
+                        <span class="text-3xl md:text-4xl font-bold">500+</span>
+                        <span class="text-lg">Campesinos acompañados</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <span class="text-3xl md:text-4xl font-bold">15+</span>
+                        <span class="text-lg">Empresas aliadas</span>
                     </div>
                 </div>
-                <div class="w-1 h-10 mt-2 bg-gray-500 rounded-lg"></div>
-                <div class="w-96">
-                    <a href="#" class="flex justify-center text-xl font-semibold"><img class="w-12 "
-                            src="{{ asset('icon/dd.png') }}" alt=""></a>
-                </div>
-            </li>
-        </ul>
-        <ul class="col-span-3 text-center">
-            <h1 class="mb-2 text-lg font-semibold">OBJETIVOS DE DESARROLLO SOSTENIBLE</h1>
-            <div class="flex justify-center gap-8 ">
-                <div class="group">
-                    <img id="ods_3" class="w-16 h-16 rounded-lg cursor-pointer bg-white"
-                        src="{{ asset('ods/ods 3.png') }}" alt="logo1">
-                    <div
-                        class="w-full h-[400px] left-0 mt-1 hidden absolute group-hover:flex flex-col justify-center group-hover:text-white group-hover:bg-black backdrop-blur-md group-hover:bg-opacity-70  bg-opacity-70 items-center p-4 rounded-lg">
-                        <span class="text-xl font-extrabold">Salud y Bienestar 🌱🌍</span>
-                        <p class="w-6/12 text-justify p-2 text-lg">
-                            En Ruralmente, abrazamos el compromiso con el Objetivo de Desarrollo Sostenible 3,
-                            trabajando incansablemente para mejorar la salud mental en el sector agrícola. Nuestra
-                            plataforma Almácigo y servicios especializados están diseñados para cultivar un ambiente
-                            emocionalmente saludable y promover el bienestar entre las comunidades agrícolas.
-                        </p>
-                        <img class="w-24 mt-5" src="{{ asset('icon/blancos/ods3blanco.png') }}" alt="">
-                    </div>
-                </div>
-
-                <div class="group">
-                    <img class="w-16 h-16 rounded-lg cursor-pointer bg-white" src="{{ asset('ods/ods 5.png') }}"
-                        alt="logo2">
-                    <div
-                        class=" w-full h-[400px] left-0 mt-1 hidden absolute group-hover:flex flex-col justify-center   group-hover:text-white group-hover:bg-black backdrop-blur-md group-hover:bg-opacity-70  bg-opacity-70 items-center p-4 rounded-lg">
-                        <span class="text-xl font-extrabold">Igualdad de Género 🌈✨</span>
-                        <p class="w-6/12 text-justify p-2 text-lg">
-                            Enfocados en la equidad, abrazamos el <b>ODS 5</b>. Creemos en la importancia de proporcionar apoyo
-                            y recursos igualitarios para todos, independientemente del género. Almácigo trabaja para
-                            eliminar barreras y fomentar un entorno agrícola inclusivo.
-                        </p>
-                        <img class="w-24 mt-5" src="{{ asset('icon/blancos/ods5blanco.png') }}" alt="">
-                    </div>
-                </div>
-
-                <div class="group">
-                    <img class="w-16 h-16 rounded-lg cursor-pointer bg-white " src="{{ asset('ods/ods 10.png') }}"
-                        alt="logo3">
-                    <div
-                        class=" w-full h-[400px] left-0 mt-1 hidden absolute group-hover:flex flex-col justify-center   group-hover:text-white group-hover:bg-black backdrop-blur-md group-hover:bg-opacity-70  bg-opacity-70 items-center p-4 rounded-lg">
-                        <span class="text-xl font-extrabold">Reducción de las Desigualdades 🌐🤝</span>
-                        <p class="w-6/12 text-justify p-2 text-lg">Nuestra misión incluye la promoción del ODS 10.
-                            Trabajamos activamente para reducir las desigualdades en el sector agrícola, asegurándonos
-                            de que cada individuo tenga acceso a servicios de salud mental de alta calidad, sin importar
-                            su posición o antecedentes.
-                        </p>
-                        <img class="w-24 mt-5" src="{{ asset('icon/blancos/ods10blanco.png') }}" alt="">
-                    </div>
-                </div>
-
             </div>
-        </ul>
-    </nav>
-
-    <x-navbar-welcome :seeButton="$seeButton" :register="$register" />
-
-
-
-
-    <!-- section donde se aloja todo el contenido -->
-    <section class="w-full flex flex-col items-center justify-center mt-[9vh] ">
-        <article class="flex items-center justify-center w-full ">
-            <div class="flex flex-col justify-center w-1/2 p-4 m-7">
-                <h1 class="text-3xl text-center">Quiénes Somos?</h1>
-                <p class="text-xl font-medium font-body"><strong>Ruralmente</strong> es una empresa que impulsa el éxito
-                    personal y laboral de los agricultores colombianos, con atención.</p>
-                <div class="my-4">
-                    <a href="{{ route('about') }}" class="btn-type-1">Conocenos más</a>
-                </div>
-            </div>
-
-            <div class="flex justify-end ">
-                <img class="" src="{{ asset('fondos_imagenes_video/agricultor.png') }}" alt="">
-            </div>
-        </article>
-
-        <!-- contenedor de la linea almácigo -->
-        <article class="grid items-center justify-center w-11/12 grid-cols-2 mt-3">
-            <div class="flex justify-center ">
-                <video class="w-1/2 m-3 shadow-2xl rounded-2xl shadow-slate-600 "
-                    src="{{ asset('videos/12 conexión video.mp4') }}" controls></video>
-            </div>
-
-
-            <div class=" p-3">
-                <h1 class="text-4xl">Linea Almácigo</h1>
-                <p class="font-body text-lg">“¡Hola! Mi nombre es Alma, y pertenezco al equipo de
-                    Ruralmente; tengo 25
-                    años, y soy de cuna campesina. Decidí ser psicóloga porque crecí viendo el estrés y la preocupación
-                    que, el trabajo en el campo, le producía a mi papá. A través de nuestra plataforma psicosocial
-                    Almácigo, busco ayudarle a la gente en el campo a cuidar de su bienestar”.</p>
-            </div>
-
-        </article>
-
-        <!-- historieta  -->
-        <article id="sapo" class="flex justify-around w-11/12 my-2">
-            <div class="w-1/5">
-                <div class="w-full h-96">
-                    <img class="w-full h-full object-cover rounded-md"
-                        src="{{ asset('fondos_imagenes_video/1.jpeg') }}" alt="">
-                </div>
-                <a href="{{route('news')}}"
-                    class="block py-3 mt-4 font-semibold text-center text-gray-100 bg-teal-700 rounded-lg text-md">Noticias</a>
-            </div>
-            <div class="w-1/5">
-                <div class="w-full h-96">
-                    <img class="object-cover w-full h-full rounded-md"
-                        src="{{ asset('fondos_imagenes_video/pasos_cafe.jpg') }}" alt="">
-                </div>
-                <a href="#"
-                    class="block py-3 mt-4 font-semibold text-center text-gray-100 bg-teal-700 rounded-lg text-md">Sostenibilidad</a>
-            </div>
-            <div class="w-1/5">
-                <div class="w-full h-96">
-                    <img class="object-cover w-full h-full rounded-md"
-                        src="{{ asset('fondos_imagenes_video/tonos_cafe.jpg') }}" alt="">
-                </div>
-                <a href="#"
-                    class="bg-teal-700 rounded-lg block text-center font-semibold text-gray-100 text-md mt-4 py-3">Boletin
-                    cafeteros</a>
-            </div>
-        </article>
-
-        <!-- carusel de los aliados -->
-        <article class="w-full h-[40vh] flex justify-between items-center my-5 rounded-lg py-10" loop>
-            <div id="carousel-container" class="w-[80%] bg-gray-200 rounded-lg">
-                <div id="carousel"
-                    class="flex justify-start items-center animate-scroll w-max-content scroll-animation h-auto">
-                    {{-- elementos normal --}}
-                    <a href="#" id="carousel-items" class="w-[300px] m-5"><img class=""
-                            src="{{ asset('Aliados/Alcaldia.png') }}" alt="Imagen 1"></a>
-                    <a href="#" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/agcenter.png') }}" alt="Imagen 2"></a>
-                    <a href="#" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/cafetear.png') }}" alt="Imagen 4"></a>
-                    <a href="#" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/creame.png') }}" alt="Imagen 5"></a>
-                    <a href="#" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/cvs.png') }}" alt="Imagen 6"></a>
-                    <a href="#" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/hubsena.png') }}" alt="Imagen 7"></a>
-                    <a href="#" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/encampo.png') }}" alt="Imagen 8"></a>
-                    <a href="https://impacthub.net/" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/impacthub.png') }}" alt="Imagen 9"></a>
-                    <a href="https://in-ova.co/" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/in-ova.png') }}" alt="Imagen 10"></a>
-                    <a href="https://www.funlam.edu.co/" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/luisamigo.png') }}" alt="Imagen 11"></a>
-                    <a href="https://www.rutanmedellin.org/" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/nodos.png') }}" alt="Imagen 12"></a>
-                    <a href="https://www.rutanmedellin.org/" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/rutan.png') }}" alt="Imagen 13"></a>
-                    <a href="https://redtecnoparque.com/" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/tecnoParque.png') }}" alt="Imagen 14"></a>
-                    <a href="https://www.upb.edu.co/es/home" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/upb.png') }}" alt="Imagen 15"></a>
-                    {{-- duplicados --}}
-                    <a href="#" id="carousel-items" class="w-[300px] m-5"><img class=""
-                            src="{{ asset('Aliados/Alcaldia.png') }}" alt="Imagen 1"></a>
-                    <a href="#" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/agcenter.png') }}" alt="Imagen 2"></a>
-                    <a href="#" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/cafetear.png') }}" alt="Imagen 4"></a>
-                    <a href="#" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/creame.png') }}" alt="Imagen 5"></a>
-                    <a href="#" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/cvs.png') }}" alt="Imagen 6"></a>
-                    <a href="#" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/hubsena.png') }}" alt="Imagen 7"></a>
-                    <a href="#" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/encampo.png') }}" alt="Imagen 8"></a>
-                    <a href="https://impacthub.net/" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/impacthub.png') }}" alt="Imagen 9"></a>
-                    <a href="https://in-ova.co/" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/in-ova.png') }}" alt="Imagen 10"></a>
-                    <a href="https://www.funlam.edu.co/" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/luisamigo.png') }}" alt="Imagen 11"></a>
-                    <a href="https://www.rutanmedellin.org/" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/nodos.png') }}" alt="Imagen 12"></a>
-                    <a href="https://www.rutanmedellin.org/" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/rutan.png') }}" alt="Imagen 13"></a>
-                    <a href="https://redtecnoparque.com/" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/tecnoParque.png') }}" alt="Imagen 14"></a>
-                    <a href="https://www.upb.edu.co/es/home" id="carousel-items" class="w-[300px] m-5"><img
-                            src="{{ asset('Aliados/upb.png') }}" alt="Imagen 15"></a>
-                </div>
-            </div>
-        </article>
-
-
-        <article class="w-9/12 my-4 bg-gray-200 rounded-lg mt-10">
-                <div class="p-4">
-                    <p class="my-2 text-lg text-black"><span class="font-bold">Desata la Productividad:</span> Secretos Revelados</p>
-                    <p class="text-justify text-black">¡Prepárate para transformar tu cosecha! En Ruralmente, desvelamos los secretos para potenciar la productividad agrícola. Descubre cómo nuestros servicios innovadores y planes personalizados están llevando a las empresas agroalimentarias a nuevos niveles de eficiencia. ¡Aumenta tu rendimiento y cosecha el éxito con nosotros!</p>
-                </div>
-                <div class="items-center p-4">
-                    <p class="my-2 text-black text-lg"><span class="font-bold">Bienestar en el Agro:</span> El Eslabón Perdido para la Calidad de Vida</p>
-                    <p class="text-justify text-black"><span class="font-semibold">¿Imaginas un entorno agrícola donde el bienestar es la clave?</span> En Ruralmente, creemos que una vida plena es esencial para una agricultura próspera. Explora cómo nuestros planes, centrados en la salud mental y calidad de vida, están transformando las comunidades agrícolas. ¡Descubre el poder del bienestar en cada surco!</p>
-                </div>
-                <div class="items-center p-4">
-                    <p class="my-2 text-black text-lg"><span class="font-bold">Ruralmente Impacta: </span> Historias Reales de Cambio Social en el Agro</p>
-                    <p class="text-justify text-black">Sumérgete en las historias inspiradoras de cambio. Conoce cómo Ruralmente está dejando huella social en el sector agrícola. Desde la reducción de desigualdades hasta la promoción de la sostenibilidad, descubre cómo estamos haciendo que cada cultivo cuente. ¡Únete a la revolución de bienestar y haz una diferencia real en el agro!</p>
-                </div>
-        </article>
     </section>
- 
+
+
+    <!-- SECCIÓN 2: Dos formas de generar impacto real -->
+    <section class="w-full py-16 bg-[#ECE8DD]">
+        <div class="container mx-auto px-4">
+            <!-- Título principal -->
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-[#35452B] mb-4">
+                    Dos formas de generar impacto real
+                </h2>
+                <p class="text-xl text-gray-700 max-w-2xl mx-auto">
+                    Conectamos empresas con comunidades rurales a través de bienestar y café con propósito
+                </p>
+            </div>
+
+            <!-- Grid de dos columnas -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                
+                <!-- Columna Izquierda: Servicios de Bienestar B2B -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-l-4 transform hover:-translate-y-2">
+
+                   
+                   
+                    <div class="mb-6">
+                        <img 
+                            src="{{ asset('fondos_imagenes_video/masaje.jpg') }}" 
+                            alt="Café de Campesinos Felices" 
+                            class="w-full h-48 object-cover rounded-lg shadow-md"
+                        >
+                    </div>
+
+                    <div class=" mb-3">
+                        <img 
+                            src="{{ asset('icon/hoja.jpg') }}" 
+                            alt="icono hoja"
+                            class="w-14 h-14 object-contain"
+                        >
+                    </div>
+
+                     <h3 class="text-2xl font-bold text-[#2E8B57] mb-4">
+                        Servicios de Bienestar B2B
+                    </h3>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Programas de salud mental y bienestar para comunidades agrícolas y pecuarias, financiados por empresas que buscan impacto social, mejora en productividad o fortalecimiento de sus cadenas de valor rurales.
+                    </p>
+                    
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-[#2E8B57] mr-3 mt-1">✓</span>
+                            <span class="text-gray-700">Talleres de salud mental y bienestar emocional</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#2E8B57] mr-3 mt-1">✓</span>
+                            <span class="text-gray-700">Acompañamiento psicológico personalizado</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#2E8B57] mr-3 mt-1">✓</span>
+                            <span class="text-gray-700">Programas de desarrollo comunitario sostenible</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Columna Derecha: Café de Campesinos Felices -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-l-4 transform hover:-translate-y-2">
+                    
+                    
+                    
+                    <div class="mb-6">
+                        <img 
+                            src="{{ asset('fondos_imagenes_video/saco-de-arpillera-negro-de-cafe.jpg') }}" 
+                            alt="Café de Campesinos Felices" 
+                            class="w-full h-48 object-cover rounded-lg shadow-md"
+                        >
+                    </div>
+
+                    <div class=" mb-3">
+                        <img 
+                            src="{{ asset('icon/taza.jpg') }}" 
+                            alt="icono café"
+                            class="w-14 h-14 object-contain"
+                        >
+                    </div>
+
+
+                    <h3 class="text-2xl font-bold text-[#8B4513] mb-4">
+                        Café de Campesinos Felices
+                    </h3>
+                    
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Café premium producido por caficultores que priorizan su salud mental y bienestar, vendido a empresas para consumo interno o regalos corporativos.
+                    </p>
+                    
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-[#8B4513] mr-3 mt-1">✓</span>
+                            <span class="text-gray-700">100% café colombiano de alta calidad</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#8B4513] mr-3 mt-1">✓</span>
+                            <span class="text-gray-700">Cada compra apoya programas de bienestar rural</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#8B4513] mr-3 mt-1">✓</span>
+                            <span class="text-gray-700">Ideal para consumo interno o regalos corporativos</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: Del bienestar, nace el mejor alimento -->
+    <section class="w-full py-20 bg-white relative overflow-hidden">
+        
+        <div class="absolute right-0 top-0 w-1/3 h-full opacity-10 lg:opacity-20">
+           
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <!-- Título principal -->
+            <div class="text-center mb-16 max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-[#35452B] mb-6 leading-tight">
+                    Del bienestar, nace el mejor alimento:<br>
+                    <span class="text-[#8B4513]">transformación rural integral</span>
+                </h2>
+                
+                <p class="text-xl text-gray-700 leading-relaxed">
+                    Cada inversión en nuestros programas cuenta una historia de transformación. Cuando una empresa financia nuestros servicios de bienestar para agricultores, ganaderos y caficultores, o elige nuestro Café de Campesinos Felices, se convierte en parte de un movimiento que prioriza el bienestar integral del campo colombiano.
+                </p>
+            </div>
+
+            <!-- Tres bloques de impacto -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
+                
+                <!-- Bloque 1: Inversión con Propósito -->
+                <div class="bg-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-200">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 bg-[#2E8B57] rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-seedling text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#2E8B57]">Inversión con Propósito</h3>
+                    </div>
+                    <p class="text-gray-700 text-center">
+                        Empresas eligen entre impacto social, fortalecimiento reputacional, o mejora en productividad de sus cadenas de valor rurales
+                    </p>
+                </div>
+
+                <!-- Bloque 2: Bienestar Rural Integral -->
+                <div class="bg-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-200">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 bg-[#8B4513] rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-heart text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#8B4513]">Bienestar Rural Integral</h3>
+                    </div>
+                    <p class="text-gray-700 text-center">
+                        Trabajadores del campo agrícola y pecuario reciben apoyo en salud mental, desarrollo personal y fortalecimiento comunitario
+                    </p>
+                </div>
+
+                <!-- Bloque 3: Resultados Tangibles -->
+                <div class="bg-gray-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-200">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 bg-[#35452B] rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-chart-line text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#35452B]">Resultados Tangibles</h3>
+                    </div>
+                    <p class="text-gray-700 text-center">
+                        Las empresas obtienen reportes de impacto, mejoras en reputación, aumento en motivación de productores, o café premium para consumo interno
+                    </p>
+                </div>
+            </div>
+
+            <!-- Línea divisoria -->
+            <div class="max-w-4xl mx-auto mb-12">
+                <div class="border-t border-gray-300"></div>
+            </div>
+
+            <!-- Beneficios diferenciados -->
+            <div class="max-w-4xl mx-auto text-center">
+                <h3 class="text-2xl font-bold text-[#35452B] mb-8">
+                    Beneficios diferenciados según tu objetivo empresarial:
+                </h3>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-8">
+                    <div class="bg-gradient-to-r from-[#2E8B57] to-[#3DA56A] text-white px-8 py-4 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <h4 class="text-xl font-bold mb-2">Para Grandes Empresas</h4>
+                        <p class="text-sm opacity-90">Impacto social medible y fortalecimiento reputacional</p>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-[#8B4513] to-[#A0522D] text-white px-8 py-4 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300">
+                        <h4 class="text-xl font-bold mb-2">Para Cadenas de Valor</h4>
+                        <p class="text-sm opacity-90">Mejora en productividad y sostenibilidad de proveedores</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NUEVA SECCIÓN 4: PERCHAS CAMPESINAS -->
+    <section class="w-full py-20 relative overflow-hidden bg-cover bg-center bg-no-repeat"
+        style="background-image: url('{{ asset('fondos_imagenes_video/vector.jpg') }}');">
+        <!-- Elementos decorativos sutiles -->
+        <div class="absolute top-10 left-10 w-20 h-20 opacity-5">
+            
+        </div>
+        <div class="absolute bottom-10 right-10 w-16 h-16 opacity-5">
+            <i class="fas fa-hat-cowboy text-5xl text-[#2E8B57]"></i>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <!-- Título y subtítulo -->
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-[#8B4513] mb-6">
+                    PERCHAS CAMPESINAS
+                </h2>
+                <p class="text-xl italic text-gray-700 leading-relaxed">
+                    Lleva el espíritu del campo contigo, camisetas y gorras con diseños artesanales que apoyan el bienestar rural
+                </p>
+            </div>
+
+            <!-- Grid de productos -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
+                
+                <!-- Producto 1: Camiseta ruralmente -->
+                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 overflow-hidden">
+                    <!-- Imagen del producto -->
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <img src="{{ asset('fondos_imagenes_video/Outfits.jpg') }}" alt="Camiseta Ruralmente" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-[#35452B] mb-2">Camiseta Verde Ruralmente</h3>
+                        <p class="text-gray-600 mb-4 text-sm">
+                            Camiseta de algodón con diseño artesanal del campo colombiano
+                        </p>
+                        
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-[#8B4513]">$80.000</span>
+                            <span class="text-sm text-gray-500">COP</span>
+                        </div>
+                        
+                        <button class="w-full bg-[#2E8B57] hover:bg-[#267349] text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                            Consultar disponibilidad
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Producto 2: Cachucha ruralmente azul -->
+                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 overflow-hidden">
+                    <!-- Imagen del producto -->
+                  <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        <img src="{{ asset('fondos_imagenes_video/Gorra Lisa De Malla Tucson Negro Invasion Caps.jpg') }}" alt="Camiseta Ruralmente" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-[#35452B] mb-2">Gorra Ruralmente Negra</h3>
+                        <p class="text-gray-600 mb-4 text-sm">
+                            Gorra de malla con diseño artesanal del campo colombiano
+                        </p>
+                        
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-[#8B4513]">$66.000</span>
+                            <span class="text-sm text-gray-500">COP</span>
+                        </div>
+                        
+                        <button class="w-full bg-[#2E8B57] hover:bg-[#267349] text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                            Consultar disponibilidad
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Producto 3: Cachucha café campesinos -->
+                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 overflow-hidden">
+                    <!-- Imagen del producto -->
+                    <div class="h-64 bg-gray-200 flex items-center justify-center">
+                        
+                        <img src="{{ asset('fondos_imagenes_video/ideas.jpg') }}" alt="Camiseta café Ruralmente" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-[#35452B] mb-2">Camiseta café Ruralmente</h3>
+                        <p class="text-gray-600 mb-4 text-sm">
+                            Camiseta de algodón con diseño artesanal del campo colombiano
+                        </p>
+                        
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-[#8B4513]">$75.000</span>
+                            <span class="text-sm text-gray-500">COP</span>
+                        </div>
+                        
+                        <button class="w-full bg-[#2E8B57] hover:bg-[#267349] text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                            Consultar disponibilidad
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Línea divisoria decorativa -->
+            <div class="max-w-4xl mx-auto mb-8">
+                <div class="border-t border-gray-300 relative">
+                  
+                </div>
+            </div>
+
+            <!-- Nota de impacto social -->
+            <div class="text-center max-w-3xl mx-auto">
+                <p class="text-lg italic text-gray-700 leading-relaxed">
+                    <i class="fas fa-hands-helping text-[#2E8B57] mr-2"></i>
+                    Cada compra apoya directamente a los programas de bienestar emocional para agricultores, ganaderos y caficultores en el campo colombiano
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div>
+    <!-- ... (Todas las secciones anteriores se mantienen igual) ... -->
+
+    <!-- SECCIÓN 5: CONTACTO -->
+    <section class="w-full py-20 relative overflow-hidden bg-cover bg-center bg-no-repeat"
+        style="background-image: url('{{ asset('fondos_imagenes_video/fondo-degragado.jpg') }}');">
+        <div class="container mx-auto px-4">
+            <!-- Título principal -->
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-[#35452B] mb-6">
+                    Genera impacto real. Únete a nuestra iniciativa.
+                </h2>
+            </div>
+
+            <!-- Grid de tres columnas de contacto -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                
+                <!-- Bloque 1: Para Empresas B2B -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 text-center">
+                    <div class="w-16 h-16 bg-[#2E8B57] rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-building text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#35452B] mb-4">Para Empresas B2B</h3>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Si representas una empresa interesada en colaborar con proyectos rurales...
+                    </p>
+                    <div class="text-[#2E8B57] font-semibold">
+                        contacto@ruralmentes.com
+                    </div>
+                </div>
+
+                <!-- Bloque 2: Escríbenos -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 text-center">
+                    <div class="w-16 h-16 bg-[#8B4513] rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-envelope text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#35452B] mb-4">Escríbenos</h3>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        ¿Tienes preguntas o quieres saber más?
+                    </p>
+                    <div class="text-[#8B4513] font-semibold">
+                        contacto@ruralmentes.com
+                    </div>
+                </div>
+
+                <!-- Bloque 3: Llámanos -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 text-center">
+                    <div class="w-16 h-16 bg-[#35452B] rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-phone text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#35452B] mb-4">Llámanos</h3>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Comunícate directamente con nuestro equipo.
+                    </p>
+                    <div class="text-[#35452B] font-semibold">
+                        +57 300 847 6257
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12 max-w-2xl mx-auto">
+                <p class="text-lg text-gray-600 italic">
+                    Estamos listos para ayudarte a crear un impacto positivo en las comunidades rurales colombianas.
+                </p>
+            </div>
+        </div>
+    </section>
     <x-footer />
-
-    <!-- <iframe id="Modal" class="modal flex bg-black bg-opacity-30 items-center justify-center fixed z-50 top-0 left-0 h-[100vh] w-[100vw]" src="/src/Formularios/Formulario_inicio.html" frameborder="0"></iframe> -->
-    <script src="src/js/modalLogin.js"></script>
-    <script src="src/js/modalRegister.js"></script>
-    <!-- <script src="src/js/validacion_registro.js"></script> -->
-    <script>
-        // // Obtén una referencia al enlace
-        const navbottom = document.getElementById("navbottom");
-        const logo = document.getElementById("logo");
-        const inst = document.getElementById("inst");
-        const avatar = document.getElementById("avatar");
-
-        // Agrega un evento para detectar el scroll
-        window.addEventListener("scroll", () => {
-            // Obtén la posición actual de desplazamiento vertical
-            const scrollY = window.scrollY;
-
-            // Define una posición de desplazamiento en la que quieres que cambie el color
-            const scrollThreshold = 1000; // Cambia esto según tus necesidades
-
-            // Verifica si el desplazamiento ha alcanzado el umbral
-            if (scrollY >= scrollThreshold) {
-                // Agrega la clase "scroll" para cambiar el color
-                navbottom.classList.add("scroll");
-            } else {
-                // Elimina la clase "scroll" para volver al color original
-                navbottom.classList.remove("scroll");
-            }
-        });
-    </script>
 </div>

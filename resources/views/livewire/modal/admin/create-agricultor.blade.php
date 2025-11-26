@@ -78,7 +78,7 @@
                         <select class="w-full border-gray-300 rounded-md" wire:model='documentType'>
                             <option selected hidden>seleccione tipo de documento</option>
                             <option value="C.C">Cedula de Ciudadania</option>
-                            <option value="T.I">Targeta de identidad</option>
+                            <option value="T.I">Tarjeta de identidad</option>
                             <option value="C.E">Cedula de Extrangeria</option>
                         </select>
                         <x-input-error for="documentType"/>
