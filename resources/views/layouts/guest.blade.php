@@ -51,7 +51,7 @@
 
         @if (request()->routeIs('ruralCafe', 'about', 'workshop', 'agro', 'news', 'tourism', 'workshop-course'))
             #navbottom {
-                background: #000;
+                background: #ffffffff;
                 font-weight: 800;
                 top: 0;
             }

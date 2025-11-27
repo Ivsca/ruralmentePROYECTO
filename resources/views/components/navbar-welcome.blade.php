@@ -1,4 +1,4 @@
-<nav id="navbottom" class="z-30 sticky w-full top-0 bg-white bg-opacity-90 backdrop-blur-sm shadow-md py-3 transition-all duration-300">
+<nav id="navbottom" class="z-30 sticky w-full top-0 bg-white shadow-md py-3 transition-all duration-300">
     <div class="container mx-auto px-4">
         <div class="flex items-center justify-between">
             
@@ -32,7 +32,7 @@
                         <a class="block px-4 py-2 text-gray-700 hover:bg-[#2E8B57] hover:text-white transition-colors duration-200 text-sm" 
                            href="{{ route('agro') }}">Traje psicológico</a>
                         <a class="block px-4 py-2 text-gray-700 hover:bg-[#2E8B57] hover:text-white transition-colors duration-200 text-sm" 
-                           href="{{ route('workshop-course') }}">Paquetes</a>
+                           href="{{ route('news.view') }}">Paquetes</a>
                     </div>
                 </li>
 

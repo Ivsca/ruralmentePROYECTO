@@ -48,8 +48,11 @@
                 <h3 class="text-xl font-bold mb-6 text-white">Nuestros Servicios</h3>
                 <ul class="space-y-3">
                     <li class="flex items-center">
-                        <i class="fas fa-leaf text-white opacity-80 mr-3 w-5"></i>
-                        <span class="text-white opacity-90">Programas de Resiliencia 360</span>
+                        <i class="fas fa-chart-line text-white opacity-80 mr-3 w-5"></i>
+                        <a href="{{ route('agro') }}" 
+                        class="text-white opacity-90 hover:opacity-100 hover:underline transition">
+                            Traje Psicológico
+                        </a>
                     </li>
                      <li class="flex items-center">
                         <i class="fas fa-chart-line text-white opacity-80 mr-3 w-5"></i>
@@ -64,7 +67,7 @@
 
                         <a href="{{ route('news.view') }}" 
                         class="text-white opacity-90 hover:opacity-100 hover:underline transition">
-                            Consultoría en Impacto Social
+                            Paquetes
                         </a>
                     </li>
 
