@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\EventCalendarController;
 use App\Livewire\Admin\AdminIndex;
 use App\Livewire\Admin\AgendaAdmin;
@@ -19,6 +18,11 @@ use App\Livewire\Modal\Admin\CreatePlan;
 use App\Livewire\SystemPago;
 use App\Livewire\TourismPage;
 use Illuminate\Support\Facades\Route;
+
+
+// lo puse yo
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,7 +62,7 @@ Route::view('/mis_product', 'products.mis-product')->name('mis-product');
 Route::view('/Ruralmente_Turismo', 'courses-workshop')->name('tourism');
 
 
-Route::view('/turismo/Agroturismo', 'tourism.agrotourism' )->name('agro');
+Route::view('/turismo/Agroturismo', 'tourism.agrotourism' )->name('agro'); 
 Route::view('/turismo/Talleres_cursos', 'tourism.workshop-courses-view' )->name('workshop-course');
 Route::view('/noticias', 'news-view')->name('news');
 
@@ -83,6 +87,18 @@ Route::get('/Agendas', AgendaAdmin::class)->name('agendaAdmin');
 
 Route::get('/Turismo', TourismPage::class)->name('Turism');
 Route::get('/Agenda_de_eventos/{id}', [AppointmentSchedule::class, 'render'])->name('EventCalendar');
+
+// Show products (use controller so $products is provided)
+Route::get('/productos-vista', [ProductController::class, 'index'])->name('mis-product');
+
+// Listado de productos (keep or remove duplicate '/productos' if you want only one URL)
+Route::get('/productos', [ProductController::class, 'index'])->name('products.index');
+
+// Detalle de producto
+Route::get('/productos/{id}', [ProductController::class, 'show'])->name('products.show');
+
+// Carrito
+Route::post('/agregar_al_carrito', [CartController::class, 'add'])->name('addCarrito');
 
 //rutas del carrito de compras
 Route::post('/agregar_al_carrito', [CartController::class, 'add'])->name('addCarrito');

@@ -45,7 +45,7 @@
                         <a class="block px-4 py-2 text-gray-700 hover:bg-[#2E8B57] hover:text-white transition-colors duration-200 text-sm" 
                            href="{{ route('agro') }}">Perchas</a>
                         <a class="block px-4 py-2 text-gray-700 hover:bg-[#2E8B57] hover:text-white transition-colors duration-200 text-sm" 
-                           href="{{ route('workshop-course') }}">Café campesinos felices</a>
+                           href="{{ route('mis-product') }}">Café campesinos felices</a>
                     </div>
                 </li>
             </ul>
@@ -121,7 +121,12 @@
                        class="text-gray-600 hover:text-[#2E8B57] py-1 block text-sm transition-colors duration-300 ml-2">
                         • Perchas
                     </a>
-                    <a href="{{ route('workshop-course') }}" 
+                    <!-- antigua direcion en la url -->
+                    <!-- <a href="{{ route('workshop-course') }}" 
+                       class="text-gray-600 hover:text-[#2E8B57] py-1 block text-sm transition-colors duration-300 ml-2">
+                        • Café campesinos felices
+                    </a> -->
+                    <a href="{{ route('mis-product') }}" 
                        class="text-gray-600 hover:text-[#2E8B57] py-1 block text-sm transition-colors duration-300 ml-2">
                         • Café campesinos felices
                     </a>

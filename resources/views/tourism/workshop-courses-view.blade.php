@@ -8,7 +8,7 @@
         </div>
 
         <div class="mt-4 ml-3 text-xl font-semibold text-gray-500">
-            Demostrativo
+            Demostrativo shjhdsjhfsd
         </div>
         <div class="my-5">
             @livewire('tourism.CardWorkshopCoursesDemostratives')
