@@ -163,7 +163,7 @@
             </p>
 
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#" class="bg-[#2E8B57] hover:bg-[#246b45] text-white px-7 py-3 rounded-lg font-semibold transition-all duration-300 text-sm">
+                <a href="{{ route('cotizacion') }}" class="bg-[#2E8B57] hover:bg-[#246b45] text-white px-7 py-3 rounded-lg font-semibold transition-all duration-300 text-sm">
                     Solicitar reunión
                 </a>
 

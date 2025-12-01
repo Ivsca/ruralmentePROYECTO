@@ -36,7 +36,7 @@
 
                     <div>
                         <a class="bg-teal-700 p-2 rounded-md shadow-lg shadow-gray-400 text-white"
-                            href="{{ route('agro') }}">Agroturismo....</a>
+                            href="{{ route('triaje') }}">Agroturismo....</a>
                     </div>
                 </div>
             </div>
@@ -54,13 +54,13 @@
 
                     <div>
                         <a class="bg-teal-700 p-2 rounded-md shadow-lg shadow-gray-400 text-white"
-                            href="{{ route('workshop-course') }}">Talleres &
+                            href="{{ route('productos.perchas') }}">Talleres &
                             cursos</a>
                     </div>
                 </div>
             </div>
         </div>
-        {{-- <x-carrousel-agroturismo /> --}}
+       
         {{-- <x-carrousel-demostrativo /> --}}
         {{-- <x-carrousel-practico /> --}}
     </main>

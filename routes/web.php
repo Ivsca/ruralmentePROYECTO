@@ -49,22 +49,26 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/news-view', function () {
-    return view('news-view');
-})->name('news.view');
+Route::get('/paquetes', function () {
+    return view('paquetes');
+})->name('paquetes');
+
 
 
 //antes de registrarse
 Route::view('/Quienes_somos', 'about')->name('about');
-Route::view('/Ruralmente_cafe', 'ruralmente-cafe')->name('ruralCafe');
-Route::view('/encuestaAgro', 'agro')->name('encuestaAgro');
+Route::view('/ruralmente-servicios', 'ruralmente_servicios')->name('ruralServicios');
+Route::view('/cotizacion', 'servicios.cotizacion')->name('cotizacion');
 Route::view('/mis_product', 'products.mis-product')->name('mis-product');
-Route::view('/Ruralmente_Turismo', 'courses-workshop')->name('tourism');
 
 
-Route::view('/turismo/Agroturismo', 'tourism.agrotourism' )->name('agro'); 
-Route::view('/turismo/Talleres_cursos', 'tourism.workshop-courses-view' )->name('workshop-course');
-Route::view('/noticias', 'news-view')->name('news');
+Route::view('/servicios/triaje', 'servicios.triaje')->name('triaje'); 
+Route::view('/productos/perchas', 'products.perchas')->name('productos.perchas');
+Route::view('/paquetes', 'paquetes')->name('paquetes');
+
+//Formulario cotización
+Route::post('/cotizacion/enviar', [App\Http\Controllers\CotizacionController::class, 'enviar'])
+    ->name('cotizacion.enviar');
 
 
 

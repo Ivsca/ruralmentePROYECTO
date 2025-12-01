@@ -49,7 +49,7 @@
             margin: 20px 0;
         }
 
-        @if (request()->routeIs('ruralCafe', 'about', 'workshop', 'agro', 'news', 'tourism', 'workshop-course'))
+        @if (request()->routeIs('ruralServicios', 'about', 'workshop', 'agro', 'news', 'tourism', 'workshop-course'))
             #navbottom {
                 background: #ffffffff;
                 font-weight: 800;
@@ -220,6 +220,42 @@
     </div>
 
     @livewireScripts
+
+    @if (session('success'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                title: "{{ session('success') }}",
+                text: "Nos estaremos comunicando contigo en los próximos días.",
+                icon: "success",
+                confirmButtonText: "Aceptar",
+                customClass: {
+                    confirmButton: 'swal-confirm-btn'
+                },
+                buttonsStyling: false
+            });
+        </script>
+
+        <style>
+            .swal-confirm-btn {
+                background-color: #16a34a; /* Verde emerald */
+                color: white;
+                border: none;
+                padding: 10px 22px;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: 0.3s ease;
+            }
+
+            .swal-confirm-btn:hover {
+                background-color: #15803d; /* Emerald más oscuro */
+            }
+        </style>
+    @endif
+
+
 </body>
 
 
