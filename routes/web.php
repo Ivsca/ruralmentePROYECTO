@@ -92,6 +92,25 @@ Route::get('/Agendas', AgendaAdmin::class)->name('agendaAdmin');
 Route::get('/Turismo', TourismPage::class)->name('Turism');
 Route::get('/Agenda_de_eventos/{id}', [AppointmentSchedule::class, 'render'])->name('EventCalendar');
 
+// crud de productos 
+// CRUD completo
+// CRUD de productos
+Route::get('/Tabla-productos', [ProductController::class, 'tablaProductos'])->middleware(['auth', 'role:admin'])->name('Tabla-productos');
+
+
+// Crear
+Route::get('/productos/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('/productos', [ProductController::class, 'store'])->name('products.store');
+
+// Editar
+Route::get('/productos/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::put('/productos/{id}', [ProductController::class, 'update'])->name('products.update');
+
+// Eliminar
+Route::delete('/productos/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+
+
 // Show products (use controller so $products is provided)
 Route::get('/productos-vista', [ProductController::class, 'index'])->name('mis-product');
 
@@ -120,4 +139,15 @@ Route::get('/Sistema_de_pago/{id}', [SystemPago::class, 'render', 'mount'])->nam
 Route::post('/Pago_Evento/{id}', [EventCalendarController::class, 'view'])->middleware('auth')->name('ViewEventPay');
 
 
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return 'Bienvenido Admin';
+    });
+});
+
+Route::middleware(['auth', 'role:usuario'])->group(function () {
+    Route::get('/perfil', function () {
+        return 'Bienvenido Usuario';
+    });
+});
 

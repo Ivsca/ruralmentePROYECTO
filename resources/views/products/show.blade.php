@@ -25,7 +25,7 @@
         <p class="text-sm text-gray-500">Color: {{ $product->color ?? 'N/A' }}</p>
 
         <p class="text-sm text-gray-500">
-          Categoría: {{ $product->categoryProduct ?? 'Sin categoría' }}
+          Categoría: {{ $product->category ?? 'Sin categoría' }}
         </p>
 
         <!-- Botones -->

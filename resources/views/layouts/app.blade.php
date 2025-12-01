@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ asset('Sello_Rural_Mente_Negro.png') }}" type="image/x-icon">
+    <!-- BOOTSTRAP CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- BOOTSTRAP JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -17,11 +21,8 @@
     <style>
         body {
             font-family: 'Nunito', sans-serif;
-
             scrollbar-width: thin;
-            /* "auto" or "thin" */
             scrollbar-color: blue orange;
-
         }
 
         #contentEval {
@@ -51,7 +52,6 @@
 
         #scrolling::-webkit-scrollbar {
             width: 0;
-
         }
 
         .slider {
@@ -84,15 +84,15 @@
             background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
             cursor: pointer;
         }
-        .boton{
+
+        .boton {
             border-color: rgb(59 130 246);
             color: rgb(59 130 246);
         }
-        .boton:hover{
+
+        .boton:hover {
             background: rgb(59 130 246);
         }
-
-        
     </style>
     <!-- Styles -->
     @livewireStyles
@@ -100,24 +100,14 @@
 </head>
 
 <body id="scrolling" class="text-black">
-    <x-banner />
-
     <div class="min-h-screen bg-gray-100">
-        @livewire('navigation-menu')
-
-
-        <!-- Page Heading -->
-        @if (isset($header))
-            <header class="bg-white shadow">
-                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endif
-
-        <!-- Page Content -->
+        <!-- Page Content (compatible con @section('content') y con $slot) -->
         <main>
-            {{ $slot }}
+            @hasSection('content')
+                @yield('content')
+            @else
+                {{ $slot ?? '' }}
+            @endif
         </main>
     </div>
 
