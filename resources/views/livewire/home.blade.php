@@ -26,13 +26,13 @@
 
                 
                 <div class="flex flex-col sm:flex-row gap-3 mb-8">
-                    <a href="{{ route('about') }}" 
+                    <a href="{{ route('ruralCafe') }}" 
                     class="bg-[#2E8B57] hover:bg-[#267349] text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 text-sm flex items-center gap-2">
                         <i class="fa-solid fa-leaf"></i> Conoce nuestros servicios
                     </a>
                     
-                    <a href="{{ route('ruralCafe') }}" 
-                    class="border-2 border-[#2E8B57] hover:bg-[#2E8B57] text-[#2E8B57] hover:text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 text-sm flex items-center gap-2">
+                    <a href="{{ route('workshop-course') }}" 
+                    class="bg-[#2E8B57] hover:bg-[#267349] text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 text-sm flex items-center gap-2">
                         <i class="fa-solid fa-mug-hot"></i> Prueba el Café de Campesinos Felices
                     </a>
                 </div>
