@@ -46,8 +46,23 @@
                            href="{{ route('agro') }}">Perchas</a>
                         <a class="block px-4 py-2 text-gray-700 hover:bg-[#2E8B57] hover:text-white transition-colors duration-200 text-sm" 
                            href="{{ route('mis-product') }}">Café campesinos felices</a>
+                        <!-- <a class="block px-4 py-2 text-gray-700 hover:bg-[#2E8B57] hover:text-white transition-colors duration-200 text-sm" 
+                           href="{{ route('Tabla-productos') }}">Tabla de productos</a> -->
+                        {{-- Solo mostrar si está logueado y es Administrador --}}
+                        <!-- arreglar esto, tiene deuda tecnica ya que no valida si es administrador o no, solo si esta logueado -->
+                        @auth
+                            @if(auth()->user()->isAdmin())
+                                <a class="block px-4 py-2 text-gray-700 hover:bg-[#2E8B57] hover:text-white transition-colors duration-200 text-sm"
+                                href="{{ route('Tabla-productos') }}">
+                                    Tabla de productos
+                                </a>
+                            @endif
+                        @endauth
+
+
                     </div>
                 </li>
+
             </ul>
 
             <!-- Lado derecho - WhatsApp y Login -->
@@ -69,14 +84,14 @@
                             @auth
                                 <a href="{{ route('dashboard') }}" 
                                     class="bg-[#2E8B57] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#267349] transition-colors duration-300 text-sm shadow-sm">
-                                        Dashboard
+                                        Mi perfil
                                 </a>
 
                             @else
-                                @livewire('modal.modal-login', ['seeButton' => $seeButton])
-                                @if($register)
-                                    @livewire('modal.modal-register')
-                                @endif
+                            <a href="{{ route('login') }}" 
+                            class="bg-[#2E8B57] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#267349] transition-colors duration-300 text-sm shadow-sm">
+                                Iniciar sesión
+                            </a>
                             @endauth
                         </div>
                     </li>
@@ -119,7 +134,7 @@
                     </a>
                     <a href="{{ route('agro') }}" 
                        class="text-gray-600 hover:text-[#2E8B57] py-1 block text-sm transition-colors duration-300 ml-2">
-                        • Perchas
+                        • Perchas 
                     </a>
                     <!-- antigua direcion en la url -->
                     <!-- <a href="{{ route('workshop-course') }}" 
@@ -129,6 +144,10 @@
                     <a href="{{ route('mis-product') }}" 
                        class="text-gray-600 hover:text-[#2E8B57] py-1 block text-sm transition-colors duration-300 ml-2">
                         • Café campesinos felices
+                    </a>
+                    <a href="{{ route('mis-product') }}" 
+                       class="text-gray-600 hover:text-[#2E8B57] py-1 block text-sm transition-colors duration-300 ml-2">
+                        • tabla de productos
                     </a>
                 </div>
 

@@ -19,7 +19,7 @@ class Product extends Model
         "stock",
         "photo",
         "color",
-        "categoryProduct",
+        "category",
         "status",
     ];
 
