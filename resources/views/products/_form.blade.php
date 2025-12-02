@@ -24,13 +24,12 @@
 
                   <div class="mb-3">
                     @php
-                      $hasPhoto = isset($product) && $product->photo;
-                      $photoUrl = $hasPhoto ? asset('storage/'.$product->photo) : null;
+                      // $photoUrl is passed from controller. If null, use placeholder.
                       $placeholder = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='100%' height='100%' fill='%23f8f9fa'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%238c8c8c' font-size='22'>Sin imagen</text></svg>";
                     @endphp
 
                     <img id="photoPreview"
-                         src="{{ $photoUrl ?? $placeholder }}"
+                         src="{{ old('photo_preview') ? old('photo_preview') : ($photoUrl ?? $placeholder) }}"
                          alt="Vista previa"
                          class="w-100 rounded"
                          style="min-height:320px; object-fit:cover; border:1px solid rgba(0,0,0,0.08);" />
@@ -51,14 +50,14 @@
                       Quitar imagen
                     </button>
                     <small class="text-muted align-self-center">
-                      {{ $hasPhoto ? 'La imagen actual se mostrará. Puedes reemplazarla o quitarla.' : 'No hay imagen. Sube una nueva si quieres.' }}
+                      {{ (!empty($photoUrl)) ? 'La imagen actual se mostrará. Puedes reemplazarla o quitarla.' : 'No hay imagen. Sube una nueva si quieres.' }}
                     </small>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- RIGHT: Inputs (mantuve tus inputs) -->
+            <!-- RIGHT: Inputs -->
             <div class="col-md-7">
               <div class="row g-3">
                 <div class="col-12">
@@ -100,7 +99,6 @@
                   @error('stock') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
 
-                <!-- Color, Category, Status (manténlos como los tenías) -->
                 <div class="col-md-6">
                     <label class="form-label fw-semibold">Color</label>
                     <select name="color" class="form-select @error('color') is-invalid @enderror">
@@ -163,10 +161,8 @@
       const removeBtn = document.getElementById('removePhoto');
       const removeFlag = document.getElementById('remove_photo');
 
-      // placeholder (igual al del servidor)
       const placeholder = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='100%' height='100%' fill='%23f8f9fa'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%238c8c8c' font-size='22'>Sin imagen</text></svg>";
 
-      // Si el usuario carga un archivo nuevo -> mostrar preview y cancelar la instrucción de borrado
       photoInput?.addEventListener('change', function () {
         const file = this.files?.[0];
         if (!file) {
@@ -175,19 +171,14 @@
         const reader = new FileReader();
         reader.onload = e => {
           preview.src = e.target.result;
-          // al subir nueva imagen, aseguramos que no quede marcada la eliminación
           if (removeFlag) removeFlag.value = '0';
         };
         reader.readAsDataURL(file);
       });
 
-      // Quitar imagen: limpia input y marca bandera para que el backend borre la imagen existente
       removeBtn?.addEventListener('click', function () {
-        // reset file input
         if (photoInput) photoInput.value = '';
-        // marcar que se quiere eliminar la imagen existente
         if (removeFlag) removeFlag.value = '1';
-        // volver al placeholder
         if (preview) preview.src = placeholder;
       });
     });

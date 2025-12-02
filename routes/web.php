@@ -35,6 +35,33 @@ use App\Http\Controllers\CartController;
 |
 */
 
+// routes/web.php (temporal)
+Route::get('/_debug/cloudinary', function () {
+    dd(config('cloudinary'));
+});
+
+Route::get('/debug-cloudinary-test', function () {
+    try {
+        $upload = Cloudinary::upload('https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png', [
+            'folder' => 'productos/tests',
+            'public_id' => 'test_public_url_' . time(),
+            'overwrite' => false,
+        ]);
+        return response()->json([
+            'secure' => $upload->getSecurePath(),
+            'public_id' => $upload->getPublicId(),
+            'raw' => $upload,
+        ]);
+    } catch (\Throwable $e) {
+        return response()->json([
+            'error' => $e->getMessage(),
+            'trace' => $e->getTraceAsString(),
+        ], 500);
+    }
+});
+
+
+
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
@@ -89,21 +116,18 @@ Route::get('/Turismo', TourismPage::class)->name('Turism');
 Route::get('/Agenda_de_eventos/{id}', [AppointmentSchedule::class, 'render'])->name('EventCalendar');
 
 // crud de productos 
-// CRUD completo
-// CRUD de productos
-Route::get('/Tabla-productos', [ProductController::class, 'tablaProductos'])->middleware(['auth', 'role:admin'])->name('Tabla-productos');
 
+Route::get('/Tabla-productos', [ProductController::class, 'tablaProductos'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('Tabla-productos');
 
-// Crear
+// CRUD existentes (mantén los tuyos)
 Route::get('/productos/create', [ProductController::class, 'create'])->name('products.create');
 Route::post('/productos', [ProductController::class, 'store'])->name('products.store');
-
-// Editar
 Route::get('/productos/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('/productos/{id}', [ProductController::class, 'update'])->name('products.update');
-
-// Eliminar
 Route::delete('/productos/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+
 
 
 
