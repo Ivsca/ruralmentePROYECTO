@@ -49,7 +49,7 @@
                 <ul class="space-y-3">
                     <li class="flex items-center">
                         <i class="fas fa-chart-line text-white opacity-80 mr-3 w-5"></i>
-                        <a href="{{ route('agro') }}" 
+                        <a href="{{ route('triaje') }}" 
                         class="text-white opacity-90 hover:opacity-100 hover:underline transition">
                             Traje Psicológico
                         </a>
@@ -57,7 +57,7 @@
                      <li class="flex items-center">
                         <i class="fas fa-chart-line text-white opacity-80 mr-3 w-5"></i>
 
-                        <a href="{{ route('ruralCafe') }}" 
+                        <a href="{{ route('mis-product') }}" 
                         class="text-white opacity-90 hover:opacity-100 hover:underline transition">
                             Cafés Campesinos Felices
                         </a>
@@ -65,7 +65,7 @@
                     <li class="flex items-center">
                         <i class="fas fa-chart-line text-white opacity-80 mr-3 w-5"></i>
 
-                        <a href="{{ route('news.view') }}" 
+                        <a href="{{ route('paquetes') }}" 
                         class="text-white opacity-90 hover:opacity-100 hover:underline transition">
                             Paquetes
                         </a>

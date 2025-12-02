@@ -24,26 +24,26 @@
                 </li>
 
                 <li class="group relative">
-                    <a href="{{ route('ruralCafe') }}" 
+                    <a href="{{ route('ruralServicios') }}" 
                        class="text-gray-700 hover:text-[#2E8B57] font-semibold py-2 px-4 rounded-lg transition-colors duration-300 text-sm">
                         Servicios
                     </a>
                     <div class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-gray-200">
                         <a class="block px-4 py-2 text-gray-700 hover:bg-[#2E8B57] hover:text-white transition-colors duration-200 text-sm" 
-                           href="{{ route('agro') }}">Traje psicológico</a>
+                           href="{{ route('triaje') }}">Triaje psicológico</a>
                         <a class="block px-4 py-2 text-gray-700 hover:bg-[#2E8B57] hover:text-white transition-colors duration-200 text-sm" 
-                           href="{{ route('news.view') }}">Paquetes</a>
+                           href="{{ route('paquetes') }}">Paquetes</a>
                     </div>
                 </li>
 
                 <li class="group relative">
-                    <a href="{{ route('tourism') }}" 
+                    <a href="#" 
                        class="text-gray-700 hover:text-[#2E8B57] font-semibold py-2 px-4 rounded-lg transition-colors duration-300 text-sm">
                         Productos
                     </a>
                     <div class="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-gray-200">
                         <a class="block px-4 py-2 text-gray-700 hover:bg-[#2E8B57] hover:text-white transition-colors duration-200 text-sm" 
-                           href="{{ route('agro') }}">Perchas</a>
+                           href="{{ route('productos.perchas') }}">Perchas</a>
                         <a class="block px-4 py-2 text-gray-700 hover:bg-[#2E8B57] hover:text-white transition-colors duration-200 text-sm" 
                            href="{{ route('mis-product') }}">Café campesinos felices</a>
                         <!-- <a class="block px-4 py-2 text-gray-700 hover:bg-[#2E8B57] hover:text-white transition-colors duration-200 text-sm" 
@@ -113,34 +113,29 @@
                 </a>
 
                 <div class="border-l-2 border-[#2E8B57] pl-4 ml-2">
-                    <a href="{{ route('ruralCafe') }}" 
+                    <a href="{{ route('ruralServicios') }}" 
                        class="text-gray-700 hover:text-[#2E8B57] font-semibold py-1 block transition-colors duration-300">
                         Servicios
                     </a>
-                    <a href="{{ route('agro') }}" 
+                    <a href="{{ route('triaje') }}" 
                        class="text-gray-600 hover:text-[#2E8B57] py-1 block text-sm transition-colors duration-300 ml-2">
                         • Traje psicológico
                     </a>
-                    <a href="{{ route('workshop-course') }}" 
+                    <a href="{{ route('productos.perchas') }}" 
                        class="text-gray-600 hover:text-[#2E8B57] py-1 block text-sm transition-colors duration-300 ml-2">
                         • Paquetes
                     </a>
                 </div>
 
                 <div class="border-l-2 border-[#2E8B57] pl-4 ml-2">
-                    <a href="{{ route('tourism') }}" 
+                    <a href="#" 
                        class="text-gray-700 hover:text-[#2E8B57] font-semibold py-1 block transition-colors duration-300">
                         Productos
                     </a>
-                    <a href="{{ route('agro') }}" 
+                    <a href="{{ route('productos.perchas') }}" 
                        class="text-gray-600 hover:text-[#2E8B57] py-1 block text-sm transition-colors duration-300 ml-2">
                         • Perchas 
                     </a>
-                    <!-- antigua direcion en la url -->
-                    <!-- <a href="{{ route('workshop-course') }}" 
-                       class="text-gray-600 hover:text-[#2E8B57] py-1 block text-sm transition-colors duration-300 ml-2">
-                        • Café campesinos felices
-                    </a> -->
                     <a href="{{ route('mis-product') }}" 
                        class="text-gray-600 hover:text-[#2E8B57] py-1 block text-sm transition-colors duration-300 ml-2">
                         • Café campesinos felices

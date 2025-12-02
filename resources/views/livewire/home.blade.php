@@ -26,12 +26,12 @@
 
                 
                 <div class="flex flex-col sm:flex-row gap-3 mb-8">
-                    <a href="{{ route('ruralCafe') }}" 
+                    <a href="{{ route('ruralServicios') }}" 
                     class="bg-[#2E8B57] hover:bg-[#267349] text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 text-sm flex items-center gap-2">
                         <i class="fa-solid fa-leaf"></i> Conoce nuestros servicios
                     </a>
                     
-                    <a href="{{ route('workshop-course') }}" 
+                    <a href="{{ route('mis-product') }}" 
                     class="bg-[#2E8B57] hover:bg-[#267349] text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 text-sm flex items-center gap-2">
                         <i class="fa-solid fa-mug-hot"></i> Prueba el Café de Campesinos Felices
                     </a>
@@ -358,11 +358,21 @@
 
             <!-- Nota de impacto social -->
             <div class="text-center max-w-3xl mx-auto">
-                <p class="text-lg italic text-gray-700 leading-relaxed">
+
+                <p class="text-lg italic text-gray-700 leading-relaxed mb-6">
                     <i class="fas fa-hands-helping text-[#2E8B57] mr-2"></i>
                     Cada compra apoya directamente a los programas de bienestar emocional para agricultores, ganaderos y caficultores en el campo colombiano
                 </p>
+
+                <!-- Botón Ver Perchas -->
+                <a 
+                    href="{{ route('productos.perchas') }}" 
+                    class="inline-block px-6 py-3 bg-[#2E8B57] text-white text-lg rounded-xl shadow-md hover:bg-[#256f47] transition duration-300">
+                    Ver perchas
+                </a>
+
             </div>
+
         </div>
     </section>
 

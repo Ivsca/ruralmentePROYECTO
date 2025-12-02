@@ -1,7 +1,7 @@
 <x-guest-layout>
-
+  <x-navbar-welcome :seeButton="2" :register="false"/>
   <div class="max-w-7xl mx-auto px-6 py-10">
-    <h1 class="text-3xl font-bold mb-6">Productos</h1>
+    <h1 class="text-3xl font-bold mb-6">Café Campesinos Felices</h1>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
