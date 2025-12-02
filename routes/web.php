@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventCalendarController;
+use App\Http\Controllers\TriajeController;
 use App\Livewire\Admin\AdminIndex;
 use App\Livewire\Admin\AgendaAdmin;
 use App\Livewire\Admin\Agricultor;
@@ -10,7 +11,6 @@ use App\Livewire\Admin\Groups;
 use App\Livewire\Admin\Planes;
 use App\Livewire\Admin\ProductAdmin;
 use App\Livewire\Admin\Questionnaire;
-use App\Livewire\Admin\Taller;
 use App\Livewire\Admin\UsersAdminIndex;
 use App\Livewire\AppointmentSchedule;
 use App\Livewire\Modal\Admin\CreateAgricultor;
@@ -62,7 +62,19 @@ Route::view('/cotizacion', 'servicios.cotizacion')->name('cotizacion');
 Route::view('/mis_product', 'products.mis-product')->name('mis-product');
 
 
-Route::view('/servicios/triaje', 'servicios.triaje')->name('triaje'); 
+
+// Formularios solo accesibles por admins
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/servicios/triaje', [TriajeController::class, 'create'])->name('triaje.create');
+    Route::post('/servicios/triaje', [TriajeController::class, 'store'])->name('triaje.store');
+});
+
+// Ver resultado del triaje (solo creador)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/servicios/triaje/{triaje}', [TriajeController::class, 'show'])->name('triaje.show');
+});
+
+
 Route::view('/productos/perchas', 'products.perchas')->name('productos.perchas');
 Route::view('/paquetes', 'paquetes')->name('paquetes');
 
@@ -77,7 +89,6 @@ Route::post('/cotizacion/enviar', [App\Http\Controllers\CotizacionController::cl
 Route::get('/admin', AdminIndex::class)->middleware('can:admin.index')->name('admin.index');
 Route::get('/admin/Grupo_trabajo', Groups::class)->middleware('can:admin.index')->name('admin.group');
 Route::get('/admin/Products', ProductAdmin::class)->middleware('can:admin.index')->name('admin.product');
-Route::get('/admin/Turismo', Taller::class)->middleware('can:admin.taller')->name('admin.taller');
 // Route::get('/admin/Encuesta', Questionnaire::class)->name('encuesta');
 Route::get('/admin/Planes', Planes::class)->middleware('can:admin.planes')->name('admin.planes');
 Route::get('/admin/Agricultores', Agricultor::class)->middleware('can:admin.agricultores')->name('admin.agricultores');
@@ -89,7 +100,6 @@ Route::get('/admin/planes', CreateAgricultor::class)->middleware('can:admin.agri
 
 Route::get('/Agendas', AgendaAdmin::class)->name('agendaAdmin');
 
-Route::get('/Turismo', TourismPage::class)->name('Turism');
 Route::get('/Agenda_de_eventos/{id}', [AppointmentSchedule::class, 'render'])->name('EventCalendar');
 
 // crud de productos 
@@ -97,6 +107,8 @@ Route::get('/Agenda_de_eventos/{id}', [AppointmentSchedule::class, 'render'])->n
 // CRUD de productos
 Route::get('/Tabla-productos', [ProductController::class, 'tablaProductos'])->middleware(['auth', 'role:admin'])->name('Tabla-productos');
 
+//Productos en el home
+Route::get('/', [ProductController::class, 'home'])->name('home');
 
 // Crear
 Route::get('/productos/create', [ProductController::class, 'create'])->name('products.create');

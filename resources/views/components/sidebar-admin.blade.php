@@ -27,22 +27,11 @@
                     href="{{ route('admin.agricultores') }}"><i class="fa-solid fa-users"></i> Agricultor</a>
             </li>
         @endcan
-        @can('admin.taller')
-            <li class="py-2">
-                <a class="text-sm p-2 rounded-md {{ request()->routeIs('admin.taller') ? 'text-white px-3 py-2 bg-black bg-opacity-50 hover:bg-black hover:bg-opacity-50' : 'bg-opacity-50 hover:bg-black hover:bg-opacity-40 px-3' }}"
-                    href="{{ route('admin.taller') }}"><i class="fa-brands fa-envira"></i> Turismo</a>
-            </li>
-        @endcan
         @can('admin.categories')
             <li class="py-2">
                 <a class="text-sm p-2 rounded-md {{ request()->routeIs('admin.categories') ? 'text-white px-3 py-2 bg-black bg-opacity-50 hover:bg-black hover:bg-opacity-50' : 'bg-opacity-50 hover:bg-black hover:bg-opacity-40 px-3' }}"
                     href="{{ route('admin.categories') }}"><i class="fa-solid fa-square-poll-vertical"></i> Categorias</a>
             </li>
         @endcan
-        <li class="py-2">
-            <a class="text-sm p-2 rounded-md {{ request()->routeIs('agendaAdmin') ? 'text-white px-3 py-2 bg-black bg-opacity-50 hover:bg-black hover:bg-opacity-50' : 'bg-opacity-50 hover:bg-black hover:bg-opacity-40 px-3' }}"
-                href="{{ route('agendaAdmin') }}"><i class="fa-solid fa-square-poll-vertical"></i> Talleres
-                agendados</a>
-        </li>
     </ul>
 </aside>

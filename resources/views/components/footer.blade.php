@@ -49,7 +49,7 @@
                 <ul class="space-y-3">
                     <li class="flex items-center">
                         <i class="fas fa-chart-line text-white opacity-80 mr-3 w-5"></i>
-                        <a href="{{ route('triaje') }}" 
+                        <a href="{{ route('triaje.store') }}" 
                         class="text-white opacity-90 hover:opacity-100 hover:underline transition">
                             Traje Psicológico
                         </a>

@@ -50,23 +50,8 @@
                 <h1 class="text-lg font-extrabold ">Planes almacigo</h1>
             </a>
 
-            <!-- cuarta carta  -->
-            <a href="{{ route('admin.agricultores') }}"
-                class="bg-gray-200 border flex flex-col items-center rounded-lg shadow-xl  p-3 hover:-translate-y-6 duration-500 ease-out hover:rotate-2 cursor-pointer">
-                <div class="w-8/12 h-48 object-cover border rounded my-3">
-                    <img class="rounded" src="{{ asset('icon/taller.png') }}" alt="imagen">
-                </div>
-                <h1 class="text-lg font-extrabold ">Agricultor</h1>
-            </a>
+        
 
-            <!-- quinta carta  -->
-            <a href="{{ route('admin.taller') }}"
-                class="bg-gray-200 border flex flex-col items-center rounded-lg shadow-xl  p-3 hover:-translate-y-6 duration-500 ease-out hover:rotate-2 cursor-pointer">
-                <div class="w-8/12 h-48 object-cover border rounded my-3">
-                    <img class="rounded" src="{{ asset('icon/taller.png') }}" alt="imagen">
-                </div>
-                <h1 class="text-lg font-extrabold ">Turismo</h1>
-            </a>
 
             <!-- sexta carta -->
             <a href=""

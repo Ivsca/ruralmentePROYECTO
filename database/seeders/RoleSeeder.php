@@ -29,10 +29,6 @@ class RoleSeeder extends Seeder
         Permission::create(['name'=> 'admin.product.edit', 'description'=> 'Modificar Producos'])->syncRoles([$role1]);
         Permission::create(['name'=> 'admin.product.destroy', 'description'=> 'Eliminar productos'])->syncRoles([$role1]);
 
-        Permission::create(['name'=> 'admin.taller', 'description'=> 'Lista de eventos'])->syncRoles([$role1]);
-        Permission::create(['name'=> 'admin.taller.create', 'description'=> 'Crear eventos'])->syncRoles([$role1]);
-        Permission::create(['name'=> 'admin.taller.edit', 'description'=> 'Modificar eventos'])->syncRoles([$role1]);
-        Permission::create(['name'=> 'admin.taller.destroy', 'description'=> 'Eliminar eventos'])->syncRoles([$role1]);
         
         Permission::create(['name'=> 'admin.planes', 'description'=> 'Lista de los planes'])->syncRoles([$role1]);
         Permission::create(['name'=> 'admin.planes.create', 'description'=> 'Crear planes'])->syncRoles([$role1]);
@@ -49,6 +45,5 @@ class RoleSeeder extends Seeder
         Permission::create(['name'=> 'admin.categories.edit', 'description'=> 'Modificar categorias'])->syncRoles([$role1]);
 
         Permission::create(['name'=> 'dashboard', 'description' => 'Panel inicial'])->syncRoles([$role1, $role2, $role3]);
-        Permission::create(['name'=> 'Turism', 'description' => 'Turismo'])->syncRoles([$role1, $role2, $role3]);
     }
 }

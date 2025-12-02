@@ -19,11 +19,6 @@
                             {{ __('Inicio') }}
                         </x-nav-link>
                     @endcan
-                    @can('Turism')
-                        <x-nav-link href="{{ route('Turism') }}" :active="request()->routeIs('Turism')">
-                            {{ __('Turismo') }}
-                        </x-nav-link>
-                    @endcan
                     @can('admin.index')
                         <x-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
                             {{ __('Dashboard Admin') }}
@@ -172,9 +167,6 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Inicio') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('Turism') }}" :active="request()->routeIs('Turism')">
-                {{ __('Turismo') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
                 {{ __('Dashboard Administrador') }}

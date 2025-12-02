@@ -7,28 +7,62 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    /**
+     * Mostrar la página de inicio (HOME)
+     */
+    public function home()
+    {
+        // Obtener productos para mostrar en el home
+        $products = Product::where('stock', '>', 0)
+                          ->orderBy('created_at', 'desc')
+                          ->take(3)
+                          ->get();
+        
+        return view('welcome', compact('products'));
+    }
+    
+    /**
+     * Mostrar todos los productos (lista completa)
+     * PARA: /productos y /productos-vista
+     */
     public function index(Request $request)
     {
-        $products = Product::select('id','name','title','description','price','stock','photo')->get();
-
+        // Si se solicita debug, devolver JSON
         if ($request->has('debug') && $request->debug) {
+            $products = Product::select('id','name','title','description','price','stock','photo')->get();
             return response()->json($products);
         }
-
-        return view('products.mis-products', compact('products'));
+        
+        // Para vista normal, mostrar con paginación
+        $products = Product::where('stock', '>', 0)
+                          ->orderBy('created_at', 'desc')
+                          ->paginate(12);
+        
+        // Puedes usar la misma vista para ambas rutas o diferentes
+        // Si tienes products.index y products.mis-products, decide cuál usar
+        return view('products.index', compact('products'));
+        // O si prefieres mantener separado:
+        // return view('products.mis-products', compact('products'));
     }
-
+    
+    /**
+     * Mostrar detalles de un producto
+     */
     public function show(Request $request, $id)
     {
         $product = Product::findOrFail($id);
-
+        
+        // Si se solicita debug, devolver JSON
         if ($request->has('debug') && $request->debug) {
             return response()->json($product);
         }
-
+        
         return view('products.show', compact('product'));
     }
 
+    /**
+     * Tabla de productos para administración
+     */
     public function tablaProductos(Request $request)
     {
         $q = $request->input('q');
@@ -45,7 +79,6 @@ class ProductController extends Controller
                     ->orWhere('color', 'like', $like)
                     ->orWhere('category', 'like', $like)
                     ->orWhere('status', 'like', $like)
-                    // Si quieres buscar por precio/stock numéricos exactos:
                     ->orWhere('price', $q)
                     ->orWhere('stock', $q);
             });
@@ -56,17 +89,19 @@ class ProductController extends Controller
         return view('products.Tabla-productos', compact('products'));
     }
 
-
-    // Mostrar formulario de creación
+    /**
+     * Mostrar formulario de creación
+     */
     public function create()
     {
         return view('products.create');
     }
 
-    // Guardar producto
+    /**
+     * Guardar producto
+     */
     public function store(Request $request)
     {
-        // Validación sólida
         $data = $request->validate([
             'name'                     => 'required|string|max:255',
             'title'                    => 'nullable|string|max:255',
@@ -77,11 +112,8 @@ class ProductController extends Controller
             'color'                    => 'nullable|string|max:50',
             'category'                 => 'required|in:camisas,gorras,cafe',
             'status'                   => 'required|in:activo,inactivo',
-            // Para ahora NO procesaremos imagen
-            // 'photo' => 'nullable|image|max:4096'
         ]);
 
-        // Crear registro sin imagen por ahora
         Product::create($data);
 
         return redirect()
@@ -89,13 +121,18 @@ class ProductController extends Controller
             ->with('success', 'Producto creado correctamente');
     }
 
-
+    /**
+     * Mostrar formulario de edición
+     */
     public function edit($id)
     {
         $product = Product::findOrFail($id);
         return view('products.edit', compact('product'));
     }
 
+    /**
+     * Actualizar producto
+     */
     public function update(Request $request, $id)
     {
         $product = Product::findOrFail($id);
@@ -111,13 +148,25 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Producto actualizado correctamente');
     }
 
-
-    // Eliminar
+    /**
+     * Eliminar producto
+     */
     public function destroy($id)
     {
         Product::destroy($id);
         return redirect()->route('Tabla-productos')->with('success', 'Producto eliminado');
     }
+
+    /**
+     * Obtener productos destacados para el home (si lo necesitas desde otra vista)
+     */
+    public function featuredProducts()
+    {
+        $products = Product::where('stock', '>', 0)
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+        
+        return $products;
+    }
 }
-
-
