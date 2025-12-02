@@ -18,10 +18,12 @@ class Product extends Model
         "price",
         "stock",
         "photo",
+        "photo_public_id",
         "color",
         "category",
         "status",
     ];
+
 
     public function invoices():BelongsToMany
     {
