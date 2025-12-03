@@ -61,7 +61,7 @@
         <h2 class="fw-bold">🛒 Gestión de Productos</h2>
 
         <!-- Form: buscador + filtros -->
-        <form action="{{ route('Tabla-productos') }}" method="GET" class="row g-2 align-items-center" role="search">
+        <form action="{{ route('admin.Tabla-productos') }}" method="GET" class="row g-2 align-items-center" role="search">
             <div class="col-auto">
                 <input name="q" value="{{ request('q') }}" class="form-control form-control-sm" type="search" placeholder="Buscar por nombre, título, descripción, color..." aria-label="Buscar">
             </div>
@@ -102,7 +102,7 @@
             <div class="col-auto d-flex">
                 <button class="btn btn-outline-primary btn-sm me-2" type="submit">Buscar</button>
                 @if(request()->anyFilled(['q','category','status','price_min','price_max','stock_min','stock_max']))
-                    <a href="{{ route('Tabla-productos') }}" class="btn btn-link btn-sm ms-2">Limpiar</a>
+                    <a href="{{ route('admin.Tabla-productos') }}" class="btn btn-link btn-sm ms-2">Limpiar</a>
                 @endif
             </div>
         </form>

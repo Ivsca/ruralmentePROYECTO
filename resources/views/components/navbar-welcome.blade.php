@@ -47,7 +47,7 @@
                         @auth
                             @if(auth()->user()->isAdmin())
                                 <a class="block px-4 py-2 text-gray-700 hover:bg-emerald-600 hover:text-white transition-colors duration-200 text-sm"
-                                href="{{ route('Tabla-productos') }}">
+                                href="{{ route('admin.Tabla-productos') }}">
                                     Tabla de productos
                                 </a>
                             @endif
@@ -153,7 +153,7 @@
                         </a>
                         @auth
                             @if(auth()->user()->isAdmin())
-                                <a href="{{ route('Tabla-productos') }}" 
+                                <a href="{{ route('admin.Tabla-productos') }}" 
                                    class="text-gray-600 hover:text-emerald-600 py-1.5 block text-sm transition-colors duration-300 flex items-center">
                                     <i class="fas fa-circle text-xs mr-2 text-emerald-400"></i>
                                     Tabla de productos

@@ -490,7 +490,7 @@
                     <i class="bi bi-eye"></i> Ver detalles
                   </a>
 
-                  <form method="POST" action="{{ route('agregar_al_carrito') }}">
+                  <form method="POST" action="{{ route('addCarrito') }}">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                     <input type="hidden" name="quantity" value="1">

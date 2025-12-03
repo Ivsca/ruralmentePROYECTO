@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Panel Administrativo') - Salud Mental Rural</title>
+    <title>@yield('title', 'Dashboard') - Salud Mental Rural</title>
 
     {{-- Fuentes --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,6 +18,9 @@
 
     <style>
         :root {
+            --sidebar-width: 280px;
+            --sidebar-collapsed: 80px;
+            --header-height: 70px;
             --primary: #2E8B57;
             --primary-light: #E8F5E9;
             --primary-dark: #1B5E20;
@@ -41,13 +44,6 @@
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
             --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
             --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1);
-            --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.25);
-            
-            --radius-sm: 0.5rem;
-            --radius-md: 0.75rem;
-            --radius-lg: 1rem;
-            --radius-xl: 1.5rem;
-            --radius-2xl: 2rem;
         }
 
         * {
@@ -58,124 +54,456 @@
         }
 
         body {
-            background: linear-gradient(135deg, #f8fafc 0%, #e5e7eb 100%);
-            min-height: 100vh;
+            background-color: #f5f7fb;
             color: var(--gray-800);
-            line-height: 1.5;
+            min-height: 100vh;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
         }
 
-        .font-serif {
-            font-family: 'Georgia', 'Times New Roman', serif;
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: white;
+            border-right: 1px solid var(--gray-200);
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+            overflow-y: auto;
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .sidebar.collapsed {
+            width: var(--sidebar-collapsed);
         }
 
-        .gradient-text {
+        .sidebar-header {
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--gray-900);
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
+            white-space: nowrap;
         }
 
-        .hover-lift {
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .sidebar.collapsed .logo-text {
+            display: none;
         }
 
-        .hover-lift:hover {
-            transform: translateY(-4px);
+        .sidebar-menu {
+            padding: 1.5rem;
         }
 
-        .smooth-transition {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .menu-section {
+            margin-bottom: 2rem;
         }
 
-        ::-webkit-scrollbar {
-            width: 8px;
+        .menu-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--gray-500);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            white-space: nowrap;
         }
 
-        ::-webkit-scrollbar-track {
-            background: var(--gray-100);
-            border-radius: 4px;
+        .sidebar.collapsed .menu-title {
+            display: none;
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: var(--gray-400);
-            border-radius: 4px;
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--gray-600);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--gray-500);
+        .menu-item:hover {
+            background-color: var(--gray-100);
+            color: var(--primary);
+        }
+
+        .menu-item.active {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .menu-item i {
+            width: 20px;
+            text-align: center;
+            font-size: 1.125rem;
+        }
+
+        .sidebar.collapsed .menu-item span {
+            display: none;
+        }
+
+        .sidebar.collapsed .menu-item {
+            justify-content: center;
+            padding: 0.75rem;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            transition: margin-left 0.3s ease;
+            min-height: 100vh;
+        }
+
+        .sidebar.collapsed ~ .main-content {
+            margin-left: var(--sidebar-collapsed);
+        }
+
+        .top-header {
+            height: var(--header-height);
+            background: white;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 90;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .toggle-sidebar {
+            width: 40px;
+            height: 40px;
+            border-radius: 0.5rem;
+            border: 1px solid var(--gray-200);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .toggle-sidebar:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .page-title h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .page-title p {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .header-search {
+            position: relative;
+        }
+
+        .header-search input {
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            width: 240px;
+            transition: all 0.2s ease;
+        }
+
+        .header-search input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
+        }
+
+        .header-search i {
+            position: absolute;
+            left: 0.875rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-400);
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: var(--gray-900);
+            font-size: 0.875rem;
+        }
+
+        .user-role {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+        }
+
+        .content-wrapper {
+            padding: 2rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .toggle-sidebar {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-search input {
+                width: 180px;
+            }
+            
+            .content-wrapper {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header-search {
+                display: none;
+            }
+            
+            .user-info {
+                display: none;
+            }
         }
     </style>
 
     @stack('styles')
 </head>
 <body>
-    {{-- Header/Navbar --}}
-    <header class="glass-card fixed top-0 left-0 right-0 z-50 border-b" style="border-color: rgba(229, 231, 235, 0.5);">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center">
-                        <i class="fas fa-heart text-white text-lg"></i>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="{{ route('admin.panel') }}" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-heartbeat"></i>
                     </div>
-                    <h1 class="text-xl font-bold gradient-text">Salud Mental Rural</h1>
-                </div>
-                <nav class="hidden md:flex items-center gap-6">
-                    <a href="#" class="text-gray-600 hover:text-primary font-medium smooth-transition">Dashboard</a>
-                    <a href="#" class="text-gray-600 hover:text-primary font-medium smooth-transition">Triajes</a>
-                    <a href="#" class="text-gray-600 hover:text-primary font-medium smooth-transition">Usuarios</a>
-                    <a href="#" class="text-gray-600 hover:text-primary font-medium smooth-transition">Reportes</a>
-                </nav>
-                <div class="flex items-center gap-4">
-                    <div class="hidden md:block text-right">
-                        <p class="text-sm font-medium text-gray-900">Administrador</p>
-                        <p class="text-xs text-gray-500">Último acceso: Hoy</p>
-                    </div>
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                        <i class="fas fa-user text-gray-600"></i>
-                    </div>
-                </div>
+                    <span class="logo-text">Salud Mental</span>
+                </a>
             </div>
-        </div>
-    </header>
 
-    <main class="pt-24">
-        <div class="container">
-            @yield('content')
-        </div>
-    </main>
+            <nav class="sidebar-menu">
+                <div class="menu-section">
+                    <div class="menu-title">Dashboard</div>
+                    <a href="{{ route('dashboard') }}" class="menu-item active">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </div>
+                <div class="menu-section">
+                    <div class="menu-title">Gestión</div>
+                    <a href="{{ route('admin.triaje') }}" class="menu-item">
+                        <i class="fas fa-clipboard-check"></i>
+                        <span>Triajes</span>
+                        <span class="badge" style="margin-left: auto; background: var(--primary); color: white; border-radius: 10px; padding: 2px 8px; font-size: 0.75rem;">{{ \App\Models\Triaje::count() }}</span>
+                    </a>
+                    <a href="{{ route('admin.Tabla-productos') }}" class="menu-item">
+                        <i class="fas fa-box-open"></i>
+                        <span>Productos</span>
+                        <span class="badge" style="margin-left: auto; background: var(--success); color: white; border-radius: 10px; padding: 2px 8px; font-size: 0.75rem;">{{ \App\Models\Product::count() }}</span>
+                    </a>
+                    <a href="{{ route('admin.users.index') }}" class="menu-item">
+                        <i class="fas fa-users"></i>
+                        <span>Usuarios</span>
+                        <span class="badge" style="margin-left: auto; background: var(--secondary); color: white; border-radius: 10px; padding: 2px 8px; font-size: 0.75rem;">{{ \App\Models\User::count() }}</span>
+                    </a>
+                </div>
 
-    {{-- Footer --}}
-    <footer class="mt-16 py-8 border-t" style="border-color: rgba(229, 231, 235, 0.5);">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <div class="flex items-center gap-2 mb-2">
-                        <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                            <i class="fas fa-leaf text-primary"></i>
+                <div class="menu-section">
+                    <div class="menu-title">Reportes</div>
+                    <a href="#" class="menu-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Estadísticas</span>
+                    </a>
+                    <a href="#" class="menu-item">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Exportar PDF</span>
+                    </a>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-title">Configuración</div>
+                    <a href="#" class="menu-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Ajustes</span>
+                    </a>
+                    <a href="{{ route('logout') }}" class="menu-item"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Cerrar Sesión</span>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="toggle-sidebar" id="toggleSidebar">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="page-title">
+                        <h1>@yield('page-title', 'Dashboard')</h1>
+                        <p>@yield('page-subtitle', 'Panel de control del sistema')</p>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <div class="header-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Buscar...">
+                    </div>
+                    
+                    <div class="user-menu">
+                        <div class="user-avatar">
+                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                         </div>
-                        <span class="font-bold text-gray-800">Salud Mental Rural</span>
+                        <div class="user-info">
+                            <span class="user-name">{{ Auth::user()->name }}</span>
+                            <span class="user-role">Administrador</span>
+                        </div>
                     </div>
-                    <p class="text-sm text-gray-500">Sistema de evaluación psicológica comunitaria</p>
                 </div>
-                <div class="text-sm text-gray-500">
-                    <p>© {{ date('Y') }} Todos los derechos reservados</p>
-                    <p class="mt-1">v1.0.0 · Última actualización: {{ date('d/m/Y') }}</p>
-                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="content-wrapper">
+                @yield('content')
             </div>
-        </div>
-    </footer>
+        </main>
+    </div>
+
+    <script>
+        // Toggle sidebar
+        document.getElementById('toggleSidebar').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            const isMobile = window.innerWidth <= 1024;
+            
+            if (isMobile) {
+                sidebar.classList.toggle('active');
+            } else {
+                sidebar.classList.toggle('collapsed');
+            }
+        });
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('toggleSidebar');
+            const isMobile = window.innerWidth <= 1024;
+            
+            if (isMobile && sidebar.classList.contains('active') && 
+                !sidebar.contains(event.target) && 
+                !toggleBtn.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Auto-collapse sidebar on small screens
+        function handleResize() {
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth <= 1024) {
+                sidebar.classList.remove('collapsed');
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Initial check
+    </script>
 
     @stack('scripts')
 </body>

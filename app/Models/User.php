@@ -74,6 +74,11 @@ class User extends Authenticatable
         return $this->hasMany(Invoice::class);
     }
 
+    // Relación con triajes
+    public function triajes(): HasMany
+    {
+        return $this->hasMany(Triaje::class);
+    }
 
     // -------------------------
     // MÉTODO CORRECTO isAdmin()

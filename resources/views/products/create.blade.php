@@ -9,7 +9,7 @@
       <div class="card-body p-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
           <h3 class="mb-0">Agregar Producto</h3>
-          <a href="{{ route('Tabla-productos') }}" class="btn btn-outline-secondary btn-sm">Volver</a>
+          <a href="{{ route('admin.Tabla-productos') }}" class="btn btn-outline-secondary btn-sm">Volver</a>
         </div>
 
         <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
