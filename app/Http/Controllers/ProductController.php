@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\CarritoCompras;
 use Illuminate\Http\Request;
 
 // para que funcionen las img
@@ -74,90 +75,79 @@ class ProductController extends Controller
     /**
      * Tabla de productos para administración
      */
-    public function tablaProductos(Request $request)
-    {
-        // Inputs
-        $q = $request->input('q');
-        $category = $request->input('category');
-        $status = $request->input('status');
-        $price_min = $request->input('price_min');
-        $price_max = $request->input('price_max');
-        $stock_min = $request->input('stock_min');
-        $stock_max = $request->input('stock_max');
+public function tablaProductos(Request $request)
+{
+    // Inputs
+    $q = $request->input('q');
+    $category = $request->input('category');
+    $status = $request->input('status');
+    $price_min = $request->input('price_min');
+    $price_max = $request->input('price_max');
+    $stock_min = $request->input('stock_min');
+    $stock_max = $request->input('stock_max');
 
-        // Query base
-        $productsQuery = Product::query();
+    // Query base
+    $productsQuery = Product::query();
 
-        // Buscador general (campo q)
-        if ($q) {
-            $like = "%{$q}%";
-            $productsQuery->where(function($query) use ($like, $q) {
-                $query->where('name', 'like', $like)
-                    ->orWhere('title', 'like', $like)
-                    ->orWhere('description', 'like', $like)
-                    ->orWhere('contentProductDescription', 'like', $like)
-                    ->orWhere('color', 'like', $like)
-                    ->orWhere('category', 'like', $like)
-                    ->orWhere('status', 'like', $like)
-                    ->orWhere('price', $q)
-                    ->orWhere('stock', $q);
-                    ->orWhere('status', 'like', $like);
+    // Buscador directo SIN LIKE
+    if ($q) {
+        $productsQuery->where(function($query) use ($q) {
+            // Coincidencia exacta
+            $query->where('name', $q)
+                ->orWhere('title', $q)
+                ->orWhere('description', $q)
+                ->orWhere('contentProductDescription', $q)
+                ->orWhere('color', $q)
+                ->orWhere('category', $q)
+                ->orWhere('status', $q);
 
-                // Búsqueda por valores numéricos si el input es numérico
-                if (is_numeric($q)) {
-                    $query->orWhere('price', $q)
-                          ->orWhere('stock', $q);
-                }
-            });
-        }
-
-        // Filtros específicos (aplican sobre el resultado del buscador si existe)
-        if ($category) {
-            $productsQuery->where('category', $category);
-        }
-
-        if ($status) {
-            $productsQuery->where('status', $status);
-        }
-
-        if ($price_min !== null && $price_min !== '') {
-            if (is_numeric($price_min)) {
-                $productsQuery->where('price', '>=', $price_min);
+            // Búsqueda numérica exacta
+            if (is_numeric($q)) {
+                $query->orWhere('price', $q)
+                      ->orWhere('stock', $q);
             }
-        }
-
-        if ($price_max !== null && $price_max !== '') {
-            if (is_numeric($price_max)) {
-                $productsQuery->where('price', '<=', $price_max);
-            }
-        }
-
-        if ($stock_min !== null && $stock_min !== '') {
-            if (is_numeric($stock_min)) {
-                $productsQuery->where('stock', '>=', $stock_min);
-            }
-        }
-
-        if ($stock_max !== null && $stock_max !== '') {
-            if (is_numeric($stock_max)) {
-                $productsQuery->where('stock', '<=', $stock_max);
-            }
-        }
-
-        // Obtener lista de categorías únicas para el select (para la vista)
-        $categories = Product::select('category')
-            ->distinct()
-            ->orderBy('category')
-            ->pluck('category');
-
-        // Paginación: 5 por página, y preserva query string al paginar
-        $products = $productsQuery->orderBy('created_at', 'desc')
-                                  ->paginate(5)
-                                  ->withQueryString();
-
-        // Retornamos a la vista con products y las categorías para el select
-        return view('products.Tabla-productos', compact('products', 'categories'));
+        });
     }
+
+    // Filtros
+    if ($category) {
+        $productsQuery->where('category', $category);
+    }
+
+    if ($status) {
+        $productsQuery->where('status', $status);
+    }
+
+    if ($price_min !== null && $price_min !== '' && is_numeric($price_min)) {
+        $productsQuery->where('price', '>=', $price_min);
+    }
+
+    if ($price_max !== null && $price_max !== '' && is_numeric($price_max)) {
+        $productsQuery->where('price', '<=', $price_max);
+    }
+
+    if ($stock_min !== null && $stock_min !== '' && is_numeric($stock_min)) {
+        $productsQuery->where('stock', '>=', $stock_min);
+    }
+
+    if ($stock_max !== null && $stock_max !== '' && is_numeric($stock_max)) {
+        $productsQuery->where('stock', '<=', $stock_max);
+    }
+
+    // Categorías
+    $categories = Product::select('category')
+        ->distinct()
+        ->orderBy('category')
+        ->pluck('category');
+
+    // Paginación
+    $products = $productsQuery->orderBy('created_at', 'desc')
+                              ->paginate(5)
+                              ->withQueryString();
+
+    return view('products.Tabla-productos', compact('products', 'categories'));
+}
+
 
     /**
      * Mostrar formulario de creación
@@ -182,18 +172,6 @@ class ProductController extends Controller
             'color'                    => 'nullable|string|max:50',
             'category'                 => 'required|in:camisas,gorras,cafe',
             'status'                   => 'required|in:activo,inactivo',
-        ]);
-
-            'name'                      => 'required|string|max:255',
-            'title'                     => 'nullable|string|max:255',
-            'description'               => 'nullable|string|max:255',
-            'contentProductDescription' => 'nullable|string',
-            'price'                     => 'required|numeric|min:0',
-            'stock'                     => 'required|integer|min:0',
-            'color'                     => 'nullable|string|max:50',
-            'category'                  => 'required|in:camisas,gorras,cafe',
-            'status'                    => 'required|in:activo,inactivo',
-            'photo'                     => 'nullable|image|max:4096',
         ]);
 
         // Cloudinary config (best-effort check)
@@ -358,7 +336,6 @@ class ProductController extends Controller
     /**
      * Actualizar producto
      */
-    public function update(Request $request, $id)
     // Handle update
    public function update(Request $request, $id)
     {
@@ -534,8 +511,47 @@ class ProductController extends Controller
         
         return $products;
     }
-}
+
+    // este va a ser un filtro que va a recibir muchos parametros que se mandan desde el form de las card de productos
+    public function searchProducts(Request $request)
+    {
+        // Base query
+        $query = Product::query();
+
+        // Text search
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'LIKE', "%{$request->search}%")
+                ->orWhere('title', 'LIKE', "%{$request->search}%")
+                ->orWhere('description', 'LIKE', "%{$request->search}%");
+            });
+        }
+
+        // Filter by category
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
+
+        // Order by price
+        if ($request->filled('price_order')) {
+            $query->orderBy('price', $request->price_order);
+        }
+
+        // Paginate to keep things tidy
+        $products = $query->paginate(12)->withQueryString();
+
+        return view('products.index', compact('products'));
+    }
+
+    public function cantidadProductosCarrito()
+    {
+        $carrito = session()->get('carrito', []);
+        return response()->json([
+            'cantidad' => count($carrito)
+        ]);
+    }
 
 }
+
 
 

@@ -3,31 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\CarritoCompras;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function add(Request $request)
+    public function add(Request $request, $id)
     {
-        $product = Product::findOrFail($request->product_id);
-        $quantity = max(1, (int) $request->quantity);
+        $user_id = auth()->id(); // ID del usuario actual
 
-        $cart = session()->get('cart', []);
+        // Buscar el carrito del usuario
+        $carrito = CarritoCompras::where('id_user', $user_id)->first();
 
-        if(isset($cart[$product->id])){
-            $cart[$product->id]['quantity'] += $quantity;
+        if (!$carrito) {
+            // Crear un carrito nuevo
+            $carrito = CarritoCompras::create([
+                'id_user' => $user_id,
+                'productos_ids' => json_encode([$id]), // agrega este producto al array
+                'CantidadProductos' => 1,
+                'seleccionado' => false,
+            ]);
         } else {
-            $cart[$product->id] = [
-                'id' => $product->id,
-                'name' => $product->name,
-                'price' => $product->price,
-                'quantity' => $quantity,
-                'photo' => $product->photo,
-            ];
+            // Incrementar la cantidad
+            $carrito->CantidadProductos += 1;
+
+            // Insertar el producto dentro del array JSON
+            $productos = json_decode($carrito->productos_ids, true) ?? [];
+            $productos[] = $id;
+            $carrito->productos_ids = json_encode($productos);
+
+            $carrito->save();
         }
 
-        session()->put('cart', $cart);
-
-        return back()->with('success', 'Producto añadido al carrito.');
+        return back()->with('success', 'Producto agregado al carrito ✔');
     }
 }

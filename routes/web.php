@@ -144,6 +144,11 @@ Route::get('/productos/{id}/edit', [ProductController::class, 'edit'])->name('pr
 Route::put('/productos/{id}', [ProductController::class, 'update'])->name('products.update');
 Route::delete('/productos/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
+Route::get('/searchProducts', [ProductController::class, 'searchProducts'])->name('searchProducts');
+
+Route::get('/cantidad-productos-carrito', [ProductController::class, 'cantidadProductosCarrito'])->name('cantidad-productos-carrito');
+Route::post('/agregar_al_carrito/{id}', [CartController::class, 'add'])
+    ->name('addCarrito');
 
 
 
