@@ -59,7 +59,7 @@
 
                         <a href="{{ route('mis-product') }}" 
                         class="text-white opacity-90 hover:opacity-100 hover:underline transition">
-                            Cafés Campesinos Felices
+                            Productos Ruralmente
                         </a>
                     </li>
                     <li class="flex items-center">

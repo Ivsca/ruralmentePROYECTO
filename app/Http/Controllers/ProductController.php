@@ -10,12 +10,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
-
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Cloudinary\Api\Upload\UploadApi;
 use Cloudinary\Api\Admin\AdminApi;
-
 
 class ProductController extends Controller
 {
@@ -163,15 +161,16 @@ public function tablaProductos(Request $request)
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name'                     => 'required|string|max:255',
-            'title'                    => 'nullable|string|max:255',
-            'description'              => 'nullable|string|max:255',
-            'contentProductDescription'=> 'nullable|string',
-            'price'                    => 'required|numeric|min:0',
-            'stock'                    => 'required|integer|min:0',
-            'color'                    => 'nullable|string|max:50',
-            'category'                 => 'required|in:camisas,gorras,cafe',
-            'status'                   => 'required|in:activo,inactivo',
+            'name'                      => 'required|string|max:255',
+            'title'                     => 'nullable|string|max:255',
+            'description'               => 'nullable|string|max:255',
+            'contentProductDescription' => 'nullable|string',
+            'price'                     => 'required|numeric|min:0',
+            'stock'                     => 'required|integer|min:0',
+            'color'                     => 'nullable|string|max:50',
+            'category'                  => 'required|in:camisas,gorras,cafe',
+            'status'                    => 'required|in:activo,inactivo',
+            'photo'                     => 'nullable|image|max:4096',
         ]);
 
         // Cloudinary config (best-effort check)
@@ -311,7 +310,6 @@ public function tablaProductos(Request $request)
     /**
      * Mostrar formulario de edición
      */
-    // Show edit form
     public function edit($id)
     {
         $product = Product::findOrFail($id);
@@ -462,7 +460,6 @@ public function tablaProductos(Request $request)
             ->route('Tabla-productos')
             ->with('success', 'Producto actualizado correctamente');
     }
-
 
     /**
      * Eliminar producto

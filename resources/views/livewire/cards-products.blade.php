@@ -1,5 +1,6 @@
 <section class="grid grid-cols-4 gap-3 p-3">
     <!-- carta de los Productos -->
+     <h1>holaaaaaaaaaaa</h1>
     @forelse ($products as $product)
     <div class="relative flex flex-col text-gray-700 bg-gray-300 shadow-md w-80 rounded-xl bg-clip-border mt-9">
         <div class="relative mx-4 overflow-hidden text-white shadow-lg -mt-7 h-52 rounded-xl bg-clip-border shadow-gray-500 bg-gradient-to-r">

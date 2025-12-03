@@ -6,21 +6,18 @@ use App\Livewire\Admin\AdminIndex;
 use App\Livewire\Admin\AgendaAdmin;
 use App\Livewire\Admin\Agricultor;
 use App\Livewire\Admin\CategoryAgro;
-use App\Livewire\Admin\Diagnostico;
 use App\Livewire\Admin\Groups;
 use App\Livewire\Admin\Planes;
 use App\Livewire\Admin\ProductAdmin;
 use App\Livewire\Admin\Questionnaire;
 use App\Livewire\Admin\UsersAdminIndex;
-use App\Livewire\AppointmentSchedule;
 use App\Livewire\Modal\Admin\CreateAgricultor;
 use App\Livewire\Modal\Admin\CreatePlan;
 use App\Livewire\SystemPago;
-use App\Livewire\TourismPage;
+use App\Livewire\Admin\TriajeAdmin;
+use App\Http\Controllers\Admin\TriajeExportController;
 use Illuminate\Support\Facades\Route;
 
-
-// lo puse yo
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 
@@ -90,16 +87,26 @@ Route::view('/mis_product', 'products.mis-product')->name('mis-product');
 
 
 
-// Formularios solo accesibles por admins
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/servicios/triaje', [TriajeController::class, 'create'])->name('triaje.create');
-    Route::post('/servicios/triaje', [TriajeController::class, 'store'])->name('triaje.store');
-});
 
-// Ver resultado del triaje (solo creador)
+// Ruta pública para ver el formulario
+Route::get('/servicios/triaje', [TriajeController::class, 'create'])->name('triaje.create');
+
+// Rutas protegidas
 Route::middleware(['auth'])->group(function () {
+    Route::post('/servicios/triaje', [TriajeController::class, 'store'])->name('triaje.store');
     Route::get('/servicios/triaje/{triaje}', [TriajeController::class, 'show'])->name('triaje.show');
 });
+
+Route::get('/admin/triaje', TriajeAdmin::class)
+    ->middleware('can:admin.index')
+    ->name('admin.triaje');
+
+Route::get('/admin/triaje/export', [TriajeExportController::class, 'export'])
+    ->middleware('can:admin.index')
+    ->name('admin.triaje.export');
+
+
+
 
 
 Route::view('/productos/perchas', 'products.perchas')->name('productos.perchas');
@@ -127,7 +134,7 @@ Route::get('/admin/planes', CreateAgricultor::class)->middleware('can:admin.agri
 
 Route::get('/Agendas', AgendaAdmin::class)->name('agendaAdmin');
 
-Route::get('/Agenda_de_eventos/{id}', [AppointmentSchedule::class, 'render'])->name('EventCalendar');
+
 
 // crud de productos 
 

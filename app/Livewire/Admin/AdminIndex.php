@@ -10,6 +10,8 @@ class AdminIndex extends Component
     
     public function render()
     {
-        return view('livewire.admin.admin-index');
+        return view('livewire.admin.admin-index')
+            ->layout('layouts.admin');
     }
+
 }

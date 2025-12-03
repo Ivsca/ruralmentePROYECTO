@@ -31,27 +31,19 @@
                         Servicios
                     </a>
                     <div class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-gray-200">
-                        @auth
-                            @if(auth()->user()->isAdmin())
-                                <a class="block px-4 py-2 text-gray-700 hover:bg-emerald-600 hover:text-white transition-colors duration-200 text-sm"
-                                    href="{{ route('triaje.store') }}"> Triaje psicológico
-                                </a>
-                            @endif
-                        @endauth
+                        <a class="block px-4 py-2 text-gray-700 hover:bg-emerald-600 hover:text-white transition-colors duration-200 text-sm"
+                            href="{{ route('triaje.create') }}"> Triaje psicológico
+                        </a>
                         <a class="block px-4 py-2 text-gray-700 hover:bg-emerald-600 hover:text-white transition-colors duration-200 text-sm" 
                            href="{{ route('paquetes') }}">Paquetes</a>
                     </div>
                 </li>
                 <li class="group relative">
-                    <a href="#" 
+                    <a href="{{ route('mis-product') }}" 
                        class="text-gray-700 hover:text-emerald-600 font-semibold py-2 px-3 xl:px-4 rounded-lg transition-colors duration-300 text-sm xl:text-base whitespace-nowrap">
                         Productos
                     </a>
                     <div class="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-gray-200">
-                        <a class="block px-4 py-2 text-gray-700 hover:bg-emerald-600 hover:text-white transition-colors duration-200 text-sm" 
-                           href="{{ route('productos.perchas') }}">Perchas</a>
-                        <a class="block px-4 py-2 text-gray-700 hover:bg-emerald-600 hover:text-white transition-colors duration-200 text-sm" 
-                           href="{{ route('mis-product') }}">Café campesinos felices</a>
                         @auth
                             @if(auth()->user()->isAdmin())
                                 <a class="block px-4 py-2 text-gray-700 hover:bg-emerald-600 hover:text-white transition-colors duration-200 text-sm"

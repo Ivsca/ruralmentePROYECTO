@@ -10,7 +10,7 @@ class TriajeController extends Controller
     // Constructor para aplicar middleware
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->only(['store', 'show']);
     }
 
     // Método para mostrar el formulario

@@ -40,7 +40,7 @@
                     <a href="{{ route('mis-product') }}" 
                     class="bg-amber-600 hover:bg-amber-700 text-white px-5 py-3 sm:px-6 md:px-8 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-2 text-sm sm:text-base">
                         <i class="fa-solid fa-mug-hot"></i> 
-                        <span class="whitespace-nowrap">Prueba el Café</span>
+                        <span class="whitespace-nowrap">Mira nuestros productos</span>
                     </a>
                 </div>
 
@@ -301,7 +301,7 @@
                                 <img src="{{ Storage::url($product->photo) }}" 
                                     alt="{{ $product->name }}" 
                                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                                    onerror="this.src='https://via.placeholder.com/400x300/cccccc/666666?text=Imagen+no+disponible'">
+                                    onerror="this.onerror=null; this.src='{{ asset('placeholder.jpg') }}';">
                             @else
                                 <div class="w-full h-full bg-gray-200 flex items-center justify-center">
                                     <span class="text-gray-500">Sin imagen</span>

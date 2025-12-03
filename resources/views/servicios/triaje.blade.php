@@ -24,11 +24,13 @@
                 <!-- Contenedor CENTRADO -->
                 <div class="flex justify-center">
 
-                    {{-- SI ESTÁ LOGUEADO --}}
-                    
+                    {{-- VERIFICACIÓN DE AUTENTICACIÓN --}}
+                    @auth
+                        {{-- USUARIO AUTENTICADO: muestra formulario --}}
+                        
                         <!-- FORMULARIO COMPLETO DE TRIAJE -->
                         <div class="bg-white rounded-xl p-10 shadow-lg border border-gray-100 w-full max-w-3xl mx-auto">
-
+                            
                             <h2 class="text-3xl font-serif font-bold text-[#2E8B57] mb-10 text-center">
                                 Datos del Paciente
                             </h2>
@@ -212,6 +214,56 @@
                                 </div>
                             </form>
                         </div>
+
+                    @else
+                        {{-- USUARIO NO AUTENTICADO: muestra mensaje de acceso --}}
+                        
+                        <div class="bg-white rounded-xl p-12 shadow-lg border border-gray-100 w-full max-w-3xl mx-auto text-center">
+                            <div class="mb-8">
+                                <div class="inline-flex items-center justify-center w-24 h-24 bg-red-50 rounded-full mb-6">
+                                    <svg class="w-12 h-12 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                              d="M12 15v2m0 0v2m0-2h2m-2 0H9m3-10a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                    </svg>
+                                </div>
+                                <h2 class="text-3xl font-bold text-gray-800 mb-4">Acceso Restringido</h2>
+                                <p class="text-gray-600 text-lg mb-6 leading-relaxed">
+                                    El formulario de triaje psicológico está disponible exclusivamente 
+                                    para personal autorizado del sistema.
+                                </p>
+                                <p class="text-gray-500 mb-8">
+                                    Debes iniciar sesión con tus credenciales para acceder a esta función.
+                                </p>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div>
+                                    <a href="{{ route('login') }}" 
+                                       class="inline-flex items-center justify-center px-10 py-4 bg-[#2E8B57] text-white font-semibold rounded-lg hover:bg-green-700 transition duration-200 text-lg shadow-md hover:shadow-lg w-full md:w-auto">
+                                        <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                                  d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                                        </svg>
+                                        Iniciar Sesión
+                                    </a>
+                                </div>
+                                
+                                <div class="pt-6 border-t border-gray-200">
+                                    <p class="text-gray-600">
+                                        ¿No tienes una cuenta?
+                                        <a href="{{ route('register') }}" class="text-[#2E8B57] font-semibold hover:underline ml-1">
+                                            Solicitar acceso
+                                        </a>
+                                    </p>
+                                    <p class="text-sm text-gray-500 mt-2">
+                                        Contacta al administrador si necesitas credenciales de acceso.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    @endauth
+
                 </div>
 
             </div>
