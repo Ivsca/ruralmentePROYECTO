@@ -163,6 +163,12 @@
                     </div>
                 </div>
 
+                <!-- Instagram móvil -->
+                <a href="#" target="_blank"
+                    class="bg-gradient-to-r from-pink-600 via-purple-600 to-orange-500 text-white px-4 py-2.5 rounded-lg font-semibold text-center hover:opacity-90 transition-all duration-300 mt-2 flex items-center justify-center">
+                    <i class="fa-brands fa-instagram mr-2 text-lg"></i>
+                    Síguenos en Instagram
+                </a>
                 <!-- WhatsApp móvil -->
                 <a href="https://wa.me/573008476257" target="_blank"
                    class="bg-emerald-600 text-white px-4 py-2.5 rounded-lg font-semibold text-center hover:bg-emerald-700 transition-all duration-300 mt-2 flex items-center justify-center">

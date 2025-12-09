@@ -23,7 +23,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductAdminController;
-use App\Http\Controllers\TriajeController as AdminTriajeController;
+use App\Http\Controllers\Admin\TriajeController as AdminTriajeController;
 use App\Http\Controllers\CotizacionController;
 
 /*
@@ -83,7 +83,10 @@ Route::post('/cotizacion/enviar', [CotizacionController::class, 'enviar'])
     ->name('cotizacion.enviar');
 
 // Triajes públicos
-Route::get('/servicios/triaje', [TriajeController::class, 'create'])->name('triaje.create');
+// Mostrar el formulario o el mensaje de acceso restringido
+    Route::get('/servicios/triaje/create', function () {
+        return view('servicios.triaje');
+    })->name('triaje.create');
 
 // Productos públicos
 Route::get('/', [ProductController::class, 'home'])->name('home');
@@ -116,9 +119,18 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     // Dashboard principal de usuarios
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
 
+    // ============================================================================
+    // RUTAS DE TRIAJES PARA USUARIOS NORMALES
+    // ============================================================================
 
-    // Triajes protegidos
+        
+    // Mis triajes - Vista para usuarios normales (sus propios triajes)
+    Route::get('/mis-triajes', [TriajeController::class, 'index'])->name('mis.triajes');
+    
+    // Crear nuevo triaje (disponible para todos los usuarios autenticados)
     Route::post('/servicios/triaje', [TriajeController::class, 'store'])->name('triaje.store');
+    
+    // Ver mi triaje específico (solo el usuario que lo creó)
     Route::get('/servicios/triaje/{triaje}', [TriajeController::class, 'show'])->name('triaje.show');
 
     // ============================================================================
@@ -128,8 +140,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         
         // Panel de control principal (nuevo diseño con sidebar)
         Route::get('/panel', [DashboardController::class, 'index'])->name('panel');
-        
-     
         
         // Dashboard Livewire existente
         Route::get('/', AdminIndex::class)->name('index');
@@ -148,23 +158,32 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/productos/vendidos', [ProductAdminController::class, 'sold'])->name('products.sold');
         Route::get('/exportar/productos', [ProductAdminController::class, 'export'])->name('export.products');
         
-        // Gestión de triajes
+        // ============================================================================
+        // GESTIÓN DE TRIAJES PARA ADMINISTRADORES (todos los triajes)
+        // ============================================================================
+        
+        // Lista de todos los triajes (vista admin)
         Route::get('/triajes', [AdminTriajeController::class, 'index'])->name('triajes.index');
+        
+        // Ver cualquier triaje (admin puede ver todos)
         Route::get('/triajes/{id}', [AdminTriajeController::class, 'show'])->name('triajes.show');
+        
+        // Eliminar triaje (solo admin)
         Route::delete('/triajes/{id}', [AdminTriajeController::class, 'destroy'])->name('triajes.destroy');
+        
+        // Exportar triajes (solo admin)
         Route::get('/exportar/triajes', [AdminTriajeController::class, 'export'])->name('export.triajes');
         
         // Livewire Admin Components (rutas existentes)
+        Route::get('/triaje', TriajeAdmin::class)->name('triaje');
+        Route::get('/triaje/export', [TriajeExportController::class, 'export'])->name('triaje.export');
+        
         Route::get('/Grupo_trabajo', Groups::class)->name('group');
         Route::get('/Products', ProductAdmin::class)->name('product');
         Route::get('/Planes', Planes::class)->middleware('can:admin.planes')->name('planes');
         Route::get('/Agricultores', Agricultor::class)->middleware('can:admin.agricultores')->name('agricultores');
         Route::get('/Categorias', CategoryAgro::class)->middleware('can:admin.categories')->name('categories');
         Route::get('/planes/create', CreateAgricultor::class)->middleware('can:admin.agricultor.createAgricultor')->name('agricultor.createAgricultor');
-        
-        // Triajes Livewire
-        Route::get('/triaje', TriajeAdmin::class)->name('triaje');
-        Route::get('/triaje/export', [TriajeExportController::class, 'export'])->name('triaje.export');
         
         // Estadísticas
         Route::get('/estadisticas', [DashboardController::class, 'stats'])->name('stats');

@@ -58,14 +58,16 @@ class UserDashboardController extends Controller
         
         $monthlyStats = [];
 
-        return view('dashboard', compact(
+        // Asegúrate de que la vista se llame dashboard-usuarios
+        return view('dashboard-usuarios', compact(
             'stats',
             'misTriajes',
             'recentTriajes',
             'recentUsers',
             'recentProducts',
             'distribution',
-            'monthlyStats'
+            'monthlyStats',
+            'user'  // ¡IMPORTANTE! Pasar el usuario a la vista
         ));
     }
 }
