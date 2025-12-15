@@ -88,15 +88,7 @@ Route::get('/productos', [ProductController::class, 'index'])->name('products.in
 Route::get('/productos/{id}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/searchProducts', [ProductController::class, 'searchProducts'])->name('searchProducts');
 
-// Carrito de compras
-Route::post('/agregar_al_carrito', [CartController::class, 'add'])->name('addCarrito');
-Route::post('/agregar_al_carrito/{id}', [CartController::class, 'add'])->name('addCarrito.id');
-Route::get('/carrito', [CartController::class, 'checkout'])->name('checkout');
-Route::get('/carrito/clear', [CartController::class, 'clear'])->name('clear');
-Route::post('/carrito/remove', [CartController::class, 'remove'])->name('removeItem');
-Route::post('/carrito/decremento_cantidad', [CartController::class, 'decrement'])->name('decrement');
-Route::post('/carrito/incremento_cantidad', [CartController::class, 'increment'])->name('increment');
-Route::get('/cantidad-productos-carrito', [ProductController::class, 'cantidadProductosCarrito'])->name('cantidad-productos-carrito');
+
 
 // Sistema de pago
 Route::get('/Sistema_de_pago/{id}', [SystemPago::class, 'render'])->name('pago');
@@ -107,6 +99,21 @@ Route::post('/Pago_Evento/{id}', [EventCalendarController::class, 'view'])->midd
 
 // RUTAS PROTEGIDAS (requieren autenticación)
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
+
+    // Ver carrito
+    Route::get('/carrito', [CartController::class, 'ver'])->name('carrito.ver');
+    Route::post('/carrito/add/{id}', [CartController::class, 'add'])->name('carrito.add');
+    Route::post('/carrito/update', [CartController::class, 'update'])->name('carrito.update');
+    Route::post('/carrito/remove', [CartController::class, 'remove'])->name('carrito.remove');
+    Route::post('/carrito/clear', [CartController::class, 'clear'])->name('carrito.clear');
+    Route::post('/carrito/toggle-selected', [CartController::class, 'toggleSelected'])
+        ->name('carrito.toggleSelected');
+    Route::get('/carrito/cantidad/{id}', [CartController::class, 'cantidad'])->name('carrito.cantidad');
+    // Checkout
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::get('/cantidad-productos-carrito/{id}', [CartController::class, 'cantidad'])->name('carrito.cantidad');
+
+
     
     // Dashboard principal de usuarios
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
@@ -170,7 +177,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         
         // Productos CRUD (compatibilidad con rutas existentes)
         Route::get('/Tabla-productos', [ProductController::class, 'tablaProductos'])->name('Tabla-productos');
-        Route::get('/productos/create', [ProductController::class, 'create'])->name('products.create');
+        Route::get('/productos/create', [ProductController::class, 'create'])->name('crearProducto');
         Route::post('/productos', [ProductController::class, 'store'])->name('products.store');
         Route::get('/productos/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
         Route::put('/productos/{id}', [ProductController::class, 'update'])->name('products.update');

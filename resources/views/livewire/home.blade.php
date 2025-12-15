@@ -343,7 +343,7 @@
                                     Ver detalles
                                 </a>
                                 
-                                <form method="POST" action="{{ route('addCarrito') }}">
+                                <form method="POST" action="{{ route('carrito.add', $product->id) }}">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                     <input type="hidden" name="quantity" value="1">

@@ -3,89 +3,73 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\CarritoCompras;
 use Illuminate\Http\Request;
-
-// para que funcionen las img
 use Illuminate\Support\Str;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
-
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary; // opcional, si instalaste el paquete
+
+// Opcionales: se usan solo si están disponibles en el servidor
 use Cloudinary\Api\Upload\UploadApi;
+use Cloudinary\Uploader;
 use Cloudinary\Api\Admin\AdminApi;
 
 class ProductController extends Controller
 {
-    /**
-     * Mostrar la página de inicio (HOME)
-     */
     public function home()
     {
-        // Obtener productos para mostrar en el home
         $products = Product::where('stock', '>', 0)
-                          ->orderBy('created_at', 'desc')
-                          ->take(3)
-                          ->get();
-        
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+
         return view('welcome', compact('products'));
     }
-    
-    /**
-     * Mostrar todos los productos (lista completa)
-     * PARA: /productos y /productos-vista
-     */
+
     public function index(Request $request)
     {
-        // Si se solicita debug, devolver JSON
-        if ($request->has('debug') && $request->debug) {
-            $products = Product::select('id','name','title','description','price','stock','photo')->get();
+        // --- DEBUG MODE -------------------------------------------------------
+        if ($request->boolean('debug')) {
+
+            // Solo productos con status = 'activo'
+            $products = Product::where('status', 'activo')
+                ->select('id','name','title','description','price','stock','photo')
+                ->get();
+
             return response()->json($products);
         }
-        
-        // Para vista normal, mostrar con paginación
-        $products = Product::where('stock', '>', 0)
-                          ->orderBy('created_at', 'desc')
-                          ->paginate(12);
-        
-        // Puedes usar la misma vista para ambas rutas o diferentes
-        // Si tienes products.index y products.mis-products, decide cuál usar
+
+        // --- NORMAL MODE ------------------------------------------------------
+        $products = Product::where('status', 'activo')   // solo activos
+            ->where('stock', '>', 0)                    // con stock
+            ->orderBy('created_at', 'desc')
+            ->paginate(12);
+
         return view('products.index', compact('products'));
-        // O si prefieres mantener separado:
-        // return view('products.mis-products', compact('products'));
     }
-    
-    /**
-     * Mostrar detalles de un producto
-     */
+
+
     public function show(Request $request, $id)
     {
         $product = Product::findOrFail($id);
-        
-        // Si se solicita debug, devolver JSON
-        if ($request->has('debug') && $request->debug) {
+
+        if ($request->boolean('debug')) {
             return response()->json($product);
         }
-        
+
         return view('products.show', compact('product'));
     }
 
-    /**
-     * Tabla de productos para administración
-     */
-public function tablaProductos(Request $request)
-{
-    // Inputs
-    $q = $request->input('q');
-    $category = $request->input('category');
-    $status = $request->input('status');
-    $price_min = $request->input('price_min');
-    $price_max = $request->input('price_max');
-    $stock_min = $request->input('stock_min');
-    $stock_max = $request->input('stock_max');
 
-    // Query base
-    $productsQuery = Product::query();
+    public function tablaProductos(Request $request)
+    {
+        $q = $request->input('q', null);
+        $category = $request->input('category', null);
+        $status = $request->input('status', null);
+        $price_min = $request->input('price_min', null);
+        $price_max = $request->input('price_max', null);
+        $stock_min = $request->input('stock_min', null);
+        $stock_max = $request->input('stock_max', null);
 
     // Buscador directo SIN LIKE
     if ($q) {
@@ -98,65 +82,51 @@ public function tablaProductos(Request $request)
                 ->orWhere('colores', $q)
                 ->orWhere('category', $q)
                 ->orWhere('status', $q);
+        $productsQuery = Product::query();
 
-            // Búsqueda numérica exacta
-            if (is_numeric($q)) {
-                $query->orWhere('price', $q)
-                      ->orWhere('stock', $q);
-            }
-        });
+        if ($q !== null && $q !== '') {
+            $productsQuery->where(function ($query) use ($q) {
+                $query->where('name', $q)
+                      ->orWhere('title', $q)
+                      ->orWhere('description', $q)
+                      ->orWhere('contentProductDescription', $q)
+                      ->orWhere('category', $q)
+                      ->orWhere('status', $q);
+
+                if (is_numeric($q)) {
+                    $query->orWhere('price', $q)
+                          ->orWhere('stock', $q);
+                }
+            });
+        }
+
+        if ($category) $productsQuery->where('category', $category);
+        if ($status) $productsQuery->where('status', $status);
+        if (is_numeric($price_min)) $productsQuery->where('price', '>=', $price_min);
+        if (is_numeric($price_max)) $productsQuery->where('price', '<=', $price_max);
+        if (is_numeric($stock_min)) $productsQuery->where('stock', '>=', $stock_min);
+        if (is_numeric($stock_max)) $productsQuery->where('stock', '<=', $stock_max);
+
+        $categories = Product::select('category')
+            ->distinct()
+            ->orderBy('category')
+            ->pluck('category');
+
+        $products = $productsQuery
+            ->orderBy('created_at', 'desc')
+            ->paginate(8)
+            ->withQueryString();
+
+        return view('products.tabla-productos', compact('products', 'categories'));
     }
 
-    // Filtros
-    if ($category) {
-        $productsQuery->where('category', $category);
-    }
-
-    if ($status) {
-        $productsQuery->where('status', $status);
-    }
-
-    if ($price_min !== null && $price_min !== '' && is_numeric($price_min)) {
-        $productsQuery->where('price', '>=', $price_min);
-    }
-
-    if ($price_max !== null && $price_max !== '' && is_numeric($price_max)) {
-        $productsQuery->where('price', '<=', $price_max);
-    }
-
-    if ($stock_min !== null && $stock_min !== '' && is_numeric($stock_min)) {
-        $productsQuery->where('stock', '>=', $stock_min);
-    }
-
-    if ($stock_max !== null && $stock_max !== '' && is_numeric($stock_max)) {
-        $productsQuery->where('stock', '<=', $stock_max);
-    }
-
-    // Categorías
-    $categories = Product::select('category')
-        ->distinct()
-        ->orderBy('category')
-        ->pluck('category');
-
-    // Paginación
-    $products = $productsQuery->orderBy('created_at', 'desc')
-                              ->paginate(5)
-                              ->withQueryString();
-
-    return view('products.Tabla-productos', compact('products', 'categories'));
-}
-
-
-    /**
-     * Mostrar formulario de creación
-     */
     public function create()
     {
         return view('products.create');
     }
 
     /**
-     * Guardar producto
+     * Guardar producto - soporta array 'colores' y subida a Cloudinary con fallback local
      */
     public function store(Request $request)
     {
@@ -167,155 +137,160 @@ public function tablaProductos(Request $request)
             'contentProductDescription' => 'nullable|string',
             'price'                     => 'required|numeric|min:0',
             'stock'                     => 'required|integer|min:0',
-            'colores'                     => 'nullable|string|max:50',
+            'colores'                   => 'nullable|array',
+            'colores.*'                 => 'nullable|string|max:50',
             'category'                  => 'required|in:camisas,gorras,cafe',
             'status'                    => 'required|in:activo,inactivo',
             'photo'                     => 'nullable|image|max:4096',
         ]);
 
-        // Cloudinary config (best-effort check)
-        $cloudinaryUrl = config('filesystems.disks.cloudinary.url') ?? env('CLOUDINARY_URL');
-        if (empty($cloudinaryUrl) || !is_string($cloudinaryUrl)) {
-            throw new \RuntimeException("Cloudinary no está configurado correctamente. Verifica CLOUDINARY_URL en .env y ejecuta php artisan config:clear");
-        }
+        // Normalizar array de colores (trim, quitar vacíos, quitar duplicados)
+        $rawColors = $request->input('colores', []);
+        if (!is_array($rawColors)) $rawColors = [];
+        $normalizedColors = array_values(array_unique(array_filter(array_map(function ($c) {
+            return is_string($c) ? trim($c) : null;
+        }, $rawColors))));
+        $data['colores'] = $normalizedColors;
 
+        // Manejo de la imagen: intentamos Cloudinary si está disponible, si no -> fallback local
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
 
             if (!$file->isValid()) {
-                throw new \RuntimeException("El archivo subido no es válido (upload error).");
+                return back()->withErrors(['photo' => 'El archivo subido no es válido.'])->withInput();
             }
 
             $randomPublicId = 'producto_' . Str::uuid()->toString();
-
             $path = $file->getRealPath() ?: $file->path();
             $storedTemp = false;
             $tempStorePath = null;
 
+            // Si no hay path legible, guardamos temporalmente
             if (!$path || !file_exists($path) || !is_readable($path)) {
-                $tempStorePath = $file->store('tmp', 'local'); // storage/app/tmp/xxxx
+                $tempStorePath = $file->store('tmp', 'local');
                 if (!$tempStorePath) {
-                    throw new \RuntimeException("No se pudo escribir un archivo temporal para la subida.");
+                    Log::error('No se pudo crear archivo temporal para upload');
+                } else {
+                    $path = storage_path('app/' . $tempStorePath);
+                    $storedTemp = true;
                 }
-                $path = storage_path('app/' . $tempStorePath);
-                $storedTemp = true;
             }
 
-            if (!file_exists($path) || !is_readable($path)) {
-                Log::error('Archivo temporal inaccesible antes de subir a Cloudinary', [
-                    'path' => $path,
-                    'exists' => file_exists($path),
-                    'readable' => is_readable($path),
-                ]);
-                if ($storedTemp && $tempStorePath) {
-                    Storage::disk('local')->delete($tempStorePath);
-                }
-                throw new \RuntimeException("Archivo temporal inaccesible: {$path}");
-            }
+            // Preparar opciones de upload
+            $uploadOptions = [
+                'folder' => 'productos',
+                'public_id' => $randomPublicId,
+                'overwrite' => false,
+                'resource_type' => 'image',
+            ];
 
-            Log::info('Preparando upload a Cloudinary', ['path' => $path, 'size' => @filesize($path) ?: 0, 'cloudinary_url' => $cloudinaryUrl]);
+            $secureUrl = null;
+            $publicId  = null;
 
+            // Intentar usar Cloudinary SDK (varias alternativas)
             try {
-                // Ensure UploadApi exists (modern SDK)
-                if (!class_exists(UploadApi::class)) {
-                    throw new \RuntimeException("Cloudinary UploadApi class not found. Run: composer require cloudinary/cloudinary_php");
+                if (class_exists(\Cloudinary\Api\Upload\UploadApi::class)) {
+                    // SDK moderno
+                    $uploader = new \Cloudinary\Api\Upload\UploadApi();
+                    $result = $uploader->upload($path, $uploadOptions);
+                } elseif (class_exists(\Cloudinary\Uploader::class)) {
+                    // SDK clásico
+                    $result = \Cloudinary\Uploader::upload($path, $uploadOptions);
+                } elseif (class_exists(\CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary::class) || class_exists(\CloudinaryLabs\CloudinaryLaravel\Cloudinary::class)) {
+                    // Si instalaste cloudinary-laravel, intenta facade
+                    try {
+                        $res = Cloudinary::upload($path, ['folder' => 'productos', 'public_id' => $randomPublicId]);
+                        $result = $res;
+                    } catch (\Throwable $e) {
+                        $result = null;
+                    }
+                } else {
+                    $result = null;
                 }
 
-                $uploader = new UploadApi();
-
-                $result = $uploader->upload($path, [
-                    'folder'      => 'productos',
-                    'public_id'   => $randomPublicId,
-                    'overwrite'   => false,
-                    'resource_type'=> 'image',
-                ]);
-
-                // Normalize result across SDK versions
-                $secureUrl = null;
-                $publicId  = null;
-
-                // array-like
-                if (is_array($result) || $result instanceof \ArrayAccess) {
-                    $secureUrl = $result['secure_url'] ?? $result['url'] ?? null;
-                    $publicId  = $result['public_id'] ?? $result['publicId'] ?? null;
-                } elseif (is_object($result)) {
-                    // ApiResponse has get() in some versions
-                    if (method_exists($result, 'get')) {
-                        try {
-                            $secureUrl = $result->get('secure_url') ?? $result->get('url') ?? null;
-                            $publicId  = $result->get('public_id') ?? $result->get('publicId') ?? null;
-                        } catch (\Throwable $inner) {
-                            Log::debug('Cloudinary ApiResponse get() failed', ['error' => $inner->getMessage()]);
+                // Normalizar resultado si vino de Cloudinary
+                if ($result) {
+                    if (is_array($result) || $result instanceof \ArrayAccess) {
+                        $secureUrl = $result['secure_url'] ?? $result['url'] ?? ($result['secureUrl'] ?? null);
+                        $publicId  = $result['public_id'] ?? $result['publicId'] ?? null;
+                    } elseif (is_object($result)) {
+                        if (method_exists($result, 'get')) {
+                            try {
+                                $secureUrl = $result->get('secure_url') ?? $result->get('url') ?? null;
+                                $publicId  = $result->get('public_id') ?? $result->get('publicId') ?? null;
+                            } catch (\Throwable $inner) {
+                                // ignore
+                            }
                         }
-                    }
-
-                    // toArray fallback
-                    if (empty($secureUrl) && method_exists($result, 'toArray')) {
-                        try {
-                            $arr = $result->toArray();
-                            $secureUrl = $arr['secure_url'] ?? $arr['url'] ?? $secureUrl;
-                            $publicId  = $arr['public_id'] ?? $arr['publicId'] ?? $publicId;
-                        } catch (\Throwable $inner) {
-                            //
+                        if (empty($secureUrl) && method_exists($result, 'toArray')) {
+                            try {
+                                $arr = $result->toArray();
+                                $secureUrl = $arr['secure_url'] ?? $arr['url'] ?? $secureUrl;
+                                $publicId  = $arr['public_id'] ?? $arr['publicId'] ?? $publicId;
+                            } catch (\Throwable $inner) { /* ignore */ }
                         }
+                        $secureUrl = $secureUrl ?: ($result->secure_url ?? $result->url ?? null);
+                        $publicId  = $publicId  ?: ($result->public_id ?? $result->publicId ?? null);
                     }
-
-                    // final attempt: public properties or cast
-                    $secureUrl = $secureUrl ?: ($result->secure_url ?? $result->url ?? null);
-                    $publicId  = $publicId  ?: ($result->public_id ?? $result->publicId ?? null);
                 }
-
             } catch (\Throwable $e) {
-                Log::error('Error subiendo a Cloudinary (FULL): ' . $e->getMessage(), [
-                    'exception_message' => $e->getMessage(),
-                    'exception_trace' => $e->getTraceAsString(),
-                    'cloudinary_url' => $cloudinaryUrl,
-                    'path' => $path,
-                ]);
-
-                if ($storedTemp && $tempStorePath) {
-                    Storage::disk('local')->delete($tempStorePath);
-                }
-
-                if (app()->environment('local')) {
-                    throw $e;
-                }
-
-                throw new \RuntimeException("Error al subir la imagen a Cloudinary. Revisa logs para más detalles.");
+                Log::error('Cloudinary upload attempt failed: ' . $e->getMessage(), ['exception' => $e]);
+                $secureUrl = null;
+                $publicId = null;
             }
 
+            // Si Cloudinary no proporcionó URL, hacemos fallback a storage local (public)
             if (empty($secureUrl)) {
-                Log::error('Cloudinary upload no devolvió URL segura', ['result' => $result ?? null]);
-                if ($storedTemp && $tempStorePath) {
-                    Storage::disk('local')->delete($tempStorePath);
+                try {
+                    // Guardar en disk public/products
+                    $storedPath = Storage::disk('public')->putFile('productos', $file);
+                    if ($storedPath) {
+                        // url pública
+                        $secureUrl = Storage::disk('public')->url($storedPath);
+                        $publicId = null; // no aplica
+                        Log::info('Fallback local: imagen guardada en storage public', ['path' => $storedPath]);
+                    } else {
+                        Log::error('Fallback local: no se pudo guardar el archivo en disk public');
+                    }
+                } catch (\Throwable $e) {
+                    Log::error('Fallback local upload failed: ' . $e->getMessage());
                 }
-                throw new \RuntimeException("Cloudinary no devolvió URL segura tras la subida.");
             }
 
-            $data['photo'] = $secureUrl;
-            $data['photo_public_id'] = $publicId;
-
+            // Limpiar temp si fue creado
             if ($storedTemp && $tempStorePath) {
-                Storage::disk('local')->delete($tempStorePath);
+                try {
+                    Storage::disk('local')->delete($tempStorePath);
+                } catch (\Throwable $e) {
+                    Log::warning('No se pudo borrar temp file: ' . $e->getMessage());
+                }
             }
+
+            // Si al final no tenemos URL, devolvemos error amigable
+            if (empty($secureUrl)) {
+                // No romper todo: devolver con error y mantener old inputs
+                return back()
+                    ->withInput()
+                    ->withErrors(['photo' => 'No se pudo subir la imagen (Cloudinary y fallback local fallaron). Revisa logs.']);
+            }
+
+            // Guardar en data
+            $data['photo'] = $secureUrl;
+            if (!empty($publicId)) $data['photo_public_id'] = $publicId;
         }
 
-        Product::create($data);
+        // Crear producto
+        $product = Product::create($data);
 
         return redirect()
-            ->route('Tabla-productos')
+            ->route('admin.Tabla-productos')
             ->with('success', 'Producto creado correctamente');
     }
 
-    /**
-     * Mostrar formulario de edición
-     */
     public function edit($id)
     {
         $product = Product::findOrFail($id);
 
-        // Compute photo URL: if it's already an absolute URL (Cloudinary secure_url) use it directly,
-        // otherwise assume it's a storage path and create an asset() URL.
         $photoUrl = null;
         if (!empty($product->photo)) {
             $photoUrl = (Str::startsWith($product->photo, ['http://', 'https://']))
@@ -323,23 +298,17 @@ public function tablaProductos(Request $request)
                 : asset('storage/' . ltrim($product->photo, '/'));
         }
 
-        // Pass route + method so the blade can be reused for create/edit
-        $route  = route('admin.products.update', $product->id); // adjust route name if different
+        $route  = route('admin.products.update', $product->id);
         $method = 'PUT';
         $title  = 'Editar producto';
 
         return view('products.edit', compact('product', 'photoUrl', 'route', 'method', 'title'));
     }
 
-    /**
-     * Actualizar producto
-     */
-    // Handle update
-   public function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $product = Product::findOrFail($id);
 
-        // Validate
         $validated = $request->validate([
             'name'                      => 'required|string|max:255',
             'title'                     => 'nullable|string|max:255',
@@ -347,194 +316,188 @@ public function tablaProductos(Request $request)
             'contentProductDescription' => 'nullable|string',
             'price'                     => 'required|numeric|min:0',
             'stock'                     => 'required|integer|min:0',
-            'colores'                     => 'nullable|string|max:50',
-            'category'                  => 'required|in:camisas,gorras,cafe',
-            'status'                    => 'required|in:activo,inactivo',
-            'photo'                     => 'nullable|image|max:4096',
-            'remove_photo'              => 'nullable|in:0,1',
+
+            // Aquí corregimos: aceptamos array de colores
+            'colores'       => 'nullable|array',
+            'colores.*'     => 'nullable|string|max:50',
+
+            'category'      => 'required|in:camisas,gorras,cafe',
+            'status'        => 'required|in:activo,inactivo',
+
+            'photo'         => 'nullable|image|max:4096',
+            'remove_photo'  => 'nullable|in:0,1',
         ]);
 
-        // Prepare data to save (exclude file & remove flag)
+        // Guardamos los campos básicos
         $saveData = $request->only([
             'name', 'title', 'description', 'contentProductDescription',
-            'price', 'stock', 'colores', 'category', 'status'
+            'price', 'stock', 'category', 'status'
         ]);
 
-        // Optional: check Cloudinary available
-        $cloudinaryUrl = config('filesystems.disks.cloudinary.url') ?? env('CLOUDINARY_URL');
-        if (empty($cloudinaryUrl) || !is_string($cloudinaryUrl)) {
-            Log::warning('Cloudinary not configured when updating product', ['product_id' => $product->id]);
-            // continue, but uploads/deletes will fail if Cloudinary not configured
-        }
+        // Normalizamos el array de colores igual que en store()
+        $rawColors = $request->input('colores', []);
+        if (!is_array($rawColors)) $rawColors = [];
 
-        // 1) Remove existing image if user asked
+        $normalizedColors = array_values(array_unique(array_filter(array_map(function ($c) {
+            return is_string($c) ? trim($c) : null;
+        }, $rawColors))));
+
+        $saveData['colores'] = $normalizedColors;
+
+        /*
+        |--------------------------------------------------------------------------
+        | 1) REMOVER IMAGEN SI MARCÓ "remove_photo = 1"
+        |--------------------------------------------------------------------------
+        */
         if ($request->input('remove_photo') === '1') {
-            if (!empty($product->photo_public_id)) {
+
+            if (!empty($product->photo_public_id) && class_exists(\Cloudinary\Api\Admin\AdminApi::class)) {
                 try {
-                    $admin = new AdminApi();
-                    // deleteAssets returns info; include resource_type for reliability
-                    $response = $admin->deleteAssets([$product->photo_public_id], ['resource_type' => 'image']);
-                    Log::info('Cloudinary deleteAssets response (remove_photo)', ['resp' => $response, 'product_id' => $product->id]);
+                    $admin = new \Cloudinary\Api\Admin\AdminApi();
+                    $admin->deleteAssets([$product->photo_public_id], ['resource_type' => 'image']);
                 } catch (\Throwable $e) {
-                    Log::error("Error deleting previous Cloudinary asset (remove_photo): " . $e->getMessage(), ['product_id' => $product->id]);
-                    // continue — don't block user update because of delete failure
+                    Log::error('Error eliminando imagen Cloudinary (remove): ' . $e->getMessage());
                 }
             }
+
             $saveData['photo'] = null;
             $saveData['photo_public_id'] = null;
         }
 
-        // 2) Upload new photo if provided
+        /*
+        |--------------------------------------------------------------------------
+        | 2) SUBIR NUEVA IMAGEN (similar a store)
+        |--------------------------------------------------------------------------
+        */
         if ($request->hasFile('photo')) {
-            // Delete previous image first (to avoid orphaned files)
-            if (!empty($product->photo_public_id)) {
-                try {
-                    $admin = new AdminApi();
-                    $resp = $admin->deleteAssets([$product->photo_public_id], ['resource_type' => 'image']);
-                    Log::info('Cloudinary deleteAssets response (replace)', ['resp' => $resp, 'product_id' => $product->id]);
-                } catch (\Throwable $e) {
-                    Log::error("Error deleting previous Cloudinary asset (replace): " . $e->getMessage(), ['product_id' => $product->id]);
-                    // continue — still attempt upload
-                }
-            }
 
             $file = $request->file('photo');
             if (!$file->isValid()) {
-                return redirect()->back()->withErrors(['photo' => 'El archivo subido no es válido.']);
+                return back()->withErrors(['photo' => 'El archivo subido no es válido.']);
             }
 
-            $publicId = 'producto_' . Str::uuid()->toString();
+            // Borrar imagen anterior si tiene public_id
+            if (!empty($product->photo_public_id) && class_exists(\Cloudinary\Api\Admin\AdminApi::class)) {
+                try {
+                    $admin = new \Cloudinary\Api\Admin\AdminApi();
+                    $admin->deleteAssets([$product->photo_public_id], ['resource_type' => 'image']);
+                } catch (\Throwable $e) {
+                    Log::error('Error borrando asset previo en Cloudinary (update): ' . $e->getMessage());
+                }
+            }
+
+            $randomPublicId = 'producto_' . Str::uuid()->toString();
             $path = $file->getRealPath() ?: $file->path();
 
-            if (!class_exists(UploadApi::class)) {
-                Log::error('Cloudinary UploadApi class not found. Run: composer require cloudinary/cloudinary_php');
-                return redirect()->back()->withErrors(['photo' => 'Uploader no disponible en el servidor.']);
-            }
+            $secureUrl = null;
+            $publicId  = null;
+
+            $uploadOptions = [
+                'folder' => 'productos',
+                'public_id' => $randomPublicId,
+                'overwrite' => true,
+                'resource_type' => 'image',
+            ];
 
             try {
-                $uploader = new UploadApi();
-                $result = $uploader->upload($path, [
-                    'folder'        => 'productos',
-                    'public_id'     => $publicId,
-                    'overwrite'     => true,
-                    'resource_type' => 'image',
-                ]);
-            } catch (\Throwable $e) {
-                Log::error('Cloudinary upload failed: ' . $e->getMessage(), ['product_id' => $product->id]);
-                return redirect()->back()->withErrors(['photo' => 'Error subiendo la imagen. Revisa logs.']);
-            }
+                if (class_exists(\Cloudinary\Api\Upload\UploadApi::class)) {
+                    $upload = new \Cloudinary\Api\Upload\UploadApi();
+                    $result = $upload->upload($path, $uploadOptions);
 
-            // Normalize result
-            $secureUrl = null;
-            $publicIdResult = null;
+                } elseif (class_exists(\Cloudinary\Uploader::class)) {
+                    $result = \Cloudinary\Uploader::upload($path, $uploadOptions);
 
-            if (is_array($result) || $result instanceof \ArrayAccess) {
-                $secureUrl = $result['secure_url'] ?? $result['url'] ?? null;
-                $publicIdResult = $result['public_id'] ?? $result['publicId'] ?? null;
-            } elseif (is_object($result)) {
-                if (method_exists($result, 'get')) {
-                    try {
-                        $secureUrl = $result->get('secure_url') ?? $result->get('url') ?? null;
-                        $publicIdResult = $result->get('public_id') ?? $result->get('publicId') ?? null;
-                    } catch (\Throwable $inner) {
-                        Log::debug('Cloudinary ApiResponse get() failed: ' . $inner->getMessage());
-                    }
+                } else {
+                    // fallback local
+                    $local = Storage::disk('public')->putFile('productos', $file);
+                    $saveData['photo'] = Storage::disk('public')->url($local);
+                    $saveData['photo_public_id'] = null;
+                    $result = null;
                 }
-                $secureUrl = $secureUrl ?: ($result->secure_url ?? $result->url ?? null);
-                $publicIdResult = $publicIdResult ?: ($result->public_id ?? $result->publicId ?? null);
+
+                if (!empty($result)) {
+                    $secureUrl = $result['secure_url'] ?? null;
+                    $publicId  = $result['public_id'] ?? null;
+                }
+
+            } catch (\Throwable $e) {
+                Log::error("Cloudinary upload error: " . $e->getMessage());
             }
 
+            // fallback si Cloudinary falló
             if (empty($secureUrl)) {
-                Log::error('Cloudinary upload did not return secure_url', ['result' => $result ?? null]);
-                return redirect()->back()->withErrors(['photo' => 'Cloudinary no devolvió URL tras la subida. Revisa logs.']);
+                $stored = Storage::disk('public')->putFile('productos', $file);
+                $secureUrl = Storage::disk('public')->url($stored);
+                $publicId = null;
             }
 
             $saveData['photo'] = $secureUrl;
-            $saveData['photo_public_id'] = $publicIdResult ?? $publicId;
+            $saveData['photo_public_id'] = $publicId;
         }
 
-        // 3) Persist only the fields we intend
+        /*
+        |--------------------------------------------------------------------------
+        | UPDATE FINAL
+        |--------------------------------------------------------------------------
+        */
         $product->update($saveData);
 
         return redirect()
-            ->route('Tabla-productos')
+            ->route('admin.Tabla-productos')
             ->with('success', 'Producto actualizado correctamente');
     }
 
-    /**
-     * Eliminar producto
-     */
+
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
 
-        /** ---------------------------------------------------------
-         * 1) ELIMINAR LA IMAGEN DE CLOUDINARY (si existe)
-         * --------------------------------------------------------- */
-        if (!empty($product->photo_public_id)) {
+        if (!empty($product->photo_public_id) && class_exists(\Cloudinary\Api\Admin\AdminApi::class)) {
             try {
                 $admin = new AdminApi();
-
-                // deleteAssets recibe un array de public_ids
-                $admin->deleteAssets([$product->photo_public_id]);
-
+                $admin->deleteAssets([$product->photo_public_id], ['resource_type' => 'image']);
             } catch (\Throwable $e) {
-                Log::error('Error eliminando imagen en Cloudinary (destroy): '.$e->getMessage(), [
-                    'public_id' => $product->photo_public_id
-                ]);
-                // Continuamos, no bloquea la eliminación del producto
+                Log::error('Error eliminando imagen en Cloudinary (destroy): '.$e->getMessage());
             }
         }
 
-        /** ---------------------------------------------------------
-         * 2) ELIMINAR EL PRODUCTO DE LA BD
-         * --------------------------------------------------------- */
         $product->delete();
 
         return redirect()
-            ->route('Tabla-productos')
+            ->route('admin.Tabla-productos')
             ->with('success', 'Producto eliminado correctamente');
     }
 
-    /**
-     * Obtener productos destacados para el home (si lo necesitas desde otra vista)
-     */
     public function featuredProducts()
     {
         $products = Product::where('stock', '>', 0)
             ->orderBy('created_at', 'desc')
             ->take(3)
             ->get();
-        
+
         return $products;
     }
 
-    // este va a ser un filtro que va a recibir muchos parametros que se mandan desde el form de las card de productos
     public function searchProducts(Request $request)
     {
-        // Base query
         $query = Product::query();
 
-        // Text search
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
                 $q->where('name', 'LIKE', "%{$request->search}%")
-                ->orWhere('title', 'LIKE', "%{$request->search}%")
-                ->orWhere('description', 'LIKE', "%{$request->search}%");
+                  ->orWhere('title', 'LIKE', "%{$request->search}%")
+                  ->orWhere('description', 'LIKE', "%{$request->search}%");
             });
         }
 
-        // Filter by category
         if ($request->filled('category')) {
             $query->where('category', $request->category);
         }
 
-        // Order by price
         if ($request->filled('price_order')) {
             $query->orderBy('price', $request->price_order);
         }
 
-        // Paginate to keep things tidy
         $products = $query->paginate(12)->withQueryString();
 
         return view('products.index', compact('products'));
@@ -547,8 +510,4 @@ public function tablaProductos(Request $request)
             'cantidad' => count($carrito)
         ]);
     }
-
 }
-
-
-

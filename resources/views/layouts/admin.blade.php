@@ -15,6 +15,7 @@
 
     {{-- Íconos --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
 
     <style>
         :root {
@@ -534,6 +535,10 @@
     @stack('styles')
 </head>
 <body>
+@php
+    // Obtén el id del usuario (null si no está autenticado)
+    $userId = auth()->id();
+@endphp
     <div class="dashboard-container">
         
         <aside class="sidebar" id="sidebar">
@@ -556,6 +561,7 @@
                 </div>
                 
                 <div class="menu-section">
+
                     <div class="menu-title">Gestión</div>
                     <a href="{{ route('admin.triajes.index') }}" class="menu-item">
                         <i class="fas fa-clipboard-check"></i>
@@ -578,6 +584,20 @@
                         @endif
                     </a>
                     <a href="{{ route('admin.users.index') }}" class="menu-item">
+                    <a href="{{ route('carrito.ver') }}" class="menu-item">
+                        <i class="fas fa-box-open"></i>
+                        <span>Carrito de compras</span>
+
+                        <!-- CONTADOR DINÁMICO DEL CARRITO -->
+                        <span class="badge contador-carrito"
+                            style="margin-left: auto; background: var(--success); color: white;
+                            border-radius: 10px; padding: 2px 8px; font-size: 0.75rem;">
+                            0
+                        </span>
+                    </a>
+
+                    <a href="{{ route('admin.users.index') }}" class="menu-item">
+
                         <i class="fas fa-users"></i>
                         <span>Usuarios</span>
                         @php
@@ -678,7 +698,34 @@
         }
 
         window.addEventListener('resize', handleResize);
-        handleResize(); 
+        handleResize(); // Initial check
+
+        const USER_ID = @json($userId);
+
+        (async function cantidad_productos_carrito() {
+            const contador = document.querySelector('.contador-carrito');
+            if (!contador) return;
+
+            if (!USER_ID) {
+                contador.textContent = '0';
+                return;
+            }
+
+            try {
+                const urlBase = "{{ url('/cantidad-productos-carrito') }}";
+                const response = await fetch(`${urlBase}/${USER_ID}`, {
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (!response.ok) return;
+
+                const data = await response.json();
+                contador.textContent = data?.cantidad ?? '0';
+            } catch (err) {
+                console.error('Error al obtener cantidad del carrito:', err);
+            }
+        })();
+
     </script>
 
     @stack('scripts')

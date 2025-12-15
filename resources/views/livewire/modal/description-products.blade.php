@@ -62,7 +62,7 @@
                         </div>
                         @include('portailsMensaje.msg')
                         <div class="grid grid-cols-2 text-lg">
-                            <form action="{{route('addCarrito')}}" method="post">
+                            <form method="POST" action="{{ route('carrito.add', $product->id) }}">
                                 @csrf
                                 <input name='id' type="hidden" value="{{$product->id}}">
                                 <button name='addProduct'                                  class="px-3 py-1 m-2 duration-300 bg-gray-200 rounded shadow-md hover:scale-105 hover:bg-gray-200 bg-opacity-40 focus:outline-none focus:ring-2 focus:ring-gray-600 shadow-gray-300 focus:ring-opacity-50">Agregar
