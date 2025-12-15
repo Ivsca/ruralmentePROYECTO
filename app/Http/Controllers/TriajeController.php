@@ -10,7 +10,7 @@ class TriajeController extends Controller
     // Constructor para aplicar middleware
     public function __construct()
     {
-        $this->middleware('auth')->only(['store', 'show']);
+        $this->middleware('auth');
     }
 
     // Método para mostrar el formulario
@@ -58,15 +58,32 @@ class TriajeController extends Controller
     // Mostrar resultado del triaje (con autorización)
     public function show($id)
     {
-        $triaje = Triaje::findOrFail($id);
-        
-        // Verificar que el usuario pueda ver este triaje
-        // (solo si es el creador o tiene permisos especiales)
-        if (auth()->id() !== $triaje->user_id) {
+        $triaje = Triaje::with('user')->findOrFail($id);
+    
+        // Verificar permisos
+        if (!auth()->user()->hasRole('admin') && auth()->id() !== $triaje->user_id) {
             abort(403, 'No tienes permiso para ver este triaje');
         }
         
+        // Si es admin, mostrar vista admin
+        if (auth()->user()->hasRole('admin')) {
+            return view('servicios.triaje-resultado', compact('triaje'));
+        }
+        
+        // Si es usuario normal
         return view('servicios.triaje-resultado', compact('triaje'));
+    }
+
+    public function showAdmin($id)
+    {
+        // Solo para administradores
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403, 'Acceso no autorizado');
+        }
+        
+        $triaje = Triaje::with('user')->findOrFail($id);
+        
+        return view('servicios.triaje-hoja-vida', compact('triaje'));
     }
 
     protected function calcularNivelAtencion(array $d)
@@ -108,5 +125,20 @@ class TriajeController extends Controller
         ];
         
         return $map[$nivel] ?? "Recomendaciones por definir.";
+    }
+
+    public function index()
+    {
+        // SOLO para usuarios normales - mostrar sus propios triajes
+        $triajes = auth()->user()->triajes()
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+        
+        if ($triajes->isEmpty()) {
+            return redirect()->route('triaje.create')
+                ->with('info', 'No tienes triajes registrados. Completa el formulario para crear uno.');
+        }
+        
+        return view('servicios.triajes-usuario', compact('triajes'));
     }
 }

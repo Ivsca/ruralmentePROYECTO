@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Triaje;
 use App\Models\Product;
 use App\Models\User;
@@ -13,35 +12,38 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        // Verificar que sea admin usando el mismo método
+        if (!auth()->user()->isAdmin()) {
+            abort(403, 'Acceso no autorizado');
+        }
+
         $stats = [
             'total_triajes' => Triaje::count(),
             'triajes_hoy' => Triaje::whereDate('created_at', today())->count(),
             'triajes_urgentes' => Triaje::whereIn('nivel_atencion', ['Atención inmediata', 'Atención en 24-48 horas'])->count(),
             
             'total_productos' => Product::count(),
-            'productos_vendidos' => 0, // Aquí necesitarías lógica para productos vendidos
-            'productos_stock_bajo' => 0, // Aquí necesitarías lógica para stock bajo
+            'productos_activos' => Product::where('status', 'active')->count(),
             
             'total_usuarios' => User::count(),
+            'usuarios_nuevos_hoy' => User::whereDate('created_at', today())->count(),
         ];
         
-        // Triajes recientes
+        // Datos recientes
         $recentTriajes = Triaje::with('user')
             ->latest()
             ->take(5)
             ->get();
         
-        // Usuarios recientes
         $recentUsers = User::latest()
             ->take(5)
             ->get();
         
-        // Productos recientes
         $recentProducts = Product::latest()
             ->take(5)
             ->get();
         
-        // Distribución por nivel de atención
+        // Distribución por nivel de atención (todos los triajes)
         $distribution = [
             'inmediata' => Triaje::where('nivel_atencion', 'Atención inmediata')->count(),
             'horas_24_48' => Triaje::where('nivel_atencion', 'Atención en 24-48 horas')->count(),
@@ -60,7 +62,8 @@ class DashboardController extends Controller
             ->get()
             ->pluck('count', 'month')
             ->toArray();
-        
+
+        // Asegúrate de que existe esta vista
         return view('dashboard', compact(
             'stats',
             'recentTriajes',
@@ -73,6 +76,10 @@ class DashboardController extends Controller
     
     public function stats()
     {
+        if (!auth()->user()->isAdmin()) {
+            abort(403, 'Acceso no autorizado');
+        }
+        
         // Lógica para estadísticas detalladas
         return view('admin.stats');
     }

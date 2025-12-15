@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Dashboard') - Salud Mental Rural</title>
+    <title>@yield('title', 'Dashboard') - Panel de administración</title>
 
     {{-- Fuentes --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -372,7 +372,7 @@
                     <div class="logo-icon">
                         <i class="fas fa-heartbeat"></i>
                     </div>
-                    <span class="logo-text">Salud Mental</span>
+                    <span class="logo-text">Ruralmente</span>
                 </a>
             </div>
 
@@ -385,13 +385,14 @@
                     </a>
                 </div>
                 <div class="menu-section">
-                    <div class="menu-title">Gestión </div>
-                    <a href="{{ route('admin.triaje') }}" class="menu-item">
+
+                    <div class="menu-title">Gestión</div>
+                    <a href="{{ route('admin.triajes.index') }}" class="menu-item">
                         <i class="fas fa-clipboard-check"></i>
                         <span>Triajes</span>
                         <span class="badge" style="margin-left: auto; background: var(--primary); color: white; border-radius: 10px; padding: 2px 8px; font-size: 0.75rem;">{{ \App\Models\Triaje::count() }}</span>
                     </a>
-                    <a href="{{ route('admin.Tabla-productos') }}" class="menu-item">
+                    <a href="#" class="menu-item">
                         <i class="fas fa-box-open"></i>
                         <span>Productos</span>
                         <span class="badge" style="margin-left: auto; background: var(--success); color: white; border-radius: 10px; padding: 2px 8px; font-size: 0.75rem;">{{ \App\Models\Product::count() }}</span>
@@ -409,6 +410,7 @@
                     </a>
 
                     <a href="{{ route('admin.users.index') }}" class="menu-item">
+
                         <i class="fas fa-users"></i>
                         <span>Usuarios</span>
                         <span class="badge" style="margin-left: auto; background: var(--secondary); color: white; border-radius: 10px; padding: 2px 8px; font-size: 0.75rem;">{{ \App\Models\User::count() }}</span>
@@ -429,10 +431,6 @@
 
                 <div class="menu-section">
                     <div class="menu-title">Configuración</div>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-cog"></i>
-                        <span>Ajustes</span>
-                    </a>
                     <a href="{{ route('logout') }}" class="menu-item"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt"></i>
