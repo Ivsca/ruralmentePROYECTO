@@ -18,7 +18,6 @@
 
     <div class="max-w-7xl mx-auto py-16 px-4">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <!-- Formulario - Columna izquierda (2/3) -->
             <div class="lg:col-span-2">
                 <div class="bg-white rounded-2xl shadow-xl p-8">
                     <h1 class="text-3xl font-bold mb-8 text-gray-800 border-b pb-4">
@@ -29,14 +28,14 @@
                         @csrf
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Empresa -->
+                           
                             <div>
                                 <label class="block font-medium text-gray-700 mb-2">Empresa</label>
                                 <input type="text" name="empresa" required
                                     class="w-full border border-gray-300 rounded-lg p-3 mt-1 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
                             </div>
 
-                            <!-- Nombre completo -->
+                            
                             <div>
                                 <label class="block font-medium text-gray-700 mb-2">Nombre completo</label>
                                 <input type="text" name="nombre" required
@@ -45,14 +44,14 @@
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Cargo -->
+                           
                             <div>
                                 <label class="block font-medium text-gray-700 mb-2">Cargo</label>
                                 <input type="text" name="cargo" required
                                     class="w-full border border-gray-300 rounded-lg p-3 mt-1 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
                             </div>
 
-                            <!-- Correo corporativo -->
+                           
                             <div>
                                 <label class="block font-medium text-gray-700 mb-2">Correo corporativo</label>
                                 <input type="email" name="correo" required
@@ -60,7 +59,7 @@
                             </div>
                         </div>
 
-                        <!-- Teléfono -->
+                       
                         <div>
                             <label class="block font-medium text-gray-700 mb-2">Teléfono</label>
                             <input type="text" name="telefono" required
@@ -68,7 +67,7 @@
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Paquete de interés -->
+                           
                             <div>
                                 <label class="block font-medium text-gray-700 mb-2">Paquete de interés</label>
                                 <select name="paquete" required
@@ -81,7 +80,7 @@
                                 </select>
                             </div>
 
-                            <!-- Número aproximado de participantes -->
+                           
                             <div>
                                 <label class="block font-medium text-gray-700 mb-2">Número aproximado de participantes</label>
                                 <input type="number" name="participantes" required min="1"
@@ -89,14 +88,14 @@
                             </div>
                         </div>
 
-                        <!-- Proyecto -->
+                       
                         <div>
                             <label class="block font-medium text-gray-700 mb-2">Cuéntenos sobre su proyecto</label>
                             <textarea name="proyecto" required rows="4"
                                 class="w-full border border-gray-300 rounded-lg p-3 mt-1 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"></textarea>
                         </div>
 
-                        <!-- Políticas -->
+                       
                         <div class="flex items-start gap-3 bg-gray-50 p-4 rounded-lg">
                             <input type="checkbox" name="politicas" value="1" required class="mt-1">
                             <label class="text-sm text-gray-700">
@@ -104,7 +103,7 @@
                             </label>
                         </div>
 
-                        <!-- Botón -->
+                        
                         <div class="pt-4">
                             <button type="submit"
                                 class="w-full bg-emerald-600 text-white px-6 py-4 rounded-lg shadow-lg hover:bg-emerald-700 transition transform hover:-translate-y-1 font-semibold text-lg">
@@ -121,16 +120,16 @@
                 </div>
             </div>
 
-            <!-- Panel de Información - Columna derecha (1/3) -->
+            
             <div class="lg:col-span-1">
                 <div class="sticky top-8 space-y-6">
-                    <!-- Título del panel -->
+                    
                     <div class="bg-gradient-to-r from-emerald-600 to-emerald-700 rounded-2xl shadow-lg p-6 text-white">
                         <h2 class="text-2xl font-bold mb-2">Información de Contacto</h2>
                         <p class="text-emerald-100">Estamos aquí para ayudarte</p>
                     </div>
 
-                    <!-- Contenedor de Ubicación -->
+               
                     <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-emerald-500">
                         <div class="flex items-start space-x-4">
                             <div class="bg-emerald-100 p-3 rounded-full">
@@ -147,7 +146,7 @@
                         </div>
                     </div>
 
-                    <!-- Contenedor de Teléfono -->
+                    
                     <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-blue-500">
                         <div class="flex items-start space-x-4">
                             <div class="bg-blue-100 p-3 rounded-full">
@@ -163,7 +162,7 @@
                         </div>
                     </div>
 
-                    <!-- Contenedor de Correo -->
+
                     <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-purple-500">
                         <div class="flex items-start space-x-4">
                             <div class="bg-purple-100 p-3 rounded-full">
@@ -181,7 +180,7 @@
                         </div>
                     </div>
 
-                    <!-- Contenedor de Tiempo de Respuesta -->
+                    
                     <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-amber-500">
                         <div class="flex items-start space-x-4">
                             <div class="bg-amber-100 p-3 rounded-full">
@@ -197,7 +196,7 @@
                         </div>
                     </div>
 
-                    <!-- Nota adicional -->
+                   
                     <div class="bg-gradient-to-r from-gray-50 to-white rounded-2xl shadow p-5 border border-gray-200">
                         <p class="text-gray-700 text-center">
                             <span class="font-semibold text-emerald-600">¡Pronto te contactaremos!</span> Nuestro equipo revisará tu solicitud y se pondrá en contacto contigo en el tiempo indicado.

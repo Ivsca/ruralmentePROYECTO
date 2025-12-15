@@ -2,9 +2,8 @@
     <x-navbar-welcome :seeButton="2" :register=false />
 
     <main class="w-full">
-        <!-- Hero Section Mejorado -->
+        
         <section class="w-full py-28 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 relative overflow-hidden">
-            <!-- Elementos decorativos de fondo -->
             <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-green-100/20 via-transparent to-transparent"></div>
             <div class="absolute top-10 right-10 w-32 h-32 bg-green-200/30 rounded-full blur-2xl"></div>
             <div class="absolute bottom-10 left-10 w-40 h-40 bg-teal-200/20 rounded-full blur-3xl"></div>
@@ -25,7 +24,7 @@
             <div class="container mx-auto px-6 lg:px-12 max-w-7xl">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
                 
-                <!-- Paquete Básico -->
+                
                 <article class="bg-white rounded-xl border border-gray-200 shadow-sm p-7 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <h3 class="text-2xl font-bold text-gray-900 mb-2">Paquete Básico</h3>
                     <ul class="space-y-2">
@@ -50,10 +49,10 @@
                         <span class="line-through">Remedios benditos personalizados</span>
                     </li>
                 </ul>
-                <!-- Sección de información del paquete - Colocar después de la lista -->
+                
                     <div class="mt-8 pt-6 border-t border-gray-200">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
-                            <!-- Ideal para -->
+                            
                             <div class="flex flex-col items-center md:items-start">
                                 <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mb-3">
                                     <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -64,7 +63,7 @@
                                 <p class="text-sm text-gray-600">Empresas que inician programas de bienestar</p>
                             </div>
 
-                            <!-- Duración -->
+                            
                             <div class="flex flex-col items-center md:items-start">
                                 <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mb-3">
                                     <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -75,7 +74,7 @@
                                 <p class="text-sm text-gray-600">3 meses</p>
                             </div>
 
-                            <!-- Cobertura -->
+                            
                             <div class="flex flex-col items-center md:items-start">
                                 <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mb-3">
                                     <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -89,7 +88,7 @@
                     </div>
                 </article>
 
-                <!-- Paquete Integral -->
+                
                 <article class="bg-white rounded-xl border border-gray-200 shadow-sm p-7 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <div class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 mb-4">
                     <span class="text-sm font-medium text-emerald-700">Más Popular</span>
@@ -119,10 +118,10 @@
                     </li>
                     </ul>
 
-                    <!-- Sección de información del paquete - Colocar después de la lista -->
+                    
                     <div class="mt-8 pt-6 border-t border-gray-200">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
-                            <!-- Ideal para -->
+                            
                             <div class="flex flex-col items-center md:items-start">
                                 <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mb-3">
                                     <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -133,7 +132,7 @@
                                 <p class="text-sm text-gray-600">pendiente</p>
                             </div>
 
-                            <!-- Duración -->
+                            
                             <div class="flex flex-col items-center md:items-start">
                                 <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mb-3">
                                     <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -144,7 +143,7 @@
                                 <p class="text-sm text-gray-600">pendiente</p>
                             </div>
 
-                            <!-- Cobertura -->
+                            
                             <div class="flex flex-col items-center md:items-start">
                                 <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mb-3">
                                     <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -158,7 +157,7 @@
                     </div>
                 </article>
 
-                <!-- Paquete Premium -->
+                
                 <article class="bg-white rounded-xl border border-gray-200 shadow-sm p-7 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <h3 class="text-2xl font-bold text-gray-900 mb-2">Paquete Premium</h3>
                     <p class="text-base font-medium text-gray-500 mb-4">Consultar</p>
@@ -186,10 +185,10 @@
                     </li>
                     </ul>
 
-                    <!-- Sección de información del paquete - Colocar después de la lista -->
+                   
                     <div class="mt-8 pt-6 border-t border-gray-200">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
-                            <!-- Ideal para -->
+                            
                             <div class="flex flex-col items-center md:items-start">
                                 <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mb-3">
                                     <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -200,7 +199,7 @@
                                 <p class="text-sm text-gray-600">Grandes corporaciones con compromiso social</p>
                             </div>
 
-                            <!-- Duración -->
+                            
                             <div class="flex flex-col items-center md:items-start">
                                 <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mb-3">
                                     <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -211,7 +210,7 @@
                                 <p class="text-sm text-gray-600">12 meses (renovable)</p>
                             </div>
 
-                            <!-- Cobertura -->
+                            
                             <div class="flex flex-col items-center md:items-start">
                                 <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mb-3">
                                     <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -226,7 +225,7 @@
                 </article>
                 </div>
 
-                <!-- Botón final -->
+                
                 <div class="mt-12 text-center">
                 <a href="{{ route('cotizacion') }}" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-6 py-3 rounded-lg shadow transition-all duration-300">
                     Solicitar cotización

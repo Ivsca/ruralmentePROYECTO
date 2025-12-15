@@ -16,13 +16,12 @@
           @csrf
 
           <div class="row g-4">
-            <!-- LEFT: Imagen grande + controls -->
+          
             <div class="col-md-5">
               <div class="card border-0 shadow-sm">
                 <div class="card-body">
                   <label class="form-label fw-semibold">Imagen del producto</label>
 
-                  <!-- Preview -->
                   <div class="mb-3">
                     <img id="photoPreview"
                          src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='100%' height='100%' fill='%23f8f9fa'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%238c8c8c' font-size='22'>Vista previa de la imagen</text></svg>"

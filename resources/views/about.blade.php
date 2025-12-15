@@ -2,7 +2,7 @@
     <x-navbar-welcome :seeButton="2" :register="false"/>
 
     <main class="w-full">
-        <!-- Hero Section Mejorado -->
+        
         <section class="w-full py-28 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 relative overflow-hidden">
             <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-green-100/20 via-transparent to-transparent"></div>
             <div class="absolute top-10 right-10 w-32 h-32 bg-green-200/30 rounded-full blur-2xl"></div>
@@ -18,12 +18,12 @@
             </div>
         </section>
 
-        <!-- Sección Misión, Visión, Valores mejorada -->
+        
         <section class="w-full py-20 bg-gradient-to-b from-white to-gray-50">
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
 
-                    <!-- ¿Quiénes Somos? -->
+                    
                     <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-emerald-500 hover:shadow-xl transition-all duration-300">
                         <div class="flex flex-col items-center text-center mb-4">
                             <div class="bg-emerald-100 p-4 rounded-full mb-4">
@@ -36,7 +36,7 @@
                         </p>
                     </div>
 
-                    <!-- Misión -->
+                    
                     <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-amber-600 hover:shadow-xl transition-all duration-300">
                         <div class="flex flex-col items-center text-center mb-4">
                             <div class="bg-amber-100 p-4 rounded-full mb-4">
@@ -49,7 +49,7 @@
                         </p>
                     </div>
 
-                    <!-- Visión -->
+                    
                     <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-green-500 hover:shadow-xl transition-all duration-300">
                         <div class="flex flex-col items-center text-center mb-4">
                             <div class="bg-green-100 p-4 rounded-full mb-4">
@@ -62,7 +62,7 @@
                         </p>
                     </div>
 
-                    <!-- Valores -->
+                    
                     <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-orange-700 hover:shadow-xl transition-all duration-300">
                         <div class="flex flex-col items-center text-center mb-4">
                             <div class="bg-orange-100 p-4 rounded-full mb-4">
@@ -79,10 +79,10 @@
             </div>
         </section>
 
-        <!-- Sección: ¿Qué hacemos nosotros? Mejorada -->
+        
         <section class="w-full py-16 bg-white">
             <div class="container mx-auto px-4">
-                <!-- Encabezado mejorado -->
+                
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-4">
                         ¿Qué hacemos nosotros?
@@ -93,9 +93,9 @@
                     </p>
                 </div>
 
-                <!-- Grid de dos columnas -->
+               
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                    <!-- Empresas enfocadas en impacto y reputación -->
+                    
                     <div class="bg-gradient-to-br from-white to-emerald-50 rounded-2xl shadow-xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300">
                         <div class="flex items-center justify-center mb-6">
                             <div class="bg-emerald-100 p-3 rounded-full mr-3">
@@ -145,7 +145,7 @@
                         </ul>
                     </div>
 
-                    <!-- Empresas enfocadas en productividad y rentabilidad -->
+                    
                     <div class="bg-gradient-to-br from-white to-amber-50 rounded-2xl shadow-xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300">
                         <div class="flex items-center justify-center mb-6">
                             <div class="bg-amber-100 p-3 rounded-full mr-3">
@@ -196,7 +196,7 @@
                     </div>
                 </div>
 
-                <!-- CTA Mejorado -->
+                
                 <div class="mt-16 bg-gradient-to-r from-emerald-50 to-green-50 rounded-2xl shadow-lg p-8 max-w-4xl mx-auto">
                     <div class="text-center">
                         <h3 class="text-2xl font-bold text-gray-800 mb-3">
@@ -218,7 +218,7 @@
             </div>
         </section>
 
-        <!-- Sección adicional de información de contacto (consistente con cotización) -->
+        
         <section class="w-full py-16 bg-gray-50">
             <div class="container mx-auto px-4">
                 <div class="max-w-4xl mx-auto">

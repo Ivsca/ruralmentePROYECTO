@@ -82,7 +82,7 @@ class TriajeAdmin extends Component
         return view('livewire.admin.triaje-admin', compact('triajes','users','total','bajo','medio','alto'));
     }
 
-    /* ---------- acciones UI ---------- */
+    
 
     public function show($id)
     {
@@ -126,7 +126,7 @@ class TriajeAdmin extends Component
 
     public function exportFiltered()
     {
-        // Emitir evento para que el backend genere PDF (ruta)
+        
         $params = http_build_query([
             'search' => $this->search,
             'user_id' => $this->user_id,

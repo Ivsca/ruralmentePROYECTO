@@ -1,7 +1,7 @@
 <div>
     <x-navbar-welcome :seeButton="2" :register="false" />
     
-    <!-- Section Inicio - Responsive completo -->
+   
     <section class="relative w-full min-h-screen md:h-screen bg-cover bg-center bg-no-repeat"
             style="background-image: url('{{ asset('fondos_imagenes_video/ai-generated-8593083_1280.jpg') }}');">
 
@@ -9,27 +9,27 @@
 
         <div class="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-16 md:py-0">
             <div class="text-center text-white w-full max-w-6xl mx-auto">
-                <!-- Logo responsive -->
+                
                 <img src="{{ asset('logos/Ruralmente_blanco.png') }}" alt="Ruralmente Logo" 
                      class="w-40 md:w-48 lg:w-64 object-contain mx-auto mb-4 md:mb-6">
 
-                <!-- Título responsive -->
+               
                 <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight mb-3 md:mb-4 leading-tight">
                     Bienestar Rural – Café con Propósito
                 </h1>
 
-                <!-- Subtítulo responsive -->
+                
                 <p class="text-lg sm:text-xl md:text-2xl italic mb-4 md:mb-6 max-w-2xl mx-auto px-2">
                     Bienestar rural que transforma empresas y comunidades
                 </p>
                 
-                <!-- Descripción responsive -->
+                
                 <div class="text-base sm:text-lg md:text-xl mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed px-2">
                     <p class="mb-2">Brindamos servicios de bienestar y salud mental a:</p>
                     <p class="text-sm sm:text-base">Mujeres campesinas, agricultores, ganaderos y caficultores. Mientras vendemos café premium producido por campesinos que priorizan su felicidad.</p>
                 </div>
 
-                <!-- Botones responsive -->
+                
                 <div class="flex flex-col sm:flex-row gap-3 md:gap-4 mb-8 md:mb-10 justify-center px-2">
                     <a href="{{ route('ruralServicios') }}" 
                     class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-3 sm:px-6 md:px-8 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-2 text-sm sm:text-base">
@@ -44,7 +44,7 @@
                     </a>
                 </div>
 
-                <!-- Estadísticas responsive -->
+                
                 <div class="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center px-2">
                     <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20 min-w-[140px]">
                         <span class="text-3xl sm:text-4xl md:text-4xl font-bold text-white block">500+</span>
@@ -59,10 +59,10 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 2: Dos formas de generar impacto real - Responsive -->
+    
     <section class="w-full py-12 sm:py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
         <div class="container mx-auto px-4 sm:px-6">
-            <!-- Título principal responsive -->
+            
             <div class="text-center mb-8 sm:mb-12 md:mb-16">
                 <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-3 md:mb-4">
                     Dos formas de generar impacto real
@@ -73,7 +73,7 @@
                 </p>
             </div>
 
-            <!-- Grid responsive -->
+            
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto">
                 
                 <!-- Columna Izquierda -->
@@ -178,10 +178,10 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 3: Del bienestar, nace el mejor alimento - Responsive -->
+    
     <section class="w-full py-12 sm:py-16 md:py-20 bg-white">
         <div class="container mx-auto px-4 sm:px-6">
-            <!-- Título principal responsive -->
+            
             <div class="text-center mb-8 sm:mb-12 md:mb-16 max-w-4xl mx-auto px-2">
                 <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-gray-800 mb-4 md:mb-6 leading-tight">
                     Del bienestar, nace el mejor alimento:
@@ -192,7 +192,7 @@
                 </p>
             </div>
 
-            <!-- Tres bloques responsive -->
+            
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto mb-8 sm:mb-10 md:mb-12">
                 
                 <!-- Bloque 1 -->
@@ -235,7 +235,7 @@
                 </div>
             </div>
 
-            <!-- Línea divisoria -->
+            
             <div class="max-w-4xl mx-auto mb-6 sm:mb-8 md:mb-12">
                 <div class="border-t border-gray-200 relative">
                     <div class="absolute left-1/2 transform -translate-x-1/2 -top-2 bg-white px-3 sm:px-4">
@@ -244,7 +244,7 @@
                 </div>
             </div>
 
-            <!-- Beneficios diferenciados responsive -->
+            
             <div class="max-w-4xl mx-auto text-center px-2">
                 <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-4 sm:mb-6 md:mb-8">
                     Beneficios diferenciados según tu objetivo empresarial:
@@ -265,10 +265,10 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 4: PERCHAS CAMPESINAS - Responsive -->
+    
     <section class="w-full py-12 sm:py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
         <div class="container mx-auto px-4 sm:px-6">
-            <!-- Título responsive -->
+            
             <div class="text-center mb-8 sm:mb-12 md:mb-16 max-w-3xl mx-auto px-2">
                 <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-3 md:mb-4">
                     PRODUCTOS RURALMENTE
@@ -279,7 +279,7 @@
                 </p>
             </div>
 
-            <!-- Grid de productos responsive -->
+            
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto mb-8 sm:mb-10 md:mb-12">
                 
                 @php
@@ -294,7 +294,7 @@
                 @endphp
                 
                 @forelse($featuredProducts as $product)
-                    <!-- Producto {{ $loop->iteration }} -->
+                    
                     <div class="bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden">
                         <div class="h-48 sm:h-56 md:h-64 overflow-hidden">
                             @if($product->photo)
@@ -358,7 +358,7 @@
                         </div>
                     </div>
                 @empty
-                    <!-- Si no hay productos -->
+                    
                     <div class="col-span-full text-center py-12">
                         <div class="text-gray-400 mb-4">
                             <i class="fas fa-box-open text-5xl mb-4"></i>
@@ -369,12 +369,12 @@
                 @endforelse
             </div>
 
-            <!-- Línea divisoria -->
+            
             <div class="max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8">
                 <div class="border-t border-gray-200"></div>
             </div>
 
-            <!-- Nota de impacto social responsive -->
+            
             <div class="text-center max-w-3xl mx-auto px-2">
                 <div class="bg-gradient-to-r from-emerald-50 to-amber-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6">
                     <p class="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed mb-2 sm:mb-4">
@@ -383,7 +383,7 @@
                     </p>
                 </div>
 
-                <!-- Botón Ver Todos los Productos -->
+                
                 <a href="{{ route('products.index') }}" 
                 class="inline-block px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-3 bg-amber-600 hover:bg-amber-700 text-white text-base sm:text-lg md:text-xl rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                     Ver todas las perchas
@@ -392,10 +392,10 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 5: CONTACTO - Responsive -->
+    
     <section class="w-full py-12 sm:py-16 md:py-20 bg-gradient-to-br from-gray-900 to-emerald-900">
         <div class="container mx-auto px-4 sm:px-6">
-            <!-- Título principal responsive -->
+            
             <div class="text-center mb-8 sm:mb-12 md:mb-16 max-w-3xl mx-auto px-2">
                 <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 md:mb-4">
                     Genera impacto real. Únete a nuestra iniciativa.
@@ -403,7 +403,7 @@
                 <div class="w-16 sm:w-20 h-1 bg-emerald-400 mx-auto rounded-full"></div>
             </div>
 
-            <!-- Grid de contacto responsive -->
+            
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto">
                 
                 <!-- Bloque 1 -->

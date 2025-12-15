@@ -1,5 +1,12 @@
 <x-guest-layout>
+
+    <a href="{{ route('home') }}" class="btn-back-home">
+        <i class="fa-solid fa-arrow-left"></i>
+        Volver al inicio
+    </a>
+
     <x-authentication-card>
+        
         <x-slot name="logo">
             <x-authentication-card-logo />
         </x-slot>
@@ -14,7 +21,7 @@
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
+            
             <div>
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
@@ -46,7 +53,7 @@
                     {{ __('Log in') }}
                 </x-button>
 
-                {{-- 🔥 ENLACE PARA REGISTRARSE --}}
+                {{-- ENLACE PARA REGISTRARSE --}}
                 @if (Route::has('register'))
                     <a
                         href="{{ route('register') }}"

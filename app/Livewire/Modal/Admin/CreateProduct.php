@@ -22,7 +22,7 @@ class CreateProduct extends Component
         $this->contentProductDescription = null;
         $this->price = null;
         $this->stock = null;
-        $this->color = null;
+        $this->colores = null;
         $this->categoryProduct = null;
         $this->status = null;
     }
@@ -54,7 +54,7 @@ class CreateProduct extends Component
             'contentProductDescription'  => $this->contentProductDescription,
             'stock' => $this->stock,
             'price'  => $this->price,
-            'color' => $this->color,
+            'colores' => $this->colores,
             'status' => 'Disponible',
             'categoryProduct' => $this->categoryProduct,
         ]);
@@ -63,7 +63,7 @@ class CreateProduct extends Component
 
 
         $this->openProduct = false;
-        $this->reset(['photo', 'name', 'title', 'description', 'contentProductDescription', 'price', 'stock', 'color', 'categoryProduct', 'status']);
+        $this->reset(['photo', 'name', 'title', 'description', 'contentProductDescription', 'price', 'stock', 'colores', 'categoryProduct', 'status']);
         $this->dispatch('render');
 
         session()->flash('msg', 'El producto a sido creado correctamente');

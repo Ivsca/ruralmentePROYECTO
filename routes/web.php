@@ -3,16 +3,9 @@
 use App\Http\Controllers\EventCalendarController;
 use App\Http\Controllers\TriajeController;
 use App\Livewire\Admin\AdminIndex;
-use App\Livewire\Admin\AgendaAdmin;
-use App\Livewire\Admin\Agricultor;
-use App\Livewire\Admin\CategoryAgro;
-use App\Livewire\Admin\Groups;
-use App\Livewire\Admin\Planes;
 use App\Livewire\Admin\ProductAdmin;
 use App\Livewire\Admin\Questionnaire;
 use App\Livewire\Admin\UsersAdminIndex;
-use App\Livewire\Modal\Admin\CreateAgricultor;
-use App\Livewire\Modal\Admin\CreatePlan;
 use App\Livewire\SystemPago;
 use App\Livewire\Admin\TriajeAdmin;
 use App\Http\Controllers\TriajeExportController;
@@ -111,34 +104,28 @@ Route::get('/Sistema_de_pago/{id}', [SystemPago::class, 'render'])->name('pago')
 // Eventos de pago
 Route::post('/Pago_Evento/{id}', [EventCalendarController::class, 'view'])->middleware('auth')->name('ViewEventPay');
 
-// ============================================================================
+
 // RUTAS PROTEGIDAS (requieren autenticación)
-// ============================================================================
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     
     // Dashboard principal de usuarios
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
 
-    // ============================================================================
-    // RUTAS DE TRIAJES PARA USUARIOS NORMALES
-    // ============================================================================
-
-        
-    // Mis triajes - Vista para usuarios normales (sus propios triajes)
+   
+    // RUTAS DE TRIAJES PARA USUARIOS NORMALES     
+    
     Route::get('/mis-triajes', [TriajeController::class, 'index'])->name('mis.triajes');
     
-    // Crear nuevo triaje (disponible para todos los usuarios autenticados)
     Route::post('/servicios/triaje', [TriajeController::class, 'store'])->name('triaje.store');
     
-    // Ver mi triaje específico (solo el usuario que lo creó)
     Route::get('/servicios/triaje/{triaje}', [TriajeController::class, 'show'])->name('triaje.show');
 
-    // ============================================================================
+    
     // RUTAS DE ADMINISTRACIÓN (requieren rol admin)
-    // ============================================================================
+    
     Route::middleware(['can:admin.index'])->prefix('admin')->name('admin.')->group(function () {
         
-        // Panel de control principal (nuevo diseño con sidebar)
+        // Panel de control principal
         Route::get('/panel', [DashboardController::class, 'index'])->name('panel');
         
         // Dashboard Livewire existente
@@ -158,9 +145,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/productos/vendidos', [ProductAdminController::class, 'sold'])->name('products.sold');
         Route::get('/exportar/productos', [ProductAdminController::class, 'export'])->name('export.products');
         
-        // ============================================================================
+        
         // GESTIÓN DE TRIAJES PARA ADMINISTRADORES (todos los triajes)
-        // ============================================================================
         
         // Lista de todos los triajes (vista admin)
         Route::get('/triajes', [AdminTriajeController::class, 'index'])->name('triajes.index');
@@ -178,12 +164,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/triaje', TriajeAdmin::class)->name('triaje');
         Route::get('/triaje/export', [TriajeExportController::class, 'export'])->name('triaje.export');
         
-        Route::get('/Grupo_trabajo', Groups::class)->name('group');
-        Route::get('/Products', ProductAdmin::class)->name('product');
-        Route::get('/Planes', Planes::class)->middleware('can:admin.planes')->name('planes');
-        Route::get('/Agricultores', Agricultor::class)->middleware('can:admin.agricultores')->name('agricultores');
-        Route::get('/Categorias', CategoryAgro::class)->middleware('can:admin.categories')->name('categories');
-        Route::get('/planes/create', CreateAgricultor::class)->middleware('can:admin.agricultor.createAgricultor')->name('agricultor.createAgricultor');
         
         // Estadísticas
         Route::get('/estadisticas', [DashboardController::class, 'stats'])->name('stats');
@@ -197,8 +177,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::delete('/productos/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
     });
     
-    // Agendas (protegida pero no necesariamente admin)
-    Route::get('/Agendas', AgendaAdmin::class)->name('agendaAdmin');
+    
     
     // Rutas por roles específicos
     Route::middleware(['role:admin'])->group(function () {

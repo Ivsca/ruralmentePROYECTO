@@ -82,12 +82,12 @@
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a href="{{ route('triajes.show', $triaje->id) }}" 
+                                        <a href="{{ route('admin.triajes.show', $triaje->id) }}" 
                                            class="btn btn-info btn-sm" 
                                            title="Ver detalles">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="{{ route('triaje.show', $triaje->id) }}" 
+                                        <a href="{{ route('admin.triajes.show', $triaje->id) }}" 
                                            class="btn btn-primary btn-sm" 
                                            title="Ver resultado">
                                             <i class="fas fa-file-medical"></i>
@@ -110,7 +110,7 @@
                     </table>
                 </div>
                 
-                <!-- Paginación -->
+                
                 <div class="d-flex justify-content-center mt-4">
                     {{ $triajes->links() }}
                 </div>

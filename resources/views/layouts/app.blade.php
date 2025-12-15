@@ -19,7 +19,7 @@
 
     <!-- Styles -->
     <style>
-        /* ===== VARIABLES Y RESET ===== */
+        
         :root {
             --primary-color: #2E8B57;
             --primary-light: #E8F5E9;
@@ -81,7 +81,7 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ===== TIPOGRAFÍA ===== */
+        
         h1, h2, h3, h4, h5, h6 {
             font-weight: 700;
             line-height: 1.2;
@@ -122,7 +122,7 @@
             color: var(--primary-dark);
         }
 
-        /* ===== COMPONENTES DEL DASHBOARD ===== */
+        
         
         /* Contenedor principal */
         .dashboard-container {
@@ -157,7 +157,7 @@
             margin: 0 auto;
         }
 
-        /* Grid de estadísticas */
+        
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -165,7 +165,7 @@
             margin-bottom: 4rem;
         }
 
-        /* Tarjetas de estadísticas */
+        
         .stat-card {
             background: linear-gradient(135deg, #ffffff 0%, var(--gray-50) 100%);
             border: 1px solid var(--gray-200);
@@ -302,7 +302,7 @@
             transform: translateX(4px);
         }
 
-        /* Contenedor del gráfico */
+        
         .chart-container {
             background: linear-gradient(135deg, #ffffff 0%, var(--gray-50) 100%);
             border: 1px solid var(--gray-200);
@@ -333,7 +333,7 @@
             position: relative;
         }
 
-        /* Accesos rápidos */
+        
         .quick-links-section {
             margin-bottom: 4rem;
         }
@@ -411,9 +411,9 @@
             transform: translateX(4px);
         }
 
-        /* ===== COMPONENTES PARA LA ADMINISTRACIÓN DE TRIAJES ===== */
         
-        /* Filtros */
+        
+        
         .filters-panel {
             background: linear-gradient(135deg, #ffffff 0%, var(--gray-50) 100%);
             border: 1px solid var(--gray-200);
@@ -505,7 +505,7 @@
             box-shadow: var(--shadow-md);
         }
 
-        /* Tabla */
+        
         .table-container {
             background: linear-gradient(135deg, #ffffff 0%, var(--gray-50) 100%);
             border: 1px solid var(--gray-200);
@@ -566,7 +566,7 @@
             vertical-align: top;
         }
 
-        /* Badges */
+        
         .badge {
             display: inline-flex;
             align-items: center;
@@ -596,7 +596,7 @@
             border: 1px solid var(--danger-color);
         }
 
-        /* Acciones */
+        
         .actions-group {
             display: flex;
             gap: 0.5rem;
@@ -645,7 +645,7 @@
             color: white;
         }
 
-        /* Estados vacíos */
+        
         .empty-state {
             padding: 4rem 2rem;
             text-align: center;
@@ -670,14 +670,14 @@
             color: var(--gray-400);
         }
 
-        /* Paginación */
+        
         .pagination-container {
             padding: 2rem;
             border-top: 1px solid var(--gray-200);
             background: var(--gray-50);
         }
 
-        /* ===== MODALES ===== */
+        
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -734,7 +734,7 @@
             background: var(--gray-50);
         }
 
-        /* ===== ANIMACIONES ===== */
+        
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -847,7 +847,7 @@
             }
         }
 
-        /* ===== UTILIDADES ===== */
+        
         .text-center {
             text-align: center;
         }
@@ -883,7 +883,7 @@
             display: none !important;
         }
 
-        /* ===== SCROLLBAR PERSONALIZADA ===== */
+        
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -903,12 +903,12 @@
             background: var(--gray-500);
         }
 
-        /* ===== LOADING STATES ===== */
+        
         .loading {
             animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
 
-        /* ===== PRINT STYLES ===== */
+        
         @media print {
             .no-print {
                 display: none !important;
@@ -934,12 +934,12 @@
 </head>
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100">
-        <!-- Navigation -->
+        
         @if(isset($navigation))
             {{ $navigation }}
         @endif
 
-        <!-- Page Heading -->
+        
         @if(isset($header))
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -948,7 +948,7 @@
             </header>
         @endif
 
-        <!-- Page Content -->
+        
         <main>
             {{ $slot }}
         </main>
@@ -958,9 +958,9 @@
     @livewireScripts
     
     <script>
-        // Scripts globales para interactividad
+        
         document.addEventListener('DOMContentLoaded', function() {
-            // Inicializar tooltips si se usan
+            
             const tooltips = document.querySelectorAll('[data-tooltip]');
             tooltips.forEach(tooltip => {
                 tooltip.addEventListener('mouseenter', function(e) {
@@ -995,21 +995,21 @@
                 });
             });
 
-            // Manejar modales con Alpine.js
+            
             window.Alpine = Alpine;
             
-            // Manejar SweetAlert2 si existe
+            
             if (typeof Swal !== 'undefined') {
                 window.Swal = Swal;
             }
 
-            // Inicializar Chart.js si hay gráficos
+            
             if (typeof Chart !== 'undefined') {
                 window.Chart = Chart;
             }
         });
 
-        // Función para copiar al portapapeles
+        
         window.copyToClipboard = function(text) {
             navigator.clipboard.writeText(text).then(() => {
                 if (typeof Swal !== 'undefined') {

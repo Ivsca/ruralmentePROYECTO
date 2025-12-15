@@ -55,13 +55,12 @@ class User extends Authenticatable
     // Relaciones
     public function alma(): HasOne
     {
-        return $this->hasOne(Alma::class);
+        return $this->hasOne(Alma::class, 'id_user', 'id');
     }
 
-    public function group(): HasMany
-    {
-        return $this->hasMany(Group::class);
-    }
+
+   
+
 
     public function workshops(): BelongsToMany
     {
@@ -69,10 +68,11 @@ class User extends Authenticatable
             ->wherePivot('dateTimeCitations');
     }
 
-    public function invoices(): HasMany
+    public function invoices()
     {
-        return $this->hasMany(Invoice::class);
+        return $this->hasMany(Invoice::class, 'user_id', 'id');
     }
+
 
     // Relación con triajes
     public function triajes(): HasMany
@@ -80,17 +80,15 @@ class User extends Authenticatable
         return $this->hasMany(Triaje::class);
     }
 
-    // -------------------------
-    // MÉTODO CORRECTO isAdmin()
-    // -------------------------
+    
     public function isAdmin(): bool
     {
-        // Primero revisa la columna 'role'
+        
         if ($this->role === 'admin') {
             return true;
         }
 
-        // Luego revisa Spatie
+        
         if ($this->hasRole('admin')) {
             return true;
         }

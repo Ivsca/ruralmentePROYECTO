@@ -24,10 +24,41 @@
             font-family: 'Nunito', sans-serif;
 
             scrollbar-width: thin;
-            /* "auto" or "thin" */
             scrollbar-color: blue orange;
 
         }
+
+        .btn-back-home {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+
+            padding: 0.45rem 0.9rem;
+            border-radius: 9999px;
+
+            background: transparent;
+            color: #1B5E20;
+
+            font-weight: 600;
+            font-size: 0.85rem;
+
+            text-decoration: none;
+            border: 1.8px solid #1B5E20;
+
+            transition: all 0.25s ease;
+        }
+
+        .btn-back-home:hover {
+            background: #1B5E20;
+            color: #ffffff;
+            transform: translateX(-2px);
+            box-shadow: 0 4px 12px rgba(27, 94, 32, 0.25);
+        }
+
 
         #contentEval {
             overflow-y: scroll;
@@ -69,7 +100,7 @@
             #navbottom.scroll #logo {
                 content: url({{ asset('logos/Ruralmente_logo_negro.png') }});
                 width: 70px;
-                /* Cambia la URL a la imagen roja */
+                
             }
 
             #navbottom.scroll #inst {
@@ -238,7 +269,7 @@
 
         <style>
             .swal-confirm-btn {
-                background-color: #16a34a; /* Verde emerald */
+                background-color: #16a34a; 
                 color: white;
                 border: none;
                 padding: 10px 22px;
@@ -250,7 +281,7 @@
             }
 
             .swal-confirm-btn:hover {
-                background-color: #15803d; /* Emerald más oscuro */
+                background-color: #15803d; 
             }
         </style>
     @endif

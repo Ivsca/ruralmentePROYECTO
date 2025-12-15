@@ -11,7 +11,7 @@
 
     <div class="relative z-10 container mx-auto px-4">
 
-        <!-- Título centrado arriba -->
+        
         <div class="max-w-2xl mx-auto text-center mb-16">
             <h1 class="text-5xl md:text-6xl font-serif font-bold tracking-wide mb-6 bg-gradient-to-r from-green-800 via-emerald-700 to-teal-800 bg-clip-text text-transparent">
                 Resultado del Triaje
@@ -21,12 +21,12 @@
             </p>
         </div>
 
-        <!-- Contenedor principal centrado -->
+       
         <div class="flex justify-center">
 
             <div class="bg-white rounded-xl p-10 shadow-lg border border-gray-100 w-full max-w-4xl mx-auto">
 
-                <!-- Encabezado de información -->
+               
                 <div class="text-center mb-10">
                     <h2 class="text-4xl font-serif font-bold text-[#2E8B57] mb-4">
                         Resultado del Triaje Psicológico
@@ -49,7 +49,7 @@
                     $colorClase = $nivelColores[$triaje->nivel_atencion] ?? 'bg-gray-100 border-gray-300';
                 @endphp
 
-                <!-- Tarjeta de nivel de atención -->
+               
                 <div class="bg-white rounded-xl shadow p-8 mb-8 border border-gray-200">
                     <div class="{{ $colorClase }} p-6 rounded-lg mb-8 border-2 text-center">
                         <h2 class="text-2xl font-bold mb-2">Nivel de atención requerido</h2>
@@ -79,7 +79,7 @@
                         </div>
                     </div>
 
-                    <!-- Evaluación detallada -->
+                    
                     <div class="mb-8">
                         <h3 class="text-2xl font-semibold text-gray-800 mb-4">📊 Evaluación detallada</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -115,7 +115,7 @@
                         </div>
                     </div>
 
-                    <!-- Contexto -->
+                    
                     @if($triaje->contexto)
                     <div class="mb-8">
                         <h3 class="text-2xl font-semibold text-gray-800 mb-4">📝 Contexto de la consulta</h3>
@@ -125,7 +125,7 @@
                     </div>
                     @endif
 
-                    <!-- Recomendaciones -->
+                    
                     <div>
                         <h3 class="text-2xl font-semibold text-gray-800 mb-4">💡 Recomendaciones de atención</h3>
                         <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
@@ -137,7 +137,7 @@
 
                 </div>
 
-                <!-- Botones de acción -->
+                
                 <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10">
                     <a href="{{ route('triaje.create') }}" 
                        class="bg-[#2E8B57] hover:bg-[#246b45] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 text-center inline-flex items-center justify-center">

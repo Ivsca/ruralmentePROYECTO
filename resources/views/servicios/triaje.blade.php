@@ -21,14 +21,14 @@
                     </p>
                 </div>
 
-                <!-- Contenedor CENTRADO -->
+                
                 <div class="flex justify-center">
 
                     {{-- VERIFICACIÓN DE AUTENTICACIÓN --}}
                     @auth
                         {{-- USUARIO AUTENTICADO: muestra formulario --}}
                         
-                        <!-- FORMULARIO COMPLETO DE TRIAJE -->
+                        
                         <div class="bg-white rounded-xl p-10 shadow-lg border border-gray-100 w-full max-w-3xl mx-auto">
                             
                             <h2 class="text-3xl font-serif font-bold text-[#2E8B57] mb-10 text-center">

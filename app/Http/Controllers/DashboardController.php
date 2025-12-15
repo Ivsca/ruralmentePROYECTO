@@ -12,7 +12,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Verificar que sea admin usando el mismo método
+        
         if (!auth()->user()->isAdmin()) {
             abort(403, 'Acceso no autorizado');
         }
@@ -29,7 +29,7 @@ class DashboardController extends Controller
             'usuarios_nuevos_hoy' => User::whereDate('created_at', today())->count(),
         ];
         
-        // Datos recientes
+        
         $recentTriajes = Triaje::with('user')
             ->latest()
             ->take(5)
@@ -43,7 +43,7 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
         
-        // Distribución por nivel de atención (todos los triajes)
+        
         $distribution = [
             'inmediata' => Triaje::where('nivel_atencion', 'Atención inmediata')->count(),
             'horas_24_48' => Triaje::where('nivel_atencion', 'Atención en 24-48 horas')->count(),
@@ -51,7 +51,7 @@ class DashboardController extends Controller
             'rutinaria' => Triaje::where('nivel_atencion', 'Atención rutinaria')->count(),
         ];
         
-        // Estadísticas mensuales (últimos 6 meses)
+        
         $monthlyStats = Triaje::select(
                 DB::raw('MONTH(created_at) as month'),
                 DB::raw('COUNT(*) as count')
@@ -63,7 +63,7 @@ class DashboardController extends Controller
             ->pluck('count', 'month')
             ->toArray();
 
-        // Asegúrate de que existe esta vista
+        
         return view('dashboard', compact(
             'stats',
             'recentTriajes',
@@ -80,7 +80,7 @@ class DashboardController extends Controller
             abort(403, 'Acceso no autorizado');
         }
         
-        // Lógica para estadísticas detalladas
+        
         return view('admin.stats');
     }
 }

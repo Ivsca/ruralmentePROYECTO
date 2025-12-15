@@ -11,9 +11,6 @@
 </head>
 <body class="antialiased">
 
-    <!-- ========================= -->
-    <!-- FONDO ESTILO TRIAJE -->
-    <!-- ========================= -->
     <section class="w-full min-h-screen py-20 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 relative overflow-hidden">
 
         <!-- Fondos decorativos -->

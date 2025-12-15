@@ -95,7 +95,7 @@ public function tablaProductos(Request $request)
                 ->orWhere('title', $q)
                 ->orWhere('description', $q)
                 ->orWhere('contentProductDescription', $q)
-                ->orWhere('color', $q)
+                ->orWhere('colores', $q)
                 ->orWhere('category', $q)
                 ->orWhere('status', $q);
 
@@ -167,7 +167,7 @@ public function tablaProductos(Request $request)
             'contentProductDescription' => 'nullable|string',
             'price'                     => 'required|numeric|min:0',
             'stock'                     => 'required|integer|min:0',
-            'color'                     => 'nullable|string|max:50',
+            'colores'                     => 'nullable|string|max:50',
             'category'                  => 'required|in:camisas,gorras,cafe',
             'status'                    => 'required|in:activo,inactivo',
             'photo'                     => 'nullable|image|max:4096',
@@ -324,7 +324,7 @@ public function tablaProductos(Request $request)
         }
 
         // Pass route + method so the blade can be reused for create/edit
-        $route  = route('products.update', $product->id); // adjust route name if different
+        $route  = route('admin.products.update', $product->id); // adjust route name if different
         $method = 'PUT';
         $title  = 'Editar producto';
 
@@ -347,7 +347,7 @@ public function tablaProductos(Request $request)
             'contentProductDescription' => 'nullable|string',
             'price'                     => 'required|numeric|min:0',
             'stock'                     => 'required|integer|min:0',
-            'color'                     => 'nullable|string|max:50',
+            'colores'                     => 'nullable|string|max:50',
             'category'                  => 'required|in:camisas,gorras,cafe',
             'status'                    => 'required|in:activo,inactivo',
             'photo'                     => 'nullable|image|max:4096',
@@ -357,7 +357,7 @@ public function tablaProductos(Request $request)
         // Prepare data to save (exclude file & remove flag)
         $saveData = $request->only([
             'name', 'title', 'description', 'contentProductDescription',
-            'price', 'stock', 'color', 'category', 'status'
+            'price', 'stock', 'colores', 'category', 'status'
         ]);
 
         // Optional: check Cloudinary available

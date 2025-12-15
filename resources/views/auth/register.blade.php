@@ -1,7 +1,6 @@
 <x-guest-layout>
     <x-authentication-card>
 
-        {{-- LINK ELEGANTE PARA VOLVER A LOGIN --}}
         <div class="flex justify-center mb-6">
             <a href="{{ route('login') }}"
                class="text-sm font-semibold text-indigo-500 hover:text-indigo-700 hover:underline transition-all duration-200">
@@ -17,7 +16,7 @@
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
-            {{-- NOMBRE COMPLETO --}}
+           
             <div>
                 <x-label for="NombreCompleto" value="Nombre completo" />
                 <x-input id="NombreCompleto" class="block mt-1 w-full" type="text"
@@ -25,7 +24,6 @@
             </div>
 
 
-            {{-- TIPO DE DOCUMENTO --}}
             <div class="mt-4">
                 <x-label for="document_type" value="Tipo de documento" />
 
@@ -43,14 +41,12 @@
                 </select>
             </div>
 
-            {{-- DOCUMENTO --}}
             <div class="mt-4">
                 <x-label for="document" value="Número de documento" />
                 <x-input id="document" class="block mt-1 w-full" type="text"
                     name="document" :value="old('document')" required autocomplete="off" />
             </div>
 
-            {{-- TELÉFONO --}}
             <div class="mt-4">
                 <x-label for="phone" value="Teléfono" />
 
@@ -65,7 +61,7 @@
                         required autocomplete="tel" />
                 </div>
             </div>
-            {{-- DIRECCIÓN --}}
+           
             <div class="mt-4">
                 <x-label for="address" value="Dirección" />
                 <x-input id="address" class="block mt-1 w-full" type="text"
@@ -73,28 +69,27 @@
             </div>
 
 
-            {{-- EMAIL --}}
             <div class="mt-4">
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email"
                     name="email" :value="old('email')" required autocomplete="username" />
             </div>
 
-            {{-- PASSWORD --}}
+            
             <div class="mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />
                 <x-input id="password" class="block mt-1 w-full" type="password"
                     name="password" required autocomplete="new-password" />
             </div>
 
-            {{-- CONFIRM PASSWORD --}}
+            
             <div class="mt-4">
                 <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                 <x-input id="password_confirmation" class="block mt-1 w-full"
                     type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
-            {{-- TERMS --}}
+            
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
                     <x-label for="terms">
@@ -115,7 +110,7 @@
                 </div>
             @endif
 
-            {{-- SUBMIT --}}
+            
             <div class="flex items-center justify-end mt-4">
                 <a href="{{ route('login') }}" class="underline text-sm text-gray-600 hover:text-gray-900">
                     {{ __('Already registered?') }}

@@ -2,9 +2,8 @@
     <x-navbar-welcome :seeButton="2" :register="false"/>
 
     <main class="w-full">
-        <!-- Hero Section Mejorado -->
         <section class="w-full py-28 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 relative overflow-hidden">
-            <!-- Elementos decorativos de fondo -->
+            
             <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-green-100/20 via-transparent to-transparent"></div>
             <div class="absolute top-10 right-10 w-32 h-32 bg-green-200/30 rounded-full blur-2xl"></div>
             <div class="absolute bottom-10 left-10 w-40 h-40 bg-teal-200/20 rounded-full blur-3xl"></div>
@@ -21,15 +20,15 @@
             </div>
         </section>
 
-        <!-- Sección de Servicios de Salud Mental -->
+        
         <section class="w-full py-20 bg-gradient-to-b from-white to-gray-50/80">
             <div class="container mx-auto px-6 md:px-12 lg:px-16 max-w-7xl">
                 <h2 class="sr-only">Servicios de Salud Mental de Ruralmente</h2>
                 
-                <!-- Grid de servicios mejorado -->
+                
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
                     
-                    <!-- Tarjeta 1: Diagnóstico de entrada y salida -->
+                    
                     <div class="group bg-white rounded-2xl border border-emerald-100 shadow-lg p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-emerald-400"></div>
                         <div class="absolute -right-10 -top-10 w-20 h-20 bg-green-100/30 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
@@ -74,8 +73,7 @@
                         </ul>
                     </div>
                     
-                    <!-- Las otras 3 tarjetas seguirían el mismo patrón de diseño mejorado -->
-                    <!-- Tarjeta 2: Teleatención en salud mental -->
+                    
                     <div class="group bg-white rounded-2xl border border-blue-100 shadow-lg p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400"></div>
                         <div class="absolute -right-10 -top-10 w-20 h-20 bg-blue-100/30 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
@@ -128,7 +126,7 @@
                         </ul>
                     </div>
 
-                    <!-- Tarjeta 3: Talleres psicoeducativos -->
+                    
                     <div class="group bg-white rounded-2xl border border-amber-100 shadow-lg p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-500 to-yellow-400"></div>
                         <div class="absolute -right-10 -top-10 w-20 h-20 bg-amber-100/30 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
@@ -181,7 +179,7 @@
                         </ul>
                     </div>
 
-                    <!-- Tarjeta 4: Desarrollo comunitario -->
+                    
                     <div class="group bg-white rounded-2xl border border-purple-100 shadow-lg p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-indigo-400"></div>
                         <div class="absolute -right-10 -top-10 w-20 h-20 bg-purple-100/30 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
@@ -245,13 +243,13 @@
             </div>
         </section>
 
-        <!-- Sección Unificada: Recursos Psicoeducativos Mejorada -->
+        
         <section class="w-full bg-gradient-to-br from-slate-50 via-white to-blue-50/30 relative overflow-hidden">
-            <!-- Elementos decorativos -->
+            
             <div class="absolute top-0 left-0 w-72 h-72 bg-green-200/10 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
             <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-200/10 rounded-full translate-x-1/3 translate-y-1/3"></div>
             
-            <!-- Hero dentro de la misma sección -->
+            
             <div class="w-full py-24 relative z-10">
                 <div class="container mx-auto px-4">
                     <header class="max-w-4xl mx-auto text-center">
@@ -267,11 +265,11 @@
                 </div>
             </div>
 
-            <!-- Contenido de tarjetas mejorado -->
+            
             <div class="container mx-auto px-6 lg:px-12 pb-24 max-w-7xl relative z-10">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 
-                <!-- Tarjeta Izquierda - Tarjetas Psicoeducativas -->
+                
                 <article class="group bg-white/80 backdrop-blur-sm rounded-3xl border border-green-100 shadow-2xl p-8 transition-all duration-500 hover:shadow-3xl hover:-translate-y-2 relative overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-br from-green-50/50 to-emerald-100/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     
@@ -323,7 +321,7 @@
                     </div>
                 </article>
                 
-                <!-- Tarjeta Derecha - Remedios Benditos -->
+                
                 <article class="group bg-white/80 backdrop-blur-sm rounded-3xl border border-amber-100 shadow-2xl p-8 transition-all duration-500 hover:shadow-3xl hover:-translate-y-2 relative overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-br from-amber-50/50 to-yellow-100/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     
@@ -382,7 +380,7 @@
             </div>
         </section>
 
-        <!-- Pop-up flotante mejorado -->
+        
         <div id="unpin-popup" class="fixed top-6 right-6 bg-gradient-to-r from-gray-900 to-slate-800 text-white px-6 py-4 rounded-2xl shadow-2xl z-50 transition-all duration-500 border border-gray-700 backdrop-blur-sm">
             <div class="flex items-center justify-between">
                 <span class="text-sm font-medium text-gray-100">Unpin Ruralmente Colombia's presentation from your main screen.</span>
@@ -395,7 +393,7 @@
         </div>
 
         <script>
-            // Auto-cerrar el popup después de 5 segundos
+            
             setTimeout(() => {
                 const popup = document.getElementById('unpin-popup');
                 if (popup) {
@@ -405,7 +403,7 @@
                 }
             }, 5000);
 
-            // Función para cerrar manualmente
+            
             function closePopup() {
                 const popup = document.getElementById('unpin-popup');
                 if (!popup) return;

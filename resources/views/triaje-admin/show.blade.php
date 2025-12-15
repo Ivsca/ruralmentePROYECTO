@@ -7,7 +7,7 @@
 
 <div style="max-width: 900px; margin: 0 auto;">
 
-    <!-- HEADER -->
+    
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
         <h1 style="color: var(--gray-800); font-size: 1.5rem; font-weight: 600;">
             <i class="fas fa-file-medical-alt"></i> Detalles del Triaje
@@ -19,10 +19,8 @@
         </a>
     </div>
 
-    <!-- CARD PRINCIPAL -->
+    
     <div style="background: white; border-radius: 12px; padding: 2rem; border: 1px solid var(--gray-200);">
-
-        <!-- TITULO + BADGE -->
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1.5rem;">
             <div>
                 <h2 style="font-size: 1.4rem; font-weight: 600; color: var(--gray-800); margin-bottom: 0.5rem;">
@@ -41,7 +39,6 @@
                 </div>
             </div>
 
-            <!-- BADGE NIVEL ATENCIÓN -->
             <div>
                 @php
                     if(strpos($triaje->nivel_atencion, 'inmediata') !== false) {
@@ -59,22 +56,8 @@
             </div>
         </div>
 
-        <!-- ESTADO -->
-        <div style="margin-bottom: 1.5rem;">
-            <p style="font-size: 0.95rem; font-weight: 600; color: var(--gray-700); margin-bottom: 0.25rem;">Estado:</p>
+   
 
-            @if($triaje->estado == 'completado')
-                <span style="color: var(--success); font-size: 0.95rem;">
-                    <i class="fas fa-check-circle"></i> Completado
-                </span>
-            @else
-                <span style="color: var(--warning); font-size: 0.95rem;">
-                    <i class="fas fa-clock"></i> Pendiente
-                </span>
-            @endif
-        </div>
-
-        <!-- SINTOMAS -->
         @if($triaje->sintomas_principales)
             <div style="margin-bottom: 1.5rem;">
                 <p style="font-size: 0.95rem; font-weight: 600; color: var(--gray-700); margin-bottom: 0.25rem;">
@@ -86,7 +69,6 @@
             </div>
         @endif
 
-        <!-- DESCRIPCIÓN COMPLETA / NOTAS -->
         @if($triaje->descripcion)
             <div style="margin-bottom: 1.5rem;">
                 <p style="font-size: 0.95rem; font-weight: 600; color: var(--gray-700); margin-bottom: 0.25rem;">
@@ -98,7 +80,6 @@
             </div>
         @endif
 
-        <!-- DATOS ADICIONALES DEL ADMIN -->
         <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-200);">
             <p style="font-size: 0.9rem; color: var(--gray-500);">
                 <i class="fas fa-info-circle"></i>
