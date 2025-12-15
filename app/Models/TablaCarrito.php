@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CarritoCompras extends Model
+class TablaCarrito extends Model
 {
-    protected $table = 'carritocompras';
+    protected $table = 'tablacarrito';
 
     protected $primaryKey = 'id';
     public $incrementing = true;
@@ -16,13 +16,11 @@ class CarritoCompras extends Model
 
     protected $fillable = [
         'id_user',
-        'productos_ids',
+        'productosYcantidad_ids',
         'CantidadProductos',
-        'seleccionado',
     ];
 
-    // Para tratarlo directamente como boolean
     protected $casts = [
-        'seleccionado' => 'boolean',
+        'productosYcantidad_ids' => 'array', // Eloquent convierte JSON <-> array automáticamente
     ];
 }

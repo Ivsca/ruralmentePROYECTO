@@ -100,26 +100,36 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label class="form-label fw-semibold">Color</label>
-                    <select name="color" class="form-select @error('color') is-invalid @enderror">
-                        <option value="">Selecciona un color</option>
-                        @php
-                          $colors = [
-                            'white' => 'Blanco','black' => 'Negro','gray' => 'Gris','lightgray' => 'Gris Claro',
-                            'red' => 'Rojo','darkred' => 'Rojo Oscuro','blue'=>'Azul','navy'=>'Azul Marino','skyblue'=>'Celeste',
-                            'yellow'=>'Amarillo','gold'=>'Dorado','green'=>'Verde','lightgreen'=>'Verde Claro','darkgreen'=>'Verde Oscuro',
-                            'orange'=>'Naranja','brown'=>'Café','beige'=>'Beige','purple'=>'Morado','pink'=>'Rosado','khaki'=>'Caqui',
-                            'turquoise'=>'Turquesa','burgundy'=>'Burdeos'
-                          ];
-                        @endphp
-                        @foreach ($colors as $value => $label)
-                            <option value="{{ $value }}" {{ old('color', $product->color ?? '') == $value ? 'selected' : '' }}>
-                                {{ $label }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('color') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
-                </div>
+                  <label class="form-label fw-semibold">Colores</label>
+
+                  <button type="button" id="show-colors-btn" class="btn btn-outline-primary btn-sm">
+                      + Escoger colores
+                  </button>
+
+                  @error('colores')
+                      <div class="invalid-feedback d-block">{{ $message }}</div>
+                  @enderror
+
+                  <!-- Contenedor donde se muestran los colores elegidos -->
+                  <div id="selected-colors" class="d-flex flex-wrap gap-2 mt-3"></div>
+
+                  <!-- Aquí se llenan los valores reales -->
+                  <div id="colors-hidden-inputs"></div>
+              </div>
+
+              <!-- PANEL flotante -->
+              <div id="colors-panel"
+                  class="card p-3 shadow-lg"
+                  style="position:fixed; bottom:20px; right:20px; width:260px; display:none; z-index:9999;">
+                  <h6 class="fw-bold mb-2">Seleccionar color</h6>
+
+                  <div id="colors-list" class="d-flex flex-wrap gap-2">
+                      <!-- JS rellena esto automáticamente -->
+                  </div>
+
+                  <button type="button" class="btn btn-sm btn-secondary w-100 mt-3" id="close-colors-btn">Cerrar</button>
+              </div>
+
 
                 <div class="col-md-6">
                   <label class="form-label">Categoría</label>
@@ -141,7 +151,7 @@
                 </div>
 
                 <div class="col-12 d-flex justify-content-end mt-3">
-                  <a href="{{ route('products.index') }}" class="btn btn-outline-secondary me-2">Cancelar</a>
+                  <a href="{{ route('admin.Tabla-productos') }}" class="btn btn-outline-secondary me-2">Cancelar</a>
                   <button type="submit" class="btn btn-primary">Guardar producto</button>
                 </div>
 
@@ -182,5 +192,121 @@
         if (preview) preview.src = placeholder;
       });
     });
+
+    const COLORS = [
+        { name: "White", value: "white" },
+        { name: "Black", value: "black" },
+        { name: "Gray", value: "gray" },
+        { name: "Light Gray", value: "lightgray" },
+        { name: "Red", value: "red" },
+        { name: "Dark Red", value: "darkred" },
+        { name: "Blue", value: "blue" },
+        { name: "Navy", value: "navy" },
+        { name: "Sky Blue", value: "skyblue" },
+        { name: "Yellow", value: "yellow" },
+        { name: "Gold", value: "gold" },
+        { name: "Green", value: "green" },
+        { name: "Light Green", value: "lightgreen" },
+        { name: "Dark Green", value: "darkgreen" },
+        { name: "Orange", value: "orange" },
+        { name: "Brown", value: "brown" },
+        { name: "Beige", value: "beige" },
+        { name: "Purple", value: "purple" },
+        { name: "Pink", value: "pink" },
+        { name: "Khaki", value: "khaki" },
+        { name: "Turquoise", value: "turquoise" },
+        { name: "Burgundy", value: "burgundy" }
+    ];
+
+    const showPanelBtn = document.getElementById("show-colors-btn");
+    const colorPanel = document.getElementById("colors-panel");
+    const closePanelBtn = document.getElementById("close-colors-btn");
+    const listColors = document.getElementById("colors-list");
+    const selectedColors = document.getElementById("selected-colors");
+    const hiddenInputs = document.getElementById("colors-hidden-inputs");
+
+    let chosenColors = [];
+
+    showPanelBtn?.addEventListener("click", () => colorPanel.style.display = "block");
+    closePanelBtn?.addEventListener("click", () => colorPanel.style.display = "none");
+
+    function loadColors() {
+        listColors.innerHTML = "";
+        COLORS.forEach(color => {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "btn btn-sm border";
+            btn.style.background = color.value;
+            btn.style.width = "32px";
+            btn.style.height = "32px";
+            btn.style.borderRadius = "6px";
+            btn.style.boxShadow = "inset 0 0 0 1px rgba(255,255,255,0.2)";
+            btn.title = color.name;
+            btn.onclick = () => selectColor(color);
+            listColors.appendChild(btn);
+        });
+    }
+    loadColors();
+
+    function selectColor(color) {
+        if (!chosenColors.includes(color.value)) {
+            chosenColors.push(color.value);
+            renderSelectedColors();
+        }
+    }
+
+    function renderSelectedColors() {
+        selectedColors.innerHTML = "";
+        hiddenInputs.innerHTML = "";
+
+        chosenColors.forEach(col => {
+            const wrapper = document.createElement("div");
+            wrapper.className = "d-flex align-items-center px-2 py-1 rounded";
+            wrapper.style.background = col;
+            wrapper.style.border = "1px solid rgba(0,0,0,0.08)";
+            wrapper.style.color = getContrast(col);
+
+            const text = document.createElement("span");
+            text.textContent = col;
+
+            const removeBtn = document.createElement("button");
+            removeBtn.type = "button";
+            removeBtn.className = "btn btn-sm btn-light p-0 px-2 ms-2";
+            removeBtn.textContent = "×";
+            removeBtn.onclick = () => {
+                chosenColors = chosenColors.filter(c => c !== col);
+                renderSelectedColors();
+            };
+
+            wrapper.appendChild(text);
+            wrapper.appendChild(removeBtn);
+            selectedColors.appendChild(wrapper);
+
+            const hidden = document.createElement("input");
+            hidden.type = "hidden";
+            hidden.name = "colores[]";
+            hidden.value = col;
+            hiddenInputs.appendChild(hidden);
+        });
+    }
+
+    // Contraste automático
+    function getContrast(color) {
+        const ctx = document.createElement("canvas").getContext("2d");
+        ctx.fillStyle = color;
+        const rgb = ctx.fillStyle.match(/\d+/g).map(Number);
+        const yiq = (rgb[0]*299 + rgb[1]*587 + rgb[2]*114) / 1000;
+        return yiq >= 128 ? "#000" : "#fff";
+    }
+
+    // Cargar colores del producto al editar
+    (function preload() {
+        const saved = @json(old('colores', $product->colores ?? []));
+
+        if (Array.isArray(saved)) {
+            chosenColors = saved.map(c => String(c));
+            renderSelectedColors();
+        }
+    })();
   </script>
 </x-app-layout>

@@ -19,17 +19,32 @@ class Product extends Model
         "stock",
         "photo",
         "photo_public_id",
-        "color",
+        "colores",      // keep original DB field if you already have it
         "category",
         "status",
     ];
 
+    protected $casts = [
+        'colores' => 'array',
+    ];
 
-    public function invoices():BelongsToMany
+    /**
+     * Backwards-compatible accessor so view can use $product->colors
+     */
+    public function getColorsAttribute()
     {
-        return $this->belongsToMany(Invoice::class, 'invoice_products', 'id_invoice', 'id_product')
-        ->withPivot('date','subTotal','total')
-        ->withTimestamps();
+        // prefer english 'colors' if you have it, otherwise fall back to 'colores'
+        if (array_key_exists('colors', $this->attributes)) {
+            return $this->attributes['colors'] ? json_decode($this->attributes['colors'], true) : [];
+        }
+
+        return $this->colores ?? [];
     }
 
+    public function invoices(): BelongsToMany
+    {
+        return $this->belongsToMany(Invoice::class, 'invoice_products', 'id_invoice', 'id_product')
+            ->withPivot('date','subTotal','total')
+            ->withTimestamps();
+    }
 }

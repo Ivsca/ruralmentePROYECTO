@@ -1,6 +1,11 @@
 <x-app-layout>
 
 <!-- CSS: quita transiciones/transformaciones/animaciones de los botones del modal -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
 <style>
 /* (Tu CSS SweetAlert2 tal y como lo tenías) */
 .swal2-styled,
@@ -107,7 +112,7 @@
             </div>
         </form>
 
-        <a href="{{ route('products.create') }}" class="btn btn-success shadow-sm">
+        <a href="{{ route('admin.crearProducto') }}" class="btn btn-success shadow-sm">
             + Agregar Producto
         </a>
     </div>
@@ -154,9 +159,9 @@
                         <td>{{ optional($product->created_at)->format('Y-m-d') }}</td>
 
                         <td class="text-center">
-                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm me-2">Editar</a>
+                            <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-warning btn-sm me-2">Editar</a>
 
-                            <form id="delete-form-{{ $product->id }}" action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-inline">
+                            <form id="delete-form-{{ $product->id }}" action="{{ route('admin.products.destroy', $product->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="{{ $product->id }}">Eliminar</button>

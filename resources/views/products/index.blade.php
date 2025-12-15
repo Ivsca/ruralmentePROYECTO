@@ -8,6 +8,11 @@
     </div>
 </div>
 
+@php
+    // Obtén el id del usuario (null si no está autenticado)
+    $userId = auth()->id();
+@endphp
+
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   
@@ -487,17 +492,9 @@
                     href="{{ route('products.show', $product->id) }}" 
                     class="btn btn-view-more"
                   >
-                    <i class="bi bi-eye"></i> Ver detalles
+                    <i class="bi bi-eye"></i> conocer más
                   </a>
 
-                  <form method="POST" action="{{ route('addCarrito') }}">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <input type="hidden" name="quantity" value="1">
-                    <button class="btn btn-add-cart text-white w-100">
-                      <i class="bi bi-cart-plus"></i> Agregar al carrito
-                    </button>
-                  </form>
                 </div>
               </div>
 
@@ -536,14 +533,44 @@
 
 
   <script>
-    async function cantidad_productos_carrito() {
-        const response = await fetch('/cantidad-productos-carrito');
-        const data = await response.json();
-        document.querySelector('.contador-carrito').textContent = data.cantidad;
-      }
+    // Inyectamos el ID del servidor al JS de forma segura
+    const USER_ID = @json($userId); // null si no hay sesión
 
-      // Llamarlo al cargar la página
-      cantidad_productos_carrito(); 
+    (async function cantidad_productos_carrito() {
+        const contador = document.querySelector('.contador-carrito');
+        if (!contador) return;
+
+        // Si no hay usuario autenticado, mostrar 0 y salir (evita llamadas innecesarias)
+        if (!USER_ID) {
+            contador.textContent = '0';
+            return;
+        }
+
+        try {
+            // Construimos la URL en base a tu endpoint. Si usas ruta con {id}:
+            const urlBase = "{{ url('/cantidad-productos-carrito') }}"; // sin slash final
+            const response = await fetch(`${urlBase}/${USER_ID}`, {
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (!response.ok) {
+                // Manejo elegante de errores (no romper la UI)
+                console.error('Fetch error: ', response.status);
+                return;
+            }
+
+            const data = await response.json();
+            contador.textContent = (data && data.cantidad) ? data.cantidad : '0';
+        } catch (err) {
+            console.error('Error al obtener cantidad del carrito:', err);
+        }
+    })();
+
+    // evento casas producto del carrito
+    function EliminarProductoCarrito(USER_ID) {
+      urlBase = "{{ url('/carrito/remove/{USER_ID}') }}";
+      
+    }
       
     document.addEventListener('DOMContentLoaded', function() {
       const toggleBtn = document.getElementById('toggleFilters');

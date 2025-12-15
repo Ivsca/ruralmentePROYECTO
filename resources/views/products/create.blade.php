@@ -12,7 +12,7 @@
           <a href="{{ route('admin.Tabla-productos') }}" class="btn btn-outline-secondary btn-sm">Volver</a>
         </div>
 
-        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
           @csrf
 
           <div class="row g-4">
@@ -89,70 +89,39 @@
                   @error('stock') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
 
+                <!-- -------------- MODIFICACION SOLO EN COLORES -------------- -->
                 <div class="col-md-6">
-                    <label class="form-label fw-semibold">Color</label>
-                    <select name="color" class="form-select @error('color') is-invalid @enderror">
-                        <option value="">Selecciona un color</option>
+                  <label class="form-label fw-semibold">Colores</label>
 
-                        <!-- Colores básicos -->
-                        <option value="white" style="background:#ffffff; color:#000;">Blanco</option>
-                        <option value="black" style="background:#000000; color:#fff;">Negro</option>
-                        <option value="gray" style="background:#808080; color:#fff;">Gris</option>
-                        <option value="lightgray" style="background:#d3d3d3;">Gris Claro</option>
+                  <button type="button" id="show-colors-btn" class="btn btn-outline-primary btn-sm">
+                      + Escoger colores
+                  </button>
 
-                        <!-- Colores primarios -->
-                        <option value="red" style="background:#ff0000; color:#fff;">Rojo</option>
-                        <option value="darkred" style="background:#8b0000; color:#fff;">Rojo Oscuro</option>
+                  @error('colores')
+                      <div class="invalid-feedback d-block">{{ $message }}</div>
+                  @enderror
 
-                        <option value="blue" style="background:#0000ff; color:#fff;">Azul</option>
-                        <option value="navy" style="background:#000080; color:#fff;">Azul Marino</option>
-                        <option value="skyblue" style="background:#87ceeb;">Celeste</option>
+                  <!-- Contenedor donde se muestran los colores elegidos -->
+                  <div id="selected-colors" class="d-flex flex-wrap gap-2 mt-3"></div>
 
-                        <option value="yellow" style="background:#ffff00;">Amarillo</option>
-                        <option value="gold" style="background:#ffd700;">Dorado</option>
-
-                        <option value="green" style="background:#008000; color:#fff;">Verde</option>
-                        <option value="lightgreen" style="background:#90ee90;">Verde Claro</option>
-                        <option value="darkgreen" style="background:#006400; color:#fff;">Verde Oscuro</option>
-
-                        <!-- Colores extendidos -->
-                        <option value="orange" style="background:#ffa500;">Naranja</option>
-                        <option value="darkorange" style="background:#ff8c00;">Naranja Oscuro</option>
-
-                        <option value="brown" style="background:#8b4513; color:#fff;">Café</option>
-                        <option value="saddlebrown" style="background:#8b4513; color:#fff;">Café Oscuro</option>
-                        <option value="beige" style="background:#f5f5dc;">Beige</option>
-
-                        <option value="purple" style="background:#800080; color:#fff;">Morado</option>
-                        <option value="violet" style="background:#ee82ee;">Violeta</option>
-                        <option value="lavender" style="background:#e6e6fa;">Lavanda</option>
-
-                        <option value="pink" style="background:#ffc0cb;">Rosado</option>
-                        <option value="hotpink" style="background:#ff69b4;">Rosado Fuerte</option>
-                        <option value="magenta" style="background:#ff00ff;">Magenta</option>
-
-                        <!-- Tonos tierra -->
-                        <option value="khaki" style="background:#f0e68c;">Caqui</option>
-                        <option value="tan" style="background:#d2b48c;">Arena</option>
-                        <option value="chocolate" style="background:#d2691e; color:#fff;">Chocolate</option>
-
-                        <!-- Tonos especiales -->
-                        <option value="turquoise" style="background:#40e0d0;">Turquesa</option>
-                        <option value="teal" style="background:#008080; color:#fff;">Verde Azulado</option>
-                        <option value="cyan" style="background:#00ffff;">Cian</option>
-
-                        <option value="burgundy" style="background:#800020; color:#fff;">Burdeos</option>
-                        <option value="mustard" style="background:#ffdb58;">Mostaza</option>
-                        <option value="olive" style="background:#808000; color:#fff;">Oliva</option>
-
-                        <!-- Si quieres agregar MUCHOS más colores, te los genero también -->
-                    </select>
-
-                    @error('color')
-                        <div class="invalid-feedback d-block">{{ $message }}</div>
-                    @enderror
+                  <!-- Aquí se llenan los valores reales para enviar -->
+                  <div id="colors-hidden-inputs"></div>
                 </div>
 
+                <!-- PANEL flotante para elegir colores -->
+                <div id="colors-panel"
+                    class="card p-3 shadow-lg"
+                    style="position:fixed; bottom:20px; right:20px; width:260px; display:none; z-index:9999;">
+                    <h6 class="fw-bold mb-2">Seleccionar color</h6>
+
+                    <div id="colors-list" class="d-flex flex-wrap gap-2">
+                        <!-- SE CREAN AUTOMÁTICAMENTE DESDE JS -->
+                    </div>
+
+                    <!-- importante: type="button" para no enviar form -->
+                    <button type="button" class="btn btn-sm btn-secondary w-100 mt-3" id="close-colors-btn">Cerrar</button>
+                </div>
+                <!-- -------------- FIN DE LA MODIFICACION -------------- -->
 
                 <div class="col-md-6">
                   <label class="form-label">Categoría</label>
@@ -191,8 +160,6 @@
     const photoInput = document.getElementById('photo');
     const preview = document.getElementById('photoPreview');
     const removeBtn = document.getElementById('removePhoto');
-    const colorText = document.getElementById('colorText');
-    const colorPicker = document.getElementById('colorPicker');
 
     photoInput?.addEventListener('change', function () {
       const file = this.files && this.files[0];
@@ -208,12 +175,171 @@
       preview.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'><rect width='100%' height='100%' fill='%23f8f9fa'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%238c8c8c' font-size='22'>Vista previa de la imagen</text></svg>";
     });
 
-    // Sincronizar color texto <-> picker
-    if (colorPicker && colorText) {
-      colorPicker.addEventListener('input', () => colorText.value = colorPicker.value);
-      colorText.addEventListener('input', () => {
-        try { colorPicker.value = colorText.value; } catch(e) { /* ignore invalid hex */ }
+    // ------------------ COLORES (JS) ------------------
+    const COLORS = [
+        { name: "White", value: "white" },
+        { name: "Black", value: "black" },
+        { name: "Gray", value: "gray" },
+        { name: "Light Gray", value: "lightgray" },
+        { name: "Red", value: "red" },
+        { name: "Dark Red", value: "darkred" },
+        { name: "Blue", value: "blue" },
+        { name: "Navy", value: "navy" },
+        { name: "Sky Blue", value: "skyblue" },
+        { name: "Yellow", value: "yellow" },
+        { name: "Gold", value: "gold" },
+        { name: "Green", value: "green" },
+        { name: "Light Green", value: "lightgreen" },
+        { name: "Dark Green", value: "darkgreen" },
+        { name: "Orange", value: "orange" },
+        { name: "Brown", value: "brown" },
+        { name: "Purple", value: "purple" },
+        { name: "Pink", value: "pink" },
+        { name: "Magenta", value: "magenta" },
+        { name: "Turquoise", value: "turquoise" }
+    ];
+
+    // elementos
+    const showPanelBtn = document.getElementById("show-colors-btn");
+    const colorPanel = document.getElementById("colors-panel");
+    const closePanelBtn = document.getElementById("close-colors-btn");
+
+    const listColors = document.getElementById("colors-list");
+    const selectedColors = document.getElementById("selected-colors");
+    const hiddenInputs = document.getElementById("colors-hidden-inputs");
+
+    let chosenColors = []; // array final que se enviará
+
+    // protección: si elementos no existen, salir
+    if (showPanelBtn) {
+      showPanelBtn.addEventListener("click", (e) => {
+        e.preventDefault(); // por si acaso
+        colorPanel.style.display = "block";
       });
     }
+    if (closePanelBtn) {
+      closePanelBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        colorPanel.style.display = "none";
+      });
+    }
+
+    // Renderizar colores dentro del panel
+    function loadColors() {
+        if (!listColors) return;
+        listColors.innerHTML = "";
+
+        COLORS.forEach(color => {
+            const btn = document.createElement("button");
+
+            // importante: type="button" para evitar submit
+            btn.type = "button";
+
+            btn.className = "btn btn-sm border";
+            btn.style.background = color.value;
+            btn.style.width = "32px";
+            btn.style.height = "32px";
+            btn.style.borderRadius = "6px";
+            btn.style.boxShadow = "inset 0 0 0 1px rgba(255,255,255,0.05)";
+
+            btn.title = color.name;
+
+            btn.onclick = () => selectColor(color);
+
+            listColors.appendChild(btn);
+        });
+    }
+    loadColors();
+
+    // Agregar color seleccionado
+    function selectColor(color) {
+        if (chosenColors.includes(color.value)) return;
+
+        chosenColors.push(color.value);
+        renderSelectedColors();
+    }
+
+    // Mostrar colores seleccionados
+    function renderSelectedColors() {
+        if (!selectedColors || !hiddenInputs) return;
+        selectedColors.innerHTML = "";
+        hiddenInputs.innerHTML = "";
+
+        chosenColors.forEach((col) => {
+
+            // chip visual
+            const box = document.createElement("div");
+            box.className = "d-flex align-items-center px-2 py-1 rounded";
+            box.style.background = col;
+            box.style.border = "1px solid rgba(0,0,0,0.08)";
+            // elegir texto oscuro o claro según contraste básico
+            box.style.color = getContrastYIQ(col) === 'dark' ? '#000' : '#fff';
+            box.style.fontSize = "14px";
+            box.style.gap = "8px";
+
+            const text = document.createElement("span");
+            text.textContent = col;
+            text.style.paddingRight = "6px";
+
+            const removeBtn = document.createElement("button");
+
+            // importante: type="button"
+            removeBtn.type = "button";
+
+            removeBtn.textContent = "×";
+            removeBtn.className = "btn btn-sm btn-light p-0 px-2";
+            removeBtn.style.fontWeight = "bold";
+
+            removeBtn.onclick = (e) => {
+                e.preventDefault();
+                chosenColors = chosenColors.filter(c => c !== col);
+                renderSelectedColors();
+            };
+
+            box.appendChild(text);
+            box.appendChild(removeBtn);
+            selectedColors.appendChild(box);
+
+            // input oculto que se enviará
+            const hidden = document.createElement("input");
+            hidden.type = "hidden";
+            hidden.name = "colores[]";
+            hidden.value = col;
+            hiddenInputs.appendChild(hidden);
+        });
+    }
+
+    // utilidad simple para contraste (retorna 'light' o 'dark')
+    function getContrastYIQ(hexcolor){
+        // si es palabra de color, usar un canvas para resolver a rgb
+        const c = document.createElement("canvas");
+        const ctx = c.getContext("2d");
+        ctx.fillStyle = hexcolor;
+        const rgb = ctx.fillStyle; // browser normaliza
+        // rgb puede venir como "rgb(r,g,b)" o color name; parse numbers:
+        let m = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/i);
+        if (!m) {
+            // fallback: negro
+            return 'light';
+        }
+        const r = parseInt(m[1], 10);
+        const g = parseInt(m[2], 10);
+        const b = parseInt(m[3], 10);
+        const yiq = ((r*299)+(g*587)+(b*114))/1000;
+        return (yiq >= 128) ? 'dark' : 'light';
+    }
+
+    // inicial render por si hay valores antiguos en old()
+    (function hydrateFromOld() {
+        // si Laravel retornó old('colores') como array en el backend, puedes inyectarlo en JS:
+        try {
+            const oldColors = @json(old('colores', []));
+            if (Array.isArray(oldColors) && oldColors.length) {
+                chosenColors = oldColors.map(c => String(c));
+                renderSelectedColors();
+            }
+        } catch(e) { /* ignore */ }
+    })();
+    // ------------------ FIN COLORES ------------------
   </script>
 </x-app-layout>
