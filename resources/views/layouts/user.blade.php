@@ -446,7 +446,7 @@
                 <span>Productos</span>
             </a>
 
-            <a href="{{ route('checkout') }}" 
+            <a href="{{ route('carrito.ver') }}" 
                class="menu-item {{ request()->routeIs('checkout') ? 'active' : '' }}">
                 <i class="fas fa-shopping-cart"></i>
                 <span>Mi Carrito</span>

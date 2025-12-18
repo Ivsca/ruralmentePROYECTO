@@ -448,7 +448,7 @@
             }
         @endphp
         <div class="card-number">{{ $carritoCount }}</div>
-        <div class="card-title">Mi Carrito</div>
+        <div class="card-title">Mi Carrito </div>
         <div class="card-subtitle">
             @if($carritoCount > 0)
                 <span style="font-weight: 600; color: var(--primary-green); font-size: 1.1rem;">
