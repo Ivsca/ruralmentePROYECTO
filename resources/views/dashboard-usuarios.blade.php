@@ -556,25 +556,49 @@
 @if(isset($recentProducts) && $recentProducts->count() > 0)
     <div class="productos-list">
         @foreach($recentProducts as $producto)
+            @php
+                // Lógica para obtener la imagen correctamente
+                $fallback = asset('fondos_imagenes_video/vietnam.jpg');
+                $imageUrl = null;
+                
+                // Verifica si existe el campo de imagen (puede ser 'photo' o 'imagen_url')
+                $imageField = $producto->photo ?? $producto->imagen_url ?? null;
+                
+                if ($imageField) {
+                    // Verificar si es una URL absoluta
+                    if (\Illuminate\Support\Str::startsWith($imageField, ['http://', 'https://'])) {
+                        $imageUrl = $imageField;
+                    } else {
+                        // Intentar obtener desde storage
+                        try {
+                            $imageUrl = \Illuminate\Support\Facades\Storage::url($imageField);
+                        } catch (\Exception $e) {
+                            $imageUrl = null;
+                        }
+                    }
+                }
+            @endphp
+            
             <div class="producto-item">
                 <div style="display: flex; align-items: center; gap: 1.25rem;">
-                    @if($producto->imagen_url)
-                        <img src="{{ $producto->imagen_url }}" 
+                    @if($imageUrl)
+                        <img src="{{ $imageUrl }}" 
                              alt="{{ $producto->nombre }}"
-                             class="producto-img">
+                             class="producto-img"
+                             onerror="this.src='{{ $fallback }}'">
                     @else
-                        <div class="producto-img-placeholder">
+                        <div class="producto-img-placeholder" style="background-image: url('{{ $fallback }}'); background-size: cover; background-position: center;">
                             <i class="fas fa-leaf"></i>
                         </div>
                     @endif
                     <div class="producto-info">
-                        <h4>{{ $producto->nombre }}</h4>
+                        <h4>{{ $producto->nombre ?? $producto->name }}</h4>
                         <div class="producto-categoria">
                             <i class="fas fa-tag" style="color: var(--text-light);"></i>
-                            {{ $producto->categoria ?? 'General' }}
+                            {{ $producto->categoria ?? $producto->category ?? 'General' }}
                         </div>
                         <div style="font-weight: 700; color: var(--primary-green); font-size: 1.1rem; margin-top: 0.5rem;">
-                            ${{ number_format($producto->precio, 0, ',', '.') }}
+                            ${{ number_format($producto->precio ?? $producto->price ?? 0, 0, ',', '.') }}
                         </div>
                     </div>
                 </div>

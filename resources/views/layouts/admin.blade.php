@@ -573,7 +573,7 @@
                             <span class="badge">{{ $triajesCount }}</span>
                         @endif
                     </a>
-                    <a href="#" class="menu-item">
+                    <a href="{{ route('admin.Tabla-productos') }}" class="menu-item">
                         <i class="fas fa-box-open"></i>
                         <span>Productos</span>
                         @php

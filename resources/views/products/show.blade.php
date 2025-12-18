@@ -1,4 +1,72 @@
 <x-guest-layout>
+
+  <style>
+    /* Estilos para productos relacionados */
+    .related-products-section {
+        margin-top: 4rem;
+        padding-top: 3rem;
+        border-top: 1px solid #e5e7eb;
+    }
+    
+    .section-title {
+        font-size: 1.875rem;
+        font-weight: bold;
+        color: #111827;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    
+    .products-grid-shein {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+    
+    .product-card-shein {
+        border: 1px solid #e5e7eb;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        background-color: white;
+    }
+    
+    .product-card-shein:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .product-image-shein {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+    
+    .product-info-shein {
+        padding: 1rem;
+    }
+    
+    .product-name-shein {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 0.5rem;
+    }
+    
+    .product-price-shein {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #059669;
+        margin-bottom: 0.5rem;
+    }
+    
+    @media (max-width: 768px) {
+        .products-grid-shein {
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+    }
+  </style>
   <div class="max-w-6xl mx-auto px-6 py-12">
     <div class="border border-gray-200 rounded-xl bg-white p-8">
       <div class="flex flex-col md:flex-row gap-10">
