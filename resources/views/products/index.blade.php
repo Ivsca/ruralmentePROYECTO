@@ -638,16 +638,6 @@
                                             <i class="bi bi-eye group-hover/btn:translate-x-1 transition-transform"></i>
                                             Ver detalles
                                         </a>
-
-                                        <form method="POST" action="{{ route('carrito.add', $product->id) }}">
-                                            @csrf
-                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                            <input type="hidden" name="quantity" value="1">
-                                            <button type="submit" class="w-full bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group/cart">
-                                                <i class="bi bi-basket3 group-hover/cart:scale-110 transition-transform"></i>
-                                                Agregar al carrito
-                                            </button>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
