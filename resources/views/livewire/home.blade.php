@@ -283,14 +283,11 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto mb-8 sm:mb-10 md:mb-12">
                 
                 @php
-                    // Opción 1: Si usas Laravel 8+ con inyección de dependencias
-                    $featuredProducts = app(App\Http\Controllers\ProductController::class)->featuredProducts();
-                    
-                    // Opción 2: Usando el helper de Laravel
-                    // $featuredProducts = \App\Models\Product::where('stock', '>', 0)
-                    //     ->orderBy('created_at', 'desc')
-                    //     ->take(3)
-                    //     ->get();
+                    $featuredProducts = \App\Models\Product::where('stock', '>', 0)
+                        ->where('status', 'activo')
+                        ->latest()
+                        ->take(3)
+                        ->get();
                 @endphp
                 
                 @forelse($featuredProducts as $product)
@@ -416,7 +413,7 @@
                         Si representas una empresa interesada en colaborar con proyectos rurales...
                     </p>
                     <div class="text-emerald-300 font-semibold text-sm sm:text-base text-center break-words">
-                        contacto@ruralmentes.com
+                         campesinosfelices@ruralmente.com.co
                     </div>
                 </div>
 
@@ -430,7 +427,7 @@
                         ¿Tienes preguntas o quieres saber más?
                     </p>
                     <div class="text-amber-300 font-semibold text-sm sm:text-base text-center break-words">
-                        contacto@ruralmentes.com
+                         campesinosfelices@ruralmente.com.co
                     </div>
                 </div>
 
@@ -444,7 +441,7 @@
                         Comunícate directamente con nuestro equipo.
                     </p>
                     <div class="text-green-300 font-semibold text-sm sm:text-base text-center break-words">
-                        +57 300 847 6257
+                        +57 3165771956
                     </div>
                 </div>
             </div>

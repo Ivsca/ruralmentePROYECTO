@@ -22,7 +22,7 @@
             onerror="this.src='{{ $fallback }}'"
           >
         </div>
-        
+
         <!-- Información del producto -->
         <div class="flex-1 space-y-6">
           <h1 class="text-4xl font-bold text-gray-900 leading-tight">
@@ -38,11 +38,11 @@
               <h2 class="text-xl font-semibold text-gray-800">Descripción detallada</h2>
               <p class="text-gray-700 leading-relaxed mt-2">
                 {!! nl2br(e($product->contentProductDescription)) !!}
-              </div>
+              </p>
             </div>
           @endif
 
-          <!-- Mostrar SOLO precio y stock (ya no mostramos categoría ni estado) -->
+          <!-- Precio y stock -->
           <div class="grid grid-cols-2 gap-4 text-gray-700 text-sm pt-4">
             <div>
               <span class="font-semibold text-gray-900">Precio:</span><br>
@@ -57,13 +57,12 @@
             </div>
           </div>
 
-          <!-- FORM: selects + cantidad dentro del form -->
+          <!-- FORM -->
           <form id="add-to-cart-form" method="POST" action="{{ route('carrito.add', $product->id) }}">
             @csrf
 
             <div class="grid grid-cols-2 gap-4 text-gray-700 text-sm pt-4">
 
-              {{-- Only show color select if product category is NOT "cafe" --}}
               @if(strtolower(trim($product->category ?? '')) !== 'cafe')
                 <div>
                   <span class="font-semibold text-gray-900">Color:</span><br>
@@ -91,7 +90,14 @@
 
               <div>
                 <span class="font-semibold text-gray-900">Cantidad:</span><br>
-                <input type="number" name="quantity" value="1" min="1" max="{{ $product->stock ?? 999 }}" class="mt-1 w-full border rounded px-2 py-1">
+                <input
+                  type="number"
+                  name="quantity"
+                  value="1"
+                  min="1"
+                  max="{{ $product->stock ?? 999 }}"
+                  class="mt-1 w-full border rounded px-2 py-1"
+                >
               </div>
             </div>
 
@@ -110,118 +116,83 @@
             </div>
           </form>
 
-          <!-- AJAX snippet (unchanged, handles absence of color/talla) -->
+          <!-- AJAX -->
           <script>
             (function () {
-                const form = document.getElementById("add-to-cart-form");
-                if (!form) return;
+              const form = document.getElementById("add-to-cart-form");
+              if (!form) return;
 
-                form.addEventListener("submit", async function (e) {
-                    e.preventDefault();
+              form.addEventListener("submit", async function (e) {
+                e.preventDefault();
 
-                    const url = form.action;
-                    const data = new FormData(form);
+                const url = form.action;
+                const data = new FormData(form);
 
-                    try {
-                        const response = await fetch(url, {
-                            method: "POST",
-                            headers: {
-                                "X-Requested-With": "XMLHttpRequest",
-                                "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value
-                            },
-                            body: data
-                        });
+                try {
+                  const response = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                      "X-Requested-With": "XMLHttpRequest",
+                      "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value
+                    },
+                    body: data
+                  });
 
-                        if (!response.ok) {
-                            const errorJSON = await response.json().catch(() => null);
+                  const json = await response.json();
 
-                            if (response.status === 401) {
-                                alert("Debes iniciar sesión.");
-                                return;
-                            }
+                  if (!response.ok) {
+                    alert(json?.message || "Error al agregar al carrito.");
+                    return;
+                  }
 
-                            if (response.status === 422 && errorJSON?.errors) {
-                                let msg = "Errores del formulario:\n";
-                                for (const k in errorJSON.errors) {
-                                    msg += `- ${errorJSON.errors[k].join(", ")}\n`;
-                                }
-                                alert(msg);
-                                return;
-                            }
-
-                            alert(errorJSON?.message || "Error al agregar al carrito.");
-                            return;
-                        }
-
-                        const json = await response.json();
-
-                        if (json.ok) {
-                            alert("Agregado al carrito ✓ (Total: " + (json.count ?? "-") + ")");
-                        } else {
-                            alert(json.message || "Error desconocido.");
-                        }
-
-                    } catch (err) {
-                        console.error(err);
-                        alert("Error de red o servidor.");
-                    }
-                });
+                  alert("Agregado al carrito ✓");
+                } catch (err) {
+                  alert("Error de red.");
+                }
+              });
             })();
           </script>
 
         </div>
       </div>
-      
-     
+
+      <!-- Productos relacionados -->
       <div class="related-products-section">
         <h2 class="section-title">Productos que podrían interesarte</h2>
-        
+
         <div class="products-grid-shein">
           @php
-            // Obtener productos relacionados (misma categoría o aleatorios)
             $relatedProducts = \App\Models\Product::where('id', '!=', $product->id)
               ->inRandomOrder()
               ->limit(8)
               ->get();
           @endphp
-          
+
           @foreach($relatedProducts as $related)
             <div class="product-card-shein">
-              <img 
-                src="{{ $related->photo ? (Str::startsWith($related->photo, ['http', 'https']) ? $related->photo : Storage::url($related->photo)) : asset('fondos_imagenes_video/vietnam.jpg') }}"
+              <img
+                src="{{ $related->photo
+                  ? (\Illuminate\Support\Str::startsWith($related->photo, ['http', 'https'])
+                      ? $related->photo
+                      : \Illuminate\Support\Facades\Storage::url($related->photo))
+                  : asset('fondos_imagenes_video/vietnam.jpg') }}"
                 alt="{{ $related->name }}"
                 class="product-image-shein"
                 onerror="this.src='{{ asset('fondos_imagenes_video/vietnam.jpg') }}'"
               >
-              
-              <button class="quick-add-btn" onclick="addToCart({{ $related->id }})">
-                <i class="fas fa-cart-plus"></i> Agregar
-              </button>
-              
+
               <div class="product-info-shein">
                 <h3 class="product-name-shein">{{ $related->name }}</h3>
-                
-                <div class="product-rating">
-                  @for($i = 0; $i < 5; $i++)
-                    <i class="fas fa-star star"></i>
-                  @endfor
-                  <span class="text-gray-600 text-sm ml-2">({{ rand(10, 50) }})</span>
-                </div>
-                
                 <div class="product-price-shein">${{ number_format($related->price, 0) }}</div>
-                
-                <a href="{{ route('products.show', $related->id) }}" class="text-green-600 hover:text-green-700 text-sm font-medium inline-block mt-2">
+                <a href="{{ route('products.show', $related->id) }}" class="text-green-600 text-sm">
                   Ver detalles →
                 </a>
               </div>
             </div>
           @endforeach
         </div>
-        
-        <a href="{{ route('products.index') }}" class="view-all-btn">
-          <i class="fas fa-store"></i> Ver todos los productos
-        </a>
       </div>
+
     </div>
   </div>
 </x-guest-layout>

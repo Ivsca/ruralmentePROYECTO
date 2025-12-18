@@ -248,7 +248,7 @@
                                 </div>
                                 <div>
                                     <h3 class="font-bold text-gray-800 text-lg mb-1">Teléfono</h3>
-                                    <p class="text-gray-600">+57 xxxxxxxx</p>
+                                    <p class="text-gray-600">+57 3165771956</p>
                                     <p class="text-gray-500 text-sm mt-1">Lunes a viernes 8:00 AM - 6:00 PM</p>
                                 </div>
                             </div>

@@ -49,7 +49,7 @@
             
             <div class="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
                 
-                <a id="whatsapp" href="https://wa.me/573008476257" target="_blank"
+                <a id="whatsapp" href="https://wa.me/573165771956" target="_blank"
                    class="text-emerald-600 hover:text-white hover:bg-emerald-600 p-2 sm:px-3 sm:py-2 rounded-full transition-all duration-300 flex items-center space-x-2"
                    aria-label="Contáctanos por WhatsApp">
                     <i class="fa-brands fa-whatsapp text-lg sm:text-xl"></i>

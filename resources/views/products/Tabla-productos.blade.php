@@ -1,11 +1,9 @@
 @extends('layouts.admin')
 
-<!-- CSS: quita transiciones/transformaciones/animaciones de los botones del modal -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+@section('page-title', 'Gestión de Productos')
+@section('page-subtitle', 'Administra el catálogo de productos rurales')
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
+@push('styles')
 <style>
     .products-admin-container {
         max-width: 1400px;
@@ -118,6 +116,7 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1rem;
+        margin-bottom: 1.5rem;
     }
 
     .filter-group {
@@ -285,7 +284,7 @@
         border-bottom: none;
     }
 
-    /* Badges y estados */
+    /* Badges y estados con la nueva estructura */
     .category-badge {
         display: inline-flex;
         align-items: center;
@@ -327,7 +326,7 @@
         font-family: 'Poppins', sans-serif;
     }
 
-    /* Acciones */
+    /* Botones de acción */
     .table-actions {
         display: flex;
         gap: 0.5rem;
@@ -580,7 +579,7 @@
             </p>
         </div>
 
-        <a href="{{ route('admin.products.create') }}" class="add-product-btn">
+        <a href="{{ route('admin.crearProducto') }}" class="add-product-btn">
             <i class="fas fa-plus-circle"></i>
             Nuevo Producto
         </a>
@@ -727,10 +726,6 @@
                 @endif
             </div>
         </form>
-
-        <a href="{{ route('admin.crearProducto') }}" class="btn btn-success shadow-sm">
-            + Agregar Producto
-        </a>
     </div>
 
     <!-- TABLA DE PRODUCTOS -->
@@ -745,6 +740,7 @@
                         <th>Descripción</th>
                         <th>Precio</th>
                         <th>Stock</th>
+                        <th>Color</th>
                         <th>Categoría</th>
                         <th>Estado</th>
                         <th>Creado</th>
@@ -754,34 +750,89 @@
 
                 <tbody>
                     @forelse($products as $product)
-                    <tr>
-                        {{-- CONTADOR global que respeta paginación --}}
-                        <td class="fw-bold">{{ $products->firstItem() + $loop->index }}</td>
-
-                        <td>{{ $product->name }}</td>
-                        <td>{{ $product->title }}</td>
-                        <td class="text-muted" style="max-width:180px;">{{ \Illuminate\Support\Str::limit($product->description, 40) }}</td>
-                        <td class="text-muted" style="max-width:200px;">{{ \Illuminate\Support\Str::limit($product->contentProductDescription, 50) }}</td>
-                        <td class="fw-semibold text-success">${{ number_format($product->price, 2) }}</td>
-                        <td>{{ $product->stock }}</td>
-                        <td>{{ $product->color }}</td>
-                        <td><span class="badge bg-primary">{{ $product->category }}</span></td>
-                        <td><span class="badge {{ $product->status === 'activo' ? 'bg-success' : 'bg-secondary' }}">{{ $product->status }}</span></td>
-                        <td>{{ optional($product->created_at)->format('Y-m-d') }}</td>
-
-                        <td class="text-center">
-                            <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-warning btn-sm me-2">Editar</a>
-
-                            <form id="delete-form-{{ $product->id }}" action="{{ route('admin.products.destroy', $product->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="{{ $product->id }}">Eliminar</button>
-                            </form>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>{{ $products->firstItem() + $loop->index }}</td>
+                            
+                            <td>
+                                <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">
+                                    {{ $product->name }}
+                                </div>
+                            </td>
+                            
+                            <td>{{ $product->title }}</td>
+                            
+                            <td>
+                                <div style="color: var(--text-secondary); font-size: 0.85rem; max-width: 180px;">
+                                    {{ \Illuminate\Support\Str::limit($product->description, 40) }}
+                                </div>
+                            </td>
+                            
+                            <td class="price-cell">
+                                ${{ number_format($product->price, 2) }}
+                            </td>
+                            
+                            <td>
+                                <div style="font-weight: 600; color: var(--text-primary);">
+                                    {{ $product->stock }}
+                                </div>
+                                @if($product->stock <= 5)
+                                    <div style="font-size: 0.75rem; color: #EF4444;">
+                                        <i class="fas fa-exclamation-triangle"></i> Stock bajo
+                                    </div>
+                                @endif
+                            </td>
+                            
+                            <td>{{ $product->color }}</td>
+                            
+                            <td>
+                                <span class="category-badge">
+                                    {{ $product->category }}
+                                </span>
+                            </td>
+                            
+                            <td>
+                                <span class="status-badge {{ $product->status === 'activo' ? 'status-active' : 'status-inactive' }}">
+                                    <i class="fas fa-circle" style="font-size: 0.6rem;"></i>
+                                    {{ $product->status }}
+                                </span>
+                            </td>
+                            
+                            <td>
+                                <div style="font-size: 0.85rem; color: var(--text-primary);">
+                                    {{ optional($product->created_at)->format('Y-m-d') }}
+                                </div>
+                            </td>
+                            
+                            <td>
+                                <div class="table-actions">
+                                    <a href="{{ route('admin.products.edit', $product->id) }}" class="btn-action btn-edit">
+                                        <i class="fas fa-edit"></i>
+                                        Editar
+                                    </a>
+                                    
+                                    <form 
+                                        action="{{ route('admin.products.destroy', $product->id) }}" 
+                                        method="POST" 
+                                        class="d-inline delete-form"
+                                        data-product-name="{{ $product->name }}"
+                                    >
+                                        @csrf
+                                        @method('DELETE')
+                                        <button 
+                                            type="button" 
+                                            class="btn-action btn-delete"
+                                            onclick="confirmDeleteProduct(event, this.closest('form'))"
+                                        >
+                                            <i class="fas fa-trash-alt"></i>
+                                            Eliminar
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
                     @empty
                         <tr>
-                            <td colspan="10">
+                            <td colspan="11">
                                 <div class="empty-table">
                                     <div class="empty-icon">
                                         <i class="fas fa-box-open"></i>
@@ -794,7 +845,7 @@
                                             El catálogo de productos está vacío. Comienza agregando un nuevo producto.
                                         @endif
                                     </p>
-                                    <a href="{{ route('admin.products.create') }}" class="add-product-btn">
+                                    <a href="{{ route('admin.crearProducto') }}" class="add-product-btn">
                                         <i class="fas fa-plus-circle"></i>
                                         Agregar Primer Producto
                                     </a>

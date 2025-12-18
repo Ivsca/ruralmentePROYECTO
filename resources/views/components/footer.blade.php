@@ -16,26 +16,28 @@
             </div>
 
             <div class="flex flex-col items-center md:items-start">
-                <h3 class="text-xl font-bold mb-6 text-white">Contacto</h3>
+                <h3 class="text-xl font-bold mb-6 text-white">Redes Sociales</h3>
                 <div class="space-y-4">
                     
                     <div class="flex items-center">
-                        <i class="fas fa-envelope text-white opacity-80 mr-3 w-5"></i>
-                        <a href="mailto:contacto@ruralmente.co" class="text-white opacity-90 hover:opacity-100 transition-opacity">
-                            contacto@ruralmente.co
+                        <i class="fab fa-instagram text-white opacity-80 mr-3 w-5"></i>
+                        <a href="https://www.instagram.com/ruralmente.col/" class="text-white opacity-90 hover:opacity-100 transition-opacity">
+                            Instagram
                         </a>
                     </div>
                     
                     <div class="flex items-center">
-                        <i class="fas fa-phone text-white opacity-80 mr-3 w-5"></i>
-                        <a href="tel:+573108126547" class="text-white opacity-90 hover:opacity-100 transition-opacity">
-                            +57 310 812 6547
+                        <i class="fab fa-spotify text-white opacity-80 mr-3 w-5"></i>
+                        <a href="https://open.spotify.com/user/31zlmrth7wark4oykx5lb7b7v5i4?si=e558d470fe6144fd" class="text-white opacity-90 hover:opacity-100 transition-opacity">
+                            Spotify
                         </a>
                     </div>
                    
                     <div class="flex items-center">
-                        <i class="fas fa-map-marker-alt text-white opacity-80 mr-3 w-5"></i>
-                        <span class="text-white opacity-90">Bogotá, Colombia</span>
+                        <i class="fab fa-youtube text-white opacity-80 mr-3 w-5"></i>
+                        <a href="http://www.youtube.com/@ruralmentecolombia" class="text-white opacity-90 hover:opacity-100 transition-opacity">
+                            Youtube
+                        </a>
                     </div>
                 </div>
             </div>
