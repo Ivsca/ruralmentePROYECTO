@@ -13,9 +13,9 @@ return [
     */
 
     'cloud' => [
-        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
-        'api_key'    => env('CLOUDINARY_API_KEY'),
-        'api_secret' => env('CLOUDINARY_API_SECRET'),
+        'cloud_name' => 'dza9ptqqj',
+        'api_key'    => '493792775544928',
+        'api_secret' => 'CLOUDINARY_API_SECRET',
     ],
 
     /*
@@ -23,12 +23,12 @@ return [
     | CLOUDINARY_URL (string) — the SDK reads this and the engine expects it
     |--------------------------------------------------------------------------
     |
-    | IMPORTANT: This value must be a string (or env var returning a string).
-    | Don't set this to an array. Use the full CLOUDINARY_URL in your .env.
+    | IMPORTANT: This value must be a string (or var returning a string).
+    | Don't set this to an array. Use the full CLOUDINARY_URL in your .
     |
     */
 
-    'url' => env('CLOUDINARY_URL'),
+    'url' => 'cloudinary://493792775544928:FhTZ-B5StjFyWT59J-5MD1oLFZk@dza9ptqqj',
 
     /*
     |--------------------------------------------------------------------------
