@@ -693,25 +693,59 @@
             <i class="fas fa-box-open"></i>
             Productos Recientes
         </h3>
-        <a href="{{ route('admin.products.index') }}" class="card-link">
-            Ver todos <i class="fas fa-arrow-right"></i>
-        </a>
     </div>
     <ul class="item-list">
         @forelse($recentProducts as $product)
+        @php
+            // Lógica simplificada para obtener imagen
+            $fallback = asset('fondos_imagenes_video/vietnam.jpg');
+            $imageField = $product->photo ?? null;
+            
+            if ($imageField && !\Illuminate\Support\Str::startsWith($imageField, ['http://', 'https://'])) {
+                $imageField = \Illuminate\Support\Facades\Storage::url($imageField);
+            }
+            
+            $finalImage = $imageField ?: $fallback;
+        @endphp
+        
         <li class="list-item">
-            <div class="item-icon" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.2) 100%); color: #10B981;">
-                <i class="fas fa-box"></i>
+            <div class="item-icon" style="
+                background-image: url('{{ $finalImage }}');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                width: 40px;
+                height: 40px;
+                border-radius: 8px;
+                position: relative;
+            ">
+                <!-- Fallback si la imagen falla -->
+                <div style="
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(5, 150, 105, 0.4) 100%);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    border-radius: 8px;
+                ">
+                    <i class="fas fa-box"></i>
+                </div>
             </div>
             <div class="item-info">
-                <span class="item-title">{{ $product->nombre }}</span>
+                <span class="item-title">{{ $product->name }}</span>
                 <span class="item-subtitle">
                     <i class="fas fa-tag"></i>
-                    {{ $product->categoria }} • {{ $product->created_at->diffForHumans() }}
+                    {{ $product->category ?? 'General' }} • 
+                    {{ $product->created_at->diffForHumans() }}
                 </span>
             </div>
             <span class="item-badge badge-success">
-                ${{ number_format($product->precio, 2) }}
+                ${{ number_format($product->price, 2) }}
             </span>
         </li>
         @empty

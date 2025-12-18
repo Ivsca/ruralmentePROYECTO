@@ -294,16 +294,28 @@
                     
                     <div class="bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden">
                         <div class="h-48 sm:h-56 md:h-64 overflow-hidden">
-                            @if($product->photo)
-                                <img src="{{ Storage::url($product->photo) }}" 
-                                    alt="{{ $product->name }}" 
-                                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                                    onerror="this.onerror=null; this.src='{{ asset('placeholder.jpg') }}';">
-                            @else
-                                <div class="w-full h-full bg-gray-200 flex items-center justify-center">
-                                    <span class="text-gray-500">Sin imagen</span>
-                                </div>
-                            @endif
+                            @php
+                                // MÉTODO CORREGIDO: Usa la misma lógica que en tu vista de producto
+                                $fallback = asset('fondos_imagenes_video/vietnam.jpg');
+                                $imageUrl = null;
+                                
+                                if ($product->photo) {
+                                    // Verificar si es URL absoluta
+                                    if (\Illuminate\Support\Str::startsWith($product->photo, ['http://', 'https://'])) {
+                                        $imageUrl = $product->photo;
+                                    } else {
+                                        // Obtener URL desde storage
+                                        $imageUrl = \Illuminate\Support\Facades\Storage::url($product->photo);
+                                    }
+                                }
+                            @endphp
+                            
+                            <img 
+                                src="{{ $imageUrl ?? $fallback }}" 
+                                alt="{{ $product->name }}" 
+                                class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                onerror="this.src='{{ $fallback }}'"
+                            >
                         </div>
                         
                         <div class="p-4 sm:p-6">
