@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
+
+// mueve tu cuerpo alegria macarena
+// tu cuerpo es para darle alegria
+// y cosa buena
+
+// si con esto no funciona no se que mas hacer
+
 class CartController extends Controller
 {
     protected function getOrCreateCart(int $userId): TablaCarrito
