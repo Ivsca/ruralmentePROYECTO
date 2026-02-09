@@ -447,7 +447,7 @@
             <h1>
                 <i class="fas fa-user-circle"></i> Detalle de Usuario
             </h1>
-            <p class="page-subtitle-detail">
+            <p class="page-subtitle-detail font-sans leading-relaxed">
                 Información completa y actividad del usuario en el sistema
             </p>
         </div>
@@ -524,7 +524,7 @@
     
     <div class="section-card">
         <div class="section-header">
-            <h3 class="section-title">
+            <h3 class="section-title font-sans font-semibold">
                 <i class="fas fa-clipboard-check"></i>
                 Triajes Psicológicos
             </h3>
@@ -537,7 +537,7 @@
         </div>
 
         @if ($user->triajes->isEmpty())
-            <div class="empty-section">
+            <div class="empty-section font-sans leading-relaxed">
                 <div class="empty-icon">
                     <i class="fas fa-clipboard-list"></i>
                 </div>
@@ -605,7 +605,7 @@
     
     <div class="section-card">
         <div class="section-header">
-            <h3 class="section-title">
+            <h3 class="section-title font-sans font-semibold">
                 <i class="fas fa-file-invoice-dollar"></i>
                 Historial de Facturas
             </h3>
@@ -621,7 +621,7 @@
         </div>
 
         @if ($user->invoices->isEmpty())
-            <div class="empty-section">
+            <div class="empty-section font-sans leading-relaxed">
                 <div class="empty-icon">
                     <i class="fas fa-receipt"></i>
                 </div>

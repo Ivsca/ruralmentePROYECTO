@@ -7,7 +7,7 @@
 
     <x-dialog-modal wire:model="open">
         <x-slot name="title" >
-            <div class="flex justify-end">
+            <div class="flex justify-end font-sans font-medium tracking-wide">
                 <button wire:click="set('open', false)" class=""><i class="fa-solid fa-xmark"></i></button>
             </div>
         </x-slot>
@@ -23,7 +23,7 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('login') }}" class="flex flex-col items-center w-full">
+                <form method="POST" action="{{ route('login') }}" class="flex flex-col items-center w-full font-sans font-medium tracking-wide">
                     @csrf
 
                     <div class="w-4/5">
@@ -36,15 +36,15 @@
                         <x-input id="password" class="block w-full mt-2 ml-3" type="password" name="password" required autocomplete="current-password" />
                         @if (Route::has('password.request'))
                             <a class="text-sm text-[#179917] hover:text-gray-900 mt-2 flex items-start" href="{{ route('password.request') }}">
-                                {{ __('Forgot your password?') }}
+                                {{ __('¿Olvidaste tu contraseña?') }}
                             </a>
                         @endif
                     </div>
-                    <div class="flex flex-col items-start mt-4">
+                    <div class="flex flex-col items-start mt-4 ">
                         
                         <div class="mt-5">
                             <x-button>
-                                {{ __('Log in') }}
+                                {{ __('Iniciar sesión') }}
                             </x-button>
                         </div>
                     </div>

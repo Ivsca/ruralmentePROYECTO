@@ -13,7 +13,7 @@
 
                 <!-- Título centrado arriba -->
                 <div class="max-w-2xl mx-auto text-center mb-16">
-                    <h1 class="text-5xl md:text-6xl font-serif font-bold tracking-wide mb-6 bg-gradient-to-r from-green-800 via-emerald-700 to-teal-800 bg-clip-text text-transparent">
+                    <h1 class="text-5xl md:text-6xl font-rural font-bold tracking-wide mb-6 bg-gradient-to-r from-green-800 via-emerald-700 to-teal-800 bg-clip-text text-transparent">
                         Triaje psicológico
                     </h1>
                     <p class="text-xl leading-relaxed text-gray-700 font-medium">
@@ -31,7 +31,7 @@
                         
                         <div class="bg-white rounded-xl p-10 shadow-lg border border-gray-100 w-full max-w-3xl mx-auto">
                             
-                            <h2 class="text-3xl font-serif font-bold text-[#2E8B57] mb-10 text-center">
+                            <h2 class="text-3xl font-rural font-semibold text-[#2E8B57] mb-10 text-center">
                                 Datos del Paciente
                             </h2>
 
@@ -40,7 +40,7 @@
 
                                 <!-- 1. DATOS DEL PACIENTE -->
                                 <section>
-                                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">1. Datos del paciente</h3>
+                                    <h3 class="text-2xl font-sans font-semibold text-gray-800 mb-4">1. Datos del paciente</h3>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
                                             <label class="block font-medium text-gray-700 mb-1">Nombre del paciente *</label>
@@ -64,7 +64,7 @@
 
                                 <!-- 2. EVALUACIÓN DE RIESGO -->
                                 <section>
-                                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">2. Evaluación de riesgo</h3>
+                                    <h3 class="text-2xl font-sans font-semibold text-gray-800 mb-4">2. Evaluación de riesgo</h3>
                                     <div class="space-y-6">
                                         <div>
                                             <label class="block font-medium text-gray-700 mb-2">Riesgo suicida *</label>
@@ -92,7 +92,7 @@
 
                                 <!-- 3. SÍNTOMAS PRESENTES -->
                                 <section>
-                                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">3. Síntomas presentes</h3>
+                                    <h3 class="text-2xl font-sans font-semibold text-gray-800 mb-4">3. Síntomas presentes</h3>
                                     <p class="text-sm text-gray-600 mb-3">(Puede seleccionar más de uno)</p>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <label class="flex items-center gap-3 p-2 hover:bg-gray-50 rounded">
@@ -128,7 +128,7 @@
 
                                 <!-- 4. NIVEL DE FUNCIONAMIENTO -->
                                 <section>
-                                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">4. Nivel de funcionamiento</h3>
+                                    <h3 class="text-2xl font-sans font-semibold text-gray-800 mb-4">4. Nivel de funcionamiento</h3>
                                     <div class="space-y-6">
                                         <div>
                                             <label class="block font-medium text-gray-700 mb-2">Capacidad de funcionamiento diario *</label>
@@ -157,7 +157,7 @@
 
                                 <!-- 5. URGENCIA Y CONTEXTO -->
                                 <section>
-                                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">5. Urgencia y contexto</h3>
+                                    <h3 class="text-2xl font-sans font-semibold text-gray-800 mb-4">5. Urgencia y contexto</h3>
                                     <div class="space-y-6">
                                         <div>
                                             <label class="block font-medium text-gray-700 mb-2">Nivel de urgencia percibido *</label>
@@ -188,7 +188,7 @@
                                                 </svg>
                                             </div>
                                             <div class="ml-3">
-                                                <h3 class="text-sm font-medium text-red-800">
+                                                <h3 class="text-sm font-medium text-red-800 font-sans font-semibold">
                                                     Por favor, corrija los siguientes errores:
                                                 </h3>
                                                 <div class="mt-2 text-sm text-red-700">
@@ -226,7 +226,7 @@
                                               d="M12 15v2m0 0v2m0-2h2m-2 0H9m3-10a4 4 0 11-8 0 4 4 0 018 0z"/>
                                     </svg>
                                 </div>
-                                <h2 class="text-3xl font-bold text-gray-800 mb-4">Acceso Restringido</h2>
+                                <h2 class="text-3xl font-rural font-semibold text-gray-800 mb-4">Acceso Restringido</h2>
                                 <p class="text-gray-600 text-lg mb-6 leading-relaxed">
                                     El formulario de triaje psicológico está disponible exclusivamente 
                                     para personal autorizado del sistema.

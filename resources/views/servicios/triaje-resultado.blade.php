@@ -1,7 +1,10 @@
 @extends('layouts.triaje') 
 
 @section('content')
-
+<a href="{{ route('home') }}" 
+    class="bg-[#2E8B57] hover:bg-[#246b45] text-white px-3 py-2 rounded-lg font-semibold transition-all duration-300 text-center inline-flex items-center justify-center">
+    Volver al inicio
+</a>
 <section class="w-full min-h-screen py-20 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 relative overflow-hidden flex items-center justify-center">
 
     <!-- Fondos decorativos -->
@@ -9,14 +12,17 @@
     <div class="absolute top-10 right-10 w-32 h-32 bg-green-200/30 rounded-full blur-2xl"></div>
     <div class="absolute bottom-10 left-10 w-40 h-40 bg-teal-200/20 rounded-full blur-3xl"></div>
 
+    
+
     <div class="relative z-10 container mx-auto px-4">
+        
 
         
         <div class="max-w-2xl mx-auto text-center mb-16">
-            <h1 class="text-5xl md:text-6xl font-serif font-bold tracking-wide mb-6 bg-gradient-to-r from-green-800 via-emerald-700 to-teal-800 bg-clip-text text-transparent">
+            <h1 class="text-5xl md:text-6xl font-rural font-bold tracking-wide mb-6 bg-gradient-to-r from-green-800 via-emerald-700 to-teal-800 bg-clip-text text-transparent">
                 Resultado del Triaje
             </h1>
-            <p class="text-lg text-gray-700">
+            <p class="text-lg text-gray-700 font-sans leading-relaxed">
                 Análisis detallado del estado actual y nivel de atención recomendado.
             </p>
         </div>
@@ -28,10 +34,10 @@
 
                
                 <div class="text-center mb-10">
-                    <h2 class="text-4xl font-serif font-bold text-[#2E8B57] mb-4">
+                    <h2 class="text-4xl font-rural font-semibold text-[#2E8B57] mb-4">
                         Resultado del Triaje Psicológico
                     </h2>
-                    <p class="text-gray-600">
+                    <p class="text-gray-600 font-sans leading-relaxed">
                         Triaje registrado el {{ $triaje->created_at->format('d/m/Y H:i') }}
                         @if($triaje->user_id)
                             por {{ $triaje->user->name ?? 'Usuario' }}
@@ -52,13 +58,13 @@
                
                 <div class="bg-white rounded-xl shadow p-8 mb-8 border border-gray-200">
                     <div class="{{ $colorClase }} p-6 rounded-lg mb-8 border-2 text-center">
-                        <h2 class="text-2xl font-bold mb-2">Nivel de atención requerido</h2>
-                        <p class="text-3xl font-bold">{{ $triaje->nivel_atencion }}</p>
+                        <h2 class="text-2xl font-rural font-semibold mb-2">Nivel de atención requerido</h2>
+                        <p class="text-3xl font-sans leading-relaxed">{{ $triaje->nivel_atencion }}</p>
                     </div>
 
                     <!-- Datos del paciente -->
                     <div class="mb-8">
-                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">📋 Datos del paciente</h3>
+                        <h3 class="text-2xl font-sans font-semibold text-gray-800 mb-4">📋 Datos del paciente</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="bg-gray-50 p-4 rounded-lg">
                                 <p class="text-sm text-gray-600">Nombre</p>
@@ -81,7 +87,7 @@
 
                     
                     <div class="mb-8">
-                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">📊 Evaluación detallada</h3>
+                        <h3 class="text-2xl font-sans font-semibold text-gray-800 mb-4">📊 Evaluación detallada</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="space-y-4">
                                 <div>
@@ -118,7 +124,7 @@
                     
                     @if($triaje->contexto)
                     <div class="mb-8">
-                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">📝 Contexto de la consulta</h3>
+                        <h3 class="text-2xl font-sans font-semibold text-gray-800 mb-4">📝 Contexto de la consulta</h3>
                         <div class="bg-gray-50 p-4 rounded-lg">
                             <p class="whitespace-pre-line">{{ $triaje->contexto }}</p>
                         </div>
@@ -127,7 +133,7 @@
 
                     
                     <div>
-                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">💡 Recomendaciones de atención</h3>
+                        <h3 class="text-2xl font-sans font-semibold text-gray-800 mb-4">💡 Recomendaciones de atención</h3>
                         <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
                             <div class="whitespace-pre-line font-medium text-blue-800">
                                 {!! nl2br(e($triaje->recomendaciones)) !!}

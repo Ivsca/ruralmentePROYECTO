@@ -7,7 +7,7 @@
                 @livewire('modal.admin.create-product')
             </div>
         @endcan
-        <section class="mt-10 ">
+        <section class="mt-10 font-sans font-medium tracking-wide">
             <article class="grid w-full grid-cols-3 gap-3">
                 {{-- trae todo los productos nuevos enviados  --}}
                 @forelse($products as $product)
@@ -64,7 +64,7 @@
                                     <h3 class="w-full text-2xl text-center text-gray-100 ">Eliminar</h3>
                                 </div>
                                 <div class="px-6 py-4 text-left">
-                                    <p class="text-xl text-gray-500">
+                                    <p class="text-xl text-gray-500 font-sans leading-relaxed">
                                         ¿Estás seguro de que deseas eliminar este producto?
                                     </p>
                                     <div class="mt-4 text-center">

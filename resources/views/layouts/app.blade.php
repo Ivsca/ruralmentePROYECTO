@@ -11,16 +11,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Georgia:wght@400;700&display=swap" rel="stylesheet">
     
+    
+    <meta name="layout-debug" content="LAYOUT_APP">
+
+
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Scripts / Styles (Vite) -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     
 
     <!-- Styles -->
     <style>
+
         
         :root {
             --primary-color: #2E8B57;
@@ -1027,6 +1035,34 @@
                 }
             });
         };
+
+        // Flash Messages
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: "{{ session('success') }}",
+                confirmButtonColor: '#2E8B57'
+            });
+        @endif
+
+        @if(session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: "{{ session('error') }}",
+                confirmButtonColor: '#EF4444'
+            });
+        @endif
+
+        @if(session('warning'))
+            Swal.fire({
+                icon: 'warning',
+                title: 'Atención',
+                text: "{{ session('warning') }}",
+                confirmButtonColor: '#FFA726'
+            });
+        @endif
     </script>
 </body>
 </html>

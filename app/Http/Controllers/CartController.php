@@ -46,26 +46,37 @@ class CartController extends Controller
         $it['product_id'] = (int)($it['product_id'] ?? 0);
         $it['quantity'] = (int)($it['quantity'] ?? 0);
         $it['color'] = trim((string)($it['color'] ?? ''));
+        $it['talla'] = isset($it['talla']) ? trim((string)$it['talla']) : null;
         $it['escojido'] = isset($it['escojido']) ? (bool)$it['escojido'] : true;
         }
         return $items;
         }
 
-        protected function findIndexByProductAndColor(array $items, int $productId, ?string $color)
+        protected function findIndexByProductAndColor(array $items, int $productId, ?string $color, ?string $talla)
         {
         $color = (string)($color ?? '');
+        $talla = (string)($talla ?? '');
         $colorNorm = mb_strtolower(trim($color));
+        $tallaNorm = mb_strtolower(trim($talla));
         $emptyVariants = ['', 'sin color', 'sin-color', 'none', 'n/a', 'null'];
         if (in_array($colorNorm, $emptyVariants, true)) $colorNorm = '';
 
 
         foreach ($items as $idx => $it) {
-        $itColor = (string)($it['color'] ?? '');
-        $itPid = (int)($it['product_id'] ?? 0);
-        $itColorNorm = mb_strtolower(trim($itColor));
-        if (in_array($itColorNorm, $emptyVariants, true)) $itColorNorm = '';
-        if ($itPid === $productId && $itColorNorm === $colorNorm) return $idx;
-        }
+            $itPid = (int)($it['product_id'] ?? 0);
+
+            $itColor = (string)($it['color'] ?? '');
+            $itColorNorm = mb_strtolower(trim($itColor));
+            if (in_array($itColorNorm, $emptyVariants, true)) $itColorNorm = '';
+
+            $itTalla = (string)($it['talla'] ?? '');
+            $itTallaNorm = mb_strtolower(trim($itTalla));
+
+            if ($itPid === $productId && $itColorNorm === $colorNorm && $itTallaNorm === $tallaNorm) {
+                return $idx;
+            }
+        }    
+
         return null;
     }
 
@@ -77,13 +88,20 @@ class CartController extends Controller
         $user = Auth::id();
         if (!$user) return redirect()->route('login');
 
+         if (auth()->user()->can('admin.index')) {
+            return redirect()->route('admin.pedidos.index'); 
+        }
+
+        $view = 'products.carrito-usuario';
+             
+
         $cart = $this->getOrCreateCart($user);
         $items = $this->normalizeItems($cart);
+        
 
         if (empty($items)) {
-            return view('products.ver-productos-carrito', [
+            return view($view, [
                 'cartItems' => [],
-                // devolvemos string formateado desde el backend
                 'subtotal'  => number_format(0, 2, '.', ','),
                 'cart'      => $cart
             ]);
@@ -109,21 +127,21 @@ class CartController extends Controller
                 'product'    => $products[$pid],
                 'quantity'   => $qty,
                 'color'      => $entry['color'] ?? '',
+                'talla'      => $entry['talla'] ?? null,
                 'escojido'   => array_key_exists('escojido', $entry) ? (bool)$entry['escojido'] : true,
-                // line_total formateado como string
                 'line_total' => number_format($lineTotalNumeric, 2, '.', ','),
             ];
         }
 
-        // Subtotal formateado por el backend (string)
         $subtotal = $this->subtotal($cartItems);
 
-        return view('products.ver-productos-carrito', [
+        return view($view, [
             'cartItems' => $cartItems,
             'subtotal'  => $subtotal,
             'cart'      => $cart
         ]);
     }
+
 
     /**
      * Subtotal SOLO de los productos escojidos = true
@@ -218,7 +236,8 @@ class CartController extends Controller
                     ['productosYcantidad_ids' => [], 'CantidadProductos' => 0, 'seleccionado' => true]
                 );
 
-                $items = $cart->productosYcantidad_ids ?? [];
+                $items = $this->normalizeItems($cart);
+
 
                 $foundIndex = null;
                 foreach ($items as $index => $it) {
@@ -286,6 +305,7 @@ class CartController extends Controller
         $v = Validator::make($r->all(), [
             'product_id' => 'required|integer|exists:products,id',
             'color' => 'nullable|string|max:100',
+            'talla'      => 'nullable|string|max:10',
             'quantity' => 'required|integer|min:0'
         ]);
 
@@ -298,12 +318,14 @@ class CartController extends Controller
 
         $pid = (int)$r->product_id;
         $color = trim((string)($r->color ?? ''));
+        $talla = trim((string)$r->input('talla', ''));
+        $talla = $talla !== '' ? strtoupper($talla) : '';
         $qty = (int)$r->quantity;
 
         $cart = $this->getOrCreateCart($user);
         $items = $this->normalizeItems($cart);
 
-        $idx = $this->findIndexByProductAndColor($items, $pid, $color);
+        $idx = $this->findIndexByProductAndColor($items, $pid, $color, $talla);
 
         if ($idx === null) return response()->json(['ok' => false, 'msg' => 'Entrada no encontrada'], 404);
 
@@ -318,19 +340,23 @@ class CartController extends Controller
         $cart->save();
 
         // recalcular subtotal
-        $productIds = array_map(fn($i) => (int)$i['product_id'], $items);
-        $subtotal = Product::whereIn('id', $productIds)->get()->sum(function ($p) use ($items) {
-            $sumQty = 0;
-            foreach ($items as $en) {
-                if ((int)$en['product_id'] === $p->id) $sumQty += (int)$en['quantity'];
+        $subtotalSelected = 0;
+        $products = Product::whereIn('id', array_unique(array_map(fn($i)=>(int)$i['product_id'],$items)))
+        ->get()->keyBy('id');
+
+        foreach ($items as $it) {
+            if (!empty($it['escojido'])) {
+                $pid = (int)$it['product_id'];
+                $price = isset($products[$pid]) ? (float)$products[$pid]->price : 0;
+                $subtotalSelected += $price * (int)$it['quantity'];
             }
-            return $sumQty * ($p->price ?? 0);
-        });
+        }
+
 
         return response()->json([
             'ok' => true,
             'count' => $cart->CantidadProductos,
-            'subtotal' => $subtotal
+            'subtotal_selected' => $subtotalSelected,
         ]);
     }
 
@@ -342,6 +368,7 @@ class CartController extends Controller
         $v = Validator::make($r->all(), [
             'product_id' => 'required|integer|exists:products,id',
             'color' => 'nullable|string|max:100',
+            'talla'      => 'nullable|string|max:10',
             'selected' => 'required|boolean'
         ]);
         if ($v->fails()) {
@@ -361,12 +388,14 @@ class CartController extends Controller
 
 
         try {
-        DB::transaction(function () use ($userId, $productId, $color, $selected, &$cart, &$selectedCount, &$subtotalSelected) {
+        $talla = trim((string)$r->input('talla', ''));
+        $talla = $talla !== '' ? strtoupper($talla) : '';
+        DB::transaction(function () use ($userId, $productId, $color, $talla, $selected, &$cart, &$selectedCount, &$subtotalSelected) {
         $cart = $this->getOrCreateCart($userId);
         $items = $this->normalizeItems($cart);
 
-
-        $idx = $this->findIndexByProductAndColor($items, $productId, $color);
+        
+        $idx = $this->findIndexByProductAndColor($items, $productId, $color, $talla);
         if ($idx === null) throw new \RuntimeException('entry_not_found');
 
 
@@ -425,7 +454,8 @@ class CartController extends Controller
     {
         $v = Validator::make($r->all(), [
             'product_id' => 'required|integer|exists:products,id',
-            'color'      => 'nullable|string|max:100'
+            'color'      => 'nullable|string|max:100',
+            'talla'      => 'nullable|string|max:10',
         ]);
         if ($v->fails()) return response()->json(['ok' => false], 422);
 
@@ -434,11 +464,13 @@ class CartController extends Controller
 
         $pid = (int)$r->product_id;
         $color = trim((string)($r->color ?? ''));
+        $talla = trim((string)($r->talla ?? ''));
+        $talla = $talla !== '' ? strtoupper($talla) : '';
 
         $cart = $this->getOrCreateCart($user);
         $items = $this->normalizeItems($cart);
 
-        $idx = $this->findIndexByProductAndColor($items, $pid, $color);
+        $idx = $this->findIndexByProductAndColor($items, $pid, $color, $talla);
         if ($idx === null) {
             return response()->json(['ok' => false, 'msg' => 'Entrada no encontrada'], 404);
         }
@@ -449,11 +481,26 @@ class CartController extends Controller
         $cart->CantidadProductos = $this->recalcTotals($items);
         $cart->save();
 
+        // subtotal selected recalculado
+        $subtotalSelected = 0;
+        $productIds = array_unique(array_map(fn($i)=>(int)$i['product_id'], $items));
+        $products = $productIds ? Product::whereIn('id', $productIds)->get()->keyBy('id') : collect();
+
+        foreach ($items as $it) {
+            if (!empty($it['escojido'])) {
+                $pid2 = (int)$it['product_id'];
+                $price = isset($products[$pid2]) ? (float)$products[$pid2]->price : 0;
+                $subtotalSelected += $price * (int)$it['quantity'];
+            }
+        }
+
         return response()->json([
-            'ok'    => true,
-            'count' => $cart->CantidadProductos
+            'ok' => true,
+            'count' => $cart->CantidadProductos,
+            'subtotal_selected' => $subtotalSelected,
         ]);
     }
+
 
 
     /**

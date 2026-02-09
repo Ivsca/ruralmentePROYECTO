@@ -10,7 +10,7 @@
     
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
         <h1 style="color: var(--gray-800); font-size: 1.5rem; font-weight: 600;">
-            <i class="fas fa-file-medical-alt"></i> Detalles del Triaje
+            <i class="fas fa-file-medical-alt font-rural font-bold"></i> Detalles del Triaje
         </h1>
 
         <a href="{{ route('admin.triajes.index') }}"

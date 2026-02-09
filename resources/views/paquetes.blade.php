@@ -10,10 +10,10 @@
             
             <div class="relative z-10 container mx-auto px-4">
                 <div class="max-w-2xl mx-auto text-center">
-                    <h1 class="text-5xl md:text-6xl font-serif font-bold tracking-wide mb-6 bg-gradient-to-r from-green-800 via-emerald-700 to-teal-800 bg-clip-text text-transparent">
+                    <h1 class="text-5xl md:text-6xl font-rural font-bold tracking-wide mb-6 bg-gradient-to-r from-green-800 via-emerald-700 to-teal-800 bg-clip-text text-transparent">
                         Soluciones a medida para su empresa
                     </h1>
-                    <p class="text-xl leading-relaxed text-gray-700 font-medium">
+                    <p class="text-xl font-sans leading-relaxed text-gray-700 font-medium">
                         Paquetes integrales diseñados para maximizar el impacto en el bienestar de las comunidades campesinas.
                     </p>
                 </div>
@@ -26,7 +26,7 @@
                 
                 
                 <article class="bg-white rounded-xl border border-gray-200 shadow-sm p-7 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Paquete Básico</h3>
+                    <h3 class="text-2xl font-sans font-semibold text-gray-900 mb-2">Paquete Básico</h3>
                     <ul class="space-y-2">
                     <li class="flex items-start gap-2 text-gray-700 text-sm leading-relaxed">
                         <span class="text-green-500 font-bold">✓</span> Diagnóstico de entrada y salida
@@ -60,7 +60,7 @@
                                     </svg>
                                 </div>
                                 <h4 class="font-semibold text-gray-900 mb-1">Ideal para</h4>
-                                <p class="text-sm text-gray-600">Empresas que inician programas de bienestar</p>
+                                <p class="text-sm text-gray-600 font-sans leading-relaxed">Empresas que inician programas de bienestar</p>
                             </div>
 
                             
@@ -71,7 +71,7 @@
                                     </svg>
                                 </div>
                                 <h4 class="font-semibold text-gray-900 mb-1">Duración</h4>
-                                <p class="text-sm text-gray-600">3 meses</p>
+                                <p class="text-sm text-gray-600 font-sans leading-relaxed">3 meses</p>
                             </div>
 
                             
@@ -82,7 +82,7 @@
                                     </svg>
                                 </div>
                                 <h4 class="font-semibold text-gray-900 mb-1">Cobertura</h4>
-                                <p class="text-sm text-gray-600">Hasta 50 participantes</p>
+                                <p class="text-sm text-gray-600 font-sans leading-relaxed">Hasta 50 participantes</p>
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                     <div class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 mb-4">
                     <span class="text-sm font-medium text-emerald-700">Más Popular</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Paquete Integral</h3>
+                    <h3 class="text-2xl font-sans font-semibold text-gray-900 mb-2">Paquete Integral</h3>
                     <ul class="space-y-2">
                     <li class="flex items-start gap-2 text-gray-700 text-sm leading-relaxed">
                         <span class="text-green-500 font-bold">✓</span> Diagnóstico de entrada y salida completo
@@ -129,7 +129,7 @@
                                     </svg>
                                 </div>
                                 <h4 class="font-semibold text-gray-900 mb-1">Ideal para</h4>
-                                <p class="text-sm text-gray-600">pendiente</p>
+                                <p class="text-sm text-gray-600 font-sans leading-relaxed">pendiente</p>
                             </div>
 
                             
@@ -140,7 +140,7 @@
                                     </svg>
                                 </div>
                                 <h4 class="font-semibold text-gray-900 mb-1">Duración</h4>
-                                <p class="text-sm text-gray-600">pendiente</p>
+                                <p class="text-sm text-gray-600 font-sans leading-relaxed">pendiente</p>
                             </div>
 
                             
@@ -151,7 +151,7 @@
                                     </svg>
                                 </div>
                                 <h4 class="font-semibold text-gray-900 mb-1">Cobertura</h4>
-                                <p class="text-sm text-gray-600">Hasta 150 participantes</p>
+                                <p class="text-sm text-gray-600 font-sans leading-relaxed">Hasta 150 participantes</p>
                             </div>
                         </div>
                     </div>
@@ -159,8 +159,8 @@
 
                 
                 <article class="bg-white rounded-xl border border-gray-200 shadow-sm p-7 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Paquete Premium</h3>
-                    <p class="text-base font-medium text-gray-500 mb-4">Consultar</p>
+                    <h3 class="text-2xl font-sans font-semibold text-gray-900 mb-2">Paquete Premium</h3>
+                    <p class="text-base font-medium text-gray-500 mb-4 font-sans leading-relaxed">Consultar</p>
                     <ul class="space-y-2">
                     <li class="flex items-start gap-2 text-gray-700 text-sm leading-relaxed">
                         <span class="text-green-500 font-bold">✓</span> Diagnóstico de entrada y salida avanzado
@@ -196,7 +196,7 @@
                                     </svg>
                                 </div>
                                 <h4 class="font-semibold text-gray-900 mb-1">Ideal para</h4>
-                                <p class="text-sm text-gray-600">Grandes corporaciones con compromiso social</p>
+                                <p class="text-sm text-gray-600 font-sans leading-relaxed">Grandes corporaciones con compromiso social</p>
                             </div>
 
                             
@@ -207,7 +207,7 @@
                                     </svg>
                                 </div>
                                 <h4 class="font-semibold text-gray-900 mb-1">Duración</h4>
-                                <p class="text-sm text-gray-600">12 meses (renovable)</p>
+                                <p class="text-sm text-gray-600 font-sans leading-relaxed">12 meses (renovable)</p>
                             </div>
 
                             
@@ -218,7 +218,7 @@
                                     </svg>
                                 </div>
                                 <h4 class="font-semibold text-gray-900 mb-1">Cobertura</h4>
-                                <p class="text-sm text-gray-600">Ilimitada</p>
+                                <p class="text-sm text-gray-600 font-sans leading-relaxed">Ilimitada</p>
                             </div>
                         </div>
                     </div>
@@ -236,10 +236,10 @@
 
             <section class="w-full bg-emerald-600 py-20">
                 <div class="container mx-auto px-6 lg:px-12 text-center">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                    <h2 class="text-3xl md:text-4xl font-rural font-semibold text-white mb-4">
                     ¿Necesita un paquete personalizado?
                     </h2>
-                    <p class="text-base md:text-lg text-white/90 leading-relaxed max-w-2xl mx-auto">
+                    <p class="text-base md:text-lg text-white/90 font-sans leading-relaxed max-w-2xl mx-auto">
                     Diseñamos soluciones a medida según las necesidades de tu empresa y las comunidades que desea impactar.
                     </p>
                     <a href="{{ route('cotizacion') }}" class="inline-block mt-6 bg-white text-emerald-700 hover:bg-gray-100 font-semibold text-sm px-6 py-3 rounded-lg shadow transition-all duration-300">

@@ -1,7 +1,7 @@
     <div>
         <x-dialog-modal maxWidth="xl">
             <x-slot name="title" >
-                <div class="flex justify-end"><button wire:click="closeRegister">Cerrar</button></div>
+                <div class="flex justify-end font-sans font-medium tracking-wide"><button wire:click="closeRegister">Cerrar</button></div>
                 
             </x-slot>
 
@@ -13,7 +13,7 @@
                     </div>
                 @endif
 
-                <article class="grid grid-cols-2 gap-2">
+                <article class="grid grid-cols-2 gap-2 font-sans font-medium tracking-wide">
                     <div class="">
                         <x-label for="documentType">Tipo de documento</x-label>
                         <select class="w-full rounded-lg border-gray-300" wire:model='documentType'>
@@ -31,7 +31,7 @@
                     </div>
                 </article>
 
-                <div class="grid grid-cols-2 gap-2">
+                <div class="grid grid-cols-2 gap-2 font-sans font-medium tracking-wide">
                     <div>
                         <x-label for="name">nombre</x-label>
                         <x-input class="w-full " wire:model='name'/>
@@ -44,7 +44,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-2">
+                <div class="grid grid-cols-2 gap-2 font-sans font-medium tracking-wide">
                     <div>
                         <x-label for="sex">Sexo</x-label>
                         <select class="w-full rounded-lg border-gray-300" wire:model='sex'>
@@ -61,13 +61,13 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="font-sans font-medium tracking-wide">
                     <x-label for="phone">Telefono</x-label>
                     <x-input class="w-full " wire:model='phone'/>
                     <x-input-error for="phone"/>
                 </div>
 
-                <div class="grid grid-cols-3 gap-2">
+                <div class="grid grid-cols-3 gap-2 font-sans font-medium tracking-wide">
                     <div>
                         <x-label for="country">Pais</x-label>
                         <x-input class="w-full " wire:model='country'/>
@@ -85,19 +85,19 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="font-sans font-medium tracking-wide">
                     <x-label for="address">Direccion</x-label>
                     <x-input class="w-full " wire:model='address'/>
                     <x-input-error for="address"/>
                 </div>
 
-                <div>
+                <div class="font-sans font-medium tracking-wide">
                     <x-label for="email">Correo electronico</x-label>
                     <x-input class="w-full " type="email" wire:model='email'/>
                     <x-input-error for="email"/>
                 </div>
 
-                <div>
+                <div class="font-sans font-medium tracking-wide">
                     <x-label for="password">Contraseña</x-label>
                     <x-input class="w-full " type="password " wire:model='password'/>
                     <x-input-error for="password"/>
@@ -137,7 +137,7 @@
                     </div>
                 @endif
 
-                <div class="flex items-center justify-end mt-4">
+                <div class="flex items-center justify-end mt-4 font-sans font-medium tracking-wide">
                 {{--  <x-button class="ml-4">
                         {{ __('Register') }}
                     </x-button>--}}

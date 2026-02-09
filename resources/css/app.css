@@ -1,3 +1,19 @@
+@font-face {
+    font-family: 'Ruralmente';
+    src: url('http://localhost:8000/fonts/Ruralmente.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HechoAMano';
+    src: url('http://localhost:8000/fonts/HechoAMano-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

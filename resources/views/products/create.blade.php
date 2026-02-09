@@ -4,7 +4,7 @@
   <!-- BOOTSTRAP JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <div class="container py-5">
+  <div class="container py-5 font-sans font-medium tracking-wide">
     <div class="card shadow-sm border-0">
       <div class="card-body p-4">
         <div class="d-flex justify-content-between align-items-center mb-4">

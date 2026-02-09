@@ -16,6 +16,8 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 display: ['nunito'],
+                rural: ['Ruralmente', 'sans-serif'],
+                handmade: ['HechoAMano', 'cursive'],
             },
         },
     },

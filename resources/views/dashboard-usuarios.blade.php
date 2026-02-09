@@ -432,38 +432,54 @@
     </div>
 
     
+        @php
+            use App\Models\TablaCarrito;
+
+            $carritoCount = 0;
+            $carritoTotal = 0;
+
+            if(auth()->check()) {
+                $cart = TablaCarrito::where('id_user', auth()->id())->first();
+
+                if ($cart && is_array($cart->productosYcantidad_ids)) {
+                    foreach ($cart->productosYcantidad_ids as $item) {
+                        $carritoCount += (int) ($item['quantity'] ?? 0);
+
+                        // si el item tiene precio guardado úsalo, si no lo recalcula luego
+                        if (isset($item['price'])) {
+                            $carritoTotal += ((float)$item['price'] * (int)($item['quantity'] ?? 0));
+                        }
+                    }
+                }
+            }
+        @endphp
+
     <div class="card">
         <div class="card-icon icon-carrito">
             <i class="fas fa-shopping-cart"></i>
         </div>
-        @php
-            $carritoCount = 0;
-            $carritoTotal = 0;
-            if(session('cart')) {
-                $carrito = session('cart');
-                $carritoCount = count($carrito);
-                foreach ($carrito as $item) {
-                    $carritoTotal += ($item['price'] * $item['quantity']);
-                }
-            }
-        @endphp
+
         <div class="card-number">{{ $carritoCount }}</div>
-        <div class="card-title">Mi Carrito </div>
+
+        <div class="card-title">Mi Carrito</div>
+
         <div class="card-subtitle">
             @if($carritoCount > 0)
-                <span style="font-weight: 600; color: var(--primary-green); font-size: 1.1rem;">
+                <span style="font-weight:600;color:var(--primary-green);font-size:1.1rem;">
                     ${{ number_format($carritoTotal, 0, ',', '.') }}
                 </span>
             @else
-                <span style="color: var(--text-light);">
+                <span style="color:var(--text-light);">
                     Carrito vacío
                 </span>
             @endif
         </div>
-        <a href="{{ route('checkout') }}" class="card-btn">
+
+        <a href="{{ route('carrito.ver') }}" class="card-btn">
             <i class="fas fa-arrow-right"></i> Ver Carrito
         </a>
     </div>
+
 
     
     <div class="card card-rapida">
@@ -488,7 +504,7 @@
 </div>
 
 
-<h3 class="section-title">
+<h3 class="section-title font-sans font-semibold">
     <i class="fas fa-history" style="color: var(--primary-green);"></i> 
     Triajes Recientes
 </h3>
@@ -548,7 +564,7 @@
 @endif
 
 
-<h3 class="section-title" style="margin-top: 3rem;">
+<h3 class="section-title font-sans font-semibold" style="margin-top: 3rem;">
     <i class="fas fa-star" style="color: var(--warm-orange);"></i> 
     Productos Destacados
 </h3>
@@ -644,9 +660,32 @@
                 </p>
             </div>
             <div>
-                <a href="{{ route('checkout') }}" class="action-btn action-btn-primary" style="padding: 0.85rem 2rem; font-size: 1rem;">
-                    <i class="fas fa-credit-card"></i> Proceder al Pago
-                </a>
+                <form id="checkout-form-dashboard" action="{{ route('checkout.iniciar') }}" method="POST" style="width:100%;">
+                    @csrf
+                    <button type="button" onclick="confirmCheckoutDashboard()" class="rm-btn rm-btn-primary" style="width:100%; justify-content:center; padding: 14px 16px;">
+                        Proceder al pago
+                    </button>
+                </form>
+
+                <script>
+                    function confirmCheckoutDashboard() {
+                        Swal.fire({
+                            title: '¿Ir a pagar en Mercado Pago?',
+                            text: "Serás redirigido a la plataforma segura de Mercado Pago para completar tu compra.",
+                            icon: 'question',
+                            showCancelButton: true,
+                            confirmButtonColor: '#2E8B57',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Sí, continuar',
+                            cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                document.getElementById('checkout-form-dashboard').submit();
+                            }
+                        })
+                    }
+                </script>
+
             </div>
         </div>
     </div>

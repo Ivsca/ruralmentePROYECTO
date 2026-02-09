@@ -6,20 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up()
     {
-        Schema::table('triajes', function (Blueprint $table) {
-            $table->dropColumn('estado');
-        });
+        // Solo elimina la columna si existe
+        if (Schema::hasColumn('triajes', 'estado')) {
+            Schema::table('triajes', function (Blueprint $table) {
+                $table->dropColumn('estado');
+            });
+        }
     }
 
     public function down()
     {
-        Schema::table('triajes', function (Blueprint $table) {
-            $table->string('estado', 50)->default('pendiente');
-        });
+        // Solo la crea si NO existe (para evitar errores al hacer rollback)
+        if (!Schema::hasColumn('triajes', 'estado')) {
+            Schema::table('triajes', function (Blueprint $table) {
+                $table->string('estado', 50)->default('pendiente');
+            });
+        }
     }
 };

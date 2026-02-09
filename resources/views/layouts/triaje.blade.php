@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Resultado del triaje')</title>
-
+    
     
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    {{-- Meta Debug --}}
+    <meta name="layout-debug" content="LAYOUT_TRIAJE">
+
 </head>
-<body class="antialiased">
+<body class="antialiased min-h-screen w-full m-0">
 
     <section class="w-full min-h-screen py-20 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 relative overflow-hidden">
 

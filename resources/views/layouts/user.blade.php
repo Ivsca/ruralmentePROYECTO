@@ -10,8 +10,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <meta name="layout-debug" content="LAYOUT_APP">
+
+
     {{-- Iconos --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Scripts / Styles (Vite) -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @stack('styles')
 
@@ -489,7 +495,7 @@
 
             <div style="display:flex; align-items:center; gap:1.5rem;">
                 {{-- Carrito con nuevo diseño --}}
-                <a href="{{ route('checkout') }}" class="cart-button">
+                <a href="{{ route('carrito.ver') }}" class="cart-button">
                     <i class="fas fa-shopping-cart"></i>
                     @if($carritoCount > 0)
                         <span class="cart-badge">{{ $carritoCount }}</span>
@@ -516,5 +522,36 @@
 </div>
 
 @stack('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: "{{ session('success') }}",
+                confirmButtonColor: '#2E8B57'
+            });
+        @endif
+
+        @if(session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: "{{ session('error') }}",
+                confirmButtonColor: '#EF4444'
+            });
+        @endif
+
+        @if(session('warning'))
+            Swal.fire({
+                icon: 'warning',
+                title: 'Atención',
+                text: "{{ session('warning') }}",
+                confirmButtonColor: '#FFA726'
+            });
+        @endif
+    });
+</script>
 </body>
 </html>

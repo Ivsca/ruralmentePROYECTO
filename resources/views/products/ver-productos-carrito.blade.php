@@ -80,6 +80,7 @@
                                                id="select-{{ $p->id }}-{{ md5($colorLabel) }}"
                                                data-product-id="{{ $p->id }}"
                                                data-color="{{ $colorLabel }}"
+                                               data-talla="{{ $item->talla ?? '' }}"
                                                {{ $escojido ? 'checked' : '' }}>
                                         <label class="form-check-label ms-2" for="select-{{ $p->id }}-{{ md5($colorLabel) }}">
                                             Seleccionado
@@ -177,7 +178,32 @@
 
                     <div>
                         <a href="{{ route('products.index') }}" class="btn btn-outline-secondary me-2">Seguir comprando</a>
-                        <a href="{{ route('checkout') }}" class="btn btn-success">Proceder al pago</a>
+                        <form id="checkout-form-cart" action="{{ route('checkout.iniciar') }}" method="POST" style="width:100%;">
+                            @csrf
+                            <button type="button" onclick="confirmCheckoutCart()" class="rm-btn rm-btn-primary" style="width:100%; justify-content:center; padding: 14px 16px;">
+                                Proceder al pago
+                            </button>
+                        </form>
+
+                        <script>
+                            function confirmCheckoutCart() {
+                                Swal.fire({
+                                    title: '¿Ir a pagar en Mercado Pago?',
+                                    text: "Serás redirigido a la plataforma segura de Mercado Pago para completar tu compra.",
+                                    icon: 'question',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#2E8B57',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'Sí, continuar',
+                                    cancelButtonText: 'Cancelar'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        document.getElementById('checkout-form-cart').submit();
+                                    }
+                                })
+                            }
+                        </script>
+
                     </div>
                 </div>
             </div>
@@ -819,7 +845,7 @@ document.addEventListener('change', async function (e) {
                 'X-CSRF-TOKEN': csrfToken,
                 'Accept': 'application/json'
             },
-            body: JSON.stringify({ product_id: Number(productId), color: String(color), selected: selected })
+            body: JSON.stringify({ product_id: Number(productId), color: String(color), talla: String(talla), selected: selected })
         });
         if (!res.ok) {
             let txt = await res.text().catch(()=>'');

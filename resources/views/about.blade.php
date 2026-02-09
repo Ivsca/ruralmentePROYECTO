@@ -10,8 +10,8 @@
 
             <div class="relative z-10 container mx-auto px-4">
                 <div class="max-w-2xl mx-auto text-center">
-                    <h1 class="text-5xl md:text-6xl font-serif font-bold tracking-wide mb-6 bg-gradient-to-r from-green-800 via-emerald-700 to-teal-800 bg-clip-text text-transparent">¿Quiénes Somos?</h1>
-                    <p class="text-xl leading-relaxed text-gray-700 font-medium">
+                    <h1 class="text-5xl md:text-6xl font-rural font-bold tracking-wide mb-6 bg-gradient-to-r from-green-800 via-emerald-700 to-teal-800 bg-clip-text text-transparent">¿Quiénes Somos?</h1>
+                    <p class="text-xl text-gray-700 font-medium font-sans leading-relaxed">
                         <strong>Ruralmente</strong> impulsa el éxito personal y laboral de los agricultores colombianos, con atención psicosocial especializada y tecnología avanzada.
                     </p>
                 </div>
@@ -29,9 +29,9 @@
                             <div class="bg-emerald-100 p-4 rounded-full mb-4">
                                 <i class="fas fa-seedling text-emerald-600 text-2xl"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">¿Quiénes Somos?</h3>
+                            <h3 class="text-xl font-sans font-semibold text-gray-800 mb-3">¿Quiénes Somos?</h3>
                         </div>
-                        <p class="text-gray-600 leading-relaxed">
+                        <p class="text-gray-600 font-sans leading-relaxed">
                             Ruralmente impulsa el éxito personal y laboral de los agricultores colombianos, con atención psicosocial especializada y tecnología avanzada, mejorando productividad, relaciones y bienestar.
                         </p>
                     </div>
@@ -42,9 +42,9 @@
                             <div class="bg-amber-100 p-4 rounded-full mb-4">
                                 <i class="fas fa-brain text-amber-600 text-2xl"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">Misión</h3>
+                            <h3 class="text-xl font-sans font-semibold text-gray-800 mb-3">Misión</h3>
                         </div>
-                        <p class="text-gray-600 leading-relaxed">
+                        <p class="text-gray-600 font-sans leading-relaxed">
                             Nuestra misión es más que palabras: es un compromiso emocional. Visualizamos un agro donde la salud mental es prioridad.
                         </p>
                     </div>
@@ -55,9 +55,9 @@
                             <div class="bg-green-100 p-4 rounded-full mb-4">
                                 <i class="fas fa-map-marked-alt text-green-600 text-2xl"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">Visión</h3>
+                            <h3 class="text-xl font-sans font-semibold text-gray-800 mb-3">Visión</h3>
                         </div>
-                        <p class="text-gray-600 leading-relaxed">
+                        <p class="text-gray-600 font-sans leading-relaxed">
                             Ser referentes nacionales en acompañamiento psicosocial agrícola, usando tecnología para mejorar vidas.
                         </p>
                     </div>
@@ -68,9 +68,9 @@
                             <div class="bg-orange-100 p-4 rounded-full mb-4">
                                 <i class="fas fa-handshake text-orange-700 text-2xl"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">Valores</h3>
+                            <h3 class="text-xl font-sans font-semibold text-gray-800 mb-3">Valores</h3>
                         </div>
-                        <p class="text-gray-600 leading-relaxed">
+                        <p class="text-gray-600 font-sans leading-relaxed">
                             Valoramos respeto, empatía, solidaridad, responsabilidad y compromiso. Son pilares para fortalecer la comunidad agrícola.
                         </p>
                     </div>
@@ -84,11 +84,11 @@
             <div class="container mx-auto px-4">
                 
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-4">
+                    <h2 class="text-4xl md:text-5xl font-rural font-semibold text-gray-800 mb-4">
                         ¿Qué hacemos nosotros?
                     </h2>
                     <div class="w-24 h-1 bg-gradient-to-r from-emerald-500 to-green-500 mx-auto mb-6 rounded-full"></div>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto font-sans leading-relaxed">
                         Transformamos el agro a través del bienestar, la tecnología y la sostenibilidad.
                     </p>
                 </div>
@@ -101,7 +101,7 @@
                             <div class="bg-emerald-100 p-3 rounded-full mr-3">
                                 <i class="fas fa-chart-line text-emerald-600 text-xl"></i>
                             </div>
-                            <h3 class="text-2xl font-bold text-gray-800 text-center">
+                            <h3 class="text-2xl font-sans font-semibold text-gray-800 text-center">
                                 Impacto y Reputación
                             </h3>
                         </div>
@@ -113,7 +113,7 @@
                                 </div>
                                 <div>
                                     <h4 class="font-semibold text-gray-800 mb-1">Impacto Social Medible</h4>
-                                    <p class="text-gray-600 text-sm leading-relaxed">
+                                    <p class="text-gray-600 text-sm font-sans leading-relaxed">
                                         Accede a métricas para medir el bienestar y la transformación comunitaria generada por tu empresa.
                                     </p>
                                 </div>
@@ -125,7 +125,7 @@
                                 </div>
                                 <div>
                                     <h4 class="font-semibold text-gray-800 mb-1">Fortalecimiento Reputacional</h4>
-                                    <p class="text-gray-600 text-sm leading-relaxed">
+                                    <p class="text-gray-600 text-sm font-sans leading-relaxed">
                                         Posiciona tu empresa como un actor comprometido con el bienestar social.
                                     </p>
                                 </div>
@@ -137,7 +137,7 @@
                                 </div>
                                 <div>
                                     <h4 class="font-semibold text-gray-800 mb-1">Historias Auténticas</h4>
-                                    <p class="text-gray-600 text-sm leading-relaxed">
+                                    <p class="text-gray-600 text-sm font-sans leading-relaxed">
                                         Accede a contenido de alto valor para comunicar el impacto de tu empresa.
                                     </p>
                                 </div>
@@ -151,7 +151,7 @@
                             <div class="bg-amber-100 p-3 rounded-full mr-3">
                                 <i class="fas fa-chart-bar text-amber-600 text-xl"></i>
                             </div>
-                            <h3 class="text-2xl font-bold text-gray-800 text-center">
+                            <h3 class="text-2xl font-sans font-semibold text-gray-800 text-center">
                                 Productividad y Rentabilidad
                             </h3>
                         </div>
@@ -163,7 +163,7 @@
                                 </div>
                                 <div>
                                     <h4 class="font-semibold text-gray-800 mb-1">Factor Humano Fortalecido</h4>
-                                    <p class="text-gray-600 text-sm leading-relaxed">
+                                    <p class="text-gray-600 text-sm font-sans leading-relaxed">
                                         Mejora el bienestar físico, emocional y económico de los colaboradores y sus familias.
                                     </p>
                                 </div>
@@ -175,7 +175,7 @@
                                 </div>
                                 <div>
                                     <h4 class="font-semibold text-gray-800 mb-1">Aumento en Rendimiento</h4>
-                                    <p class="text-gray-600 text-sm leading-relaxed">
+                                    <p class="text-gray-600 text-sm font-sans leading-relaxed">
                                         Incrementa la productividad y reduce el ausentismo laboral.
                                     </p>
                                 </div>
@@ -187,7 +187,7 @@
                                 </div>
                                 <div>
                                     <h4 class="font-semibold text-gray-800 mb-1">Sostenibilidad Rentable</h4>
-                                    <p class="text-gray-600 text-sm leading-relaxed">
+                                    <p class="text-gray-600 text-sm font-sans leading-relaxed">
                                         Implementa iniciativas de bienestar con retorno económico y alto impacto social.
                                     </p>
                                 </div>
@@ -199,10 +199,10 @@
                 
                 <div class="mt-16 bg-gradient-to-r from-emerald-50 to-green-50 rounded-2xl shadow-lg p-8 max-w-4xl mx-auto">
                     <div class="text-center">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-3">
+                        <h3 class="text-2xl font-sans font-semibold text-gray-800 mb-3">
                             ¿Tu empresa quiere patrocinar estos programas?
                         </h3>
-                        <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                        <p class="text-gray-600 mb-6 max-w-2xl mx-auto font-sans leading-relaxed">
                             Únete a nuestra misión de transformar el agro colombiano. Juntos podemos crear un impacto positivo y duradero.
                         </p>
 
@@ -223,8 +223,8 @@
             <div class="container mx-auto px-4">
                 <div class="max-w-4xl mx-auto">
                     <div class="text-center mb-12">
-                        <h2 class="text-3xl font-bold text-gray-800 mb-3">Contáctanos</h2>
-                        <p class="text-gray-600">Estamos aquí para transformar el agro contigo</p>
+                        <h2 class="text-3xl font-rural font-semibold text-gray-800 mb-3">Contáctanos</h2>
+                        <p class="text-gray-600 font-sans leading-relaxed">Estamos aquí para transformar el agro contigo</p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -234,9 +234,9 @@
                                     <i class="fas fa-map-marker-alt text-emerald-600"></i>
                                 </div>
                                 <div>
-                                    <h3 class="font-bold text-gray-800 text-lg mb-1">Ubicación</h3>
-                                    <p class="text-gray-600">Colombia</p>
-                                    <p class="text-emerald-600 font-medium">Cobertura Nacional</p>
+                                    <h3 class="font-sans font-semibold text-gray-800 text-lg mb-1">Ubicación</h3>
+                                    <p class="text-gray-600 font-sans leading-relaxed">Colombia</p>
+                                    <p class="text-emerald-600 font-medium font-sans leading-relaxed">Cobertura Nacional</p>
                                 </div>
                             </div>
                         </div>
@@ -247,9 +247,9 @@
                                     <i class="fas fa-phone text-blue-600"></i>
                                 </div>
                                 <div>
-                                    <h3 class="font-bold text-gray-800 text-lg mb-1">Teléfono</h3>
-                                    <p class="text-gray-600">+57 3165771956</p>
-                                    <p class="text-gray-500 text-sm mt-1">Lunes a viernes 8:00 AM - 6:00 PM</p>
+                                    <h3 class="font-sans font-semibold text-gray-800 text-lg mb-1">Teléfono</h3>
+                                    <p class="text-gray-600 font-sans leading-relaxed">+57 3165771956</p>
+                                    <p class="text-gray-500 text-sm mt-1 font-sans leading-relaxed">Lunes a viernes 8:00 AM - 6:00 PM</p>
                                 </div>
                             </div>
                         </div>

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex justify-center">
+    <div class="flex justify-center font-sans font-medium tracking-wide">
         <div class="flex gap-4 w-11/12 mt-3">
             <div class="w-3/4">
                 <p class="font-bold underline text-2xl uppercase">Datos personales</p>

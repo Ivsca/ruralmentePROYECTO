@@ -384,7 +384,7 @@
             @foreach($triajes as $triaje)
                 <div class="triaje-item">
                     <div class="triaje-header">
-                        <div class="triaje-info">
+                        <div class="triaje-info font-sans font-semibold">
                             <h3>{{ $triaje->nombre_paciente ?? 'Triaje psicológico' }}</h3>
                             <div class="triaje-meta">
                                 <span class="meta-item">

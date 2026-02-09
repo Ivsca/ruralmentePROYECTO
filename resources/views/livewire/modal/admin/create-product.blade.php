@@ -1,4 +1,4 @@
-<div>
+<div class="font-sans font-medium tracking-wide">
     <button class="bg-cyan-800 px-4 py-2 rounded-md text-white shadow-lg shadow-gray-400"
         wire:click="set('openProduct', true)"><i class="fa-solid fa-user-plus mr-1"></i> Añadir Productos</button>
 

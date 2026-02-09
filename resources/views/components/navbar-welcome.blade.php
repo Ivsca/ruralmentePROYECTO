@@ -7,10 +7,10 @@
                 <img id="logo" class="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 object-contain" 
                      src="{{ asset('logos/Ruralmente_banco.png') }}" alt="Ruralmente">
                 <div class="flex flex-col min-w-0">
-                    <span class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 leading-tight tracking-tight truncate">
+                    <span class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-sans font-medium tracking-wide text-gray-800 leading-tight tracking-tight truncate">
                         Ruralmente
                     </span>
-                    <span class="text-xs sm:text-sm text-[#8B4513] font-handwriting mt-0.5 truncate">
+                    <span class="text-xs sm:text-sm text-[#8B4513] font-sans font-medium tracking-wide mt-0.5 truncate">
                         Bienestar Psicosocial Rural
                     </span>
                 </div>
@@ -20,14 +20,14 @@
             <ul class="hidden lg:flex items-center space-x-4 xl:space-x-6">
                 <li class="group relative">
                     <a href="{{ route('about') }}"
-                       class="text-gray-700 hover:text-emerald-600 font-semibold py-2 px-3 xl:px-4 rounded-lg transition-colors duration-300 text-sm xl:text-base whitespace-nowrap">
+                       class="text-gray-700 hover:text-emerald-600 font-sans font-medium tracking-wide py-2 px-3 xl:px-4 rounded-lg transition-colors duration-300 text-sm xl:text-base whitespace-nowrap">
                         Sobre Nosotros
                     </a>
                 </li>
 
                 <li class="group relative">
                     <a href="{{ route('ruralServicios') }}" 
-                       class="text-gray-700 hover:text-emerald-600 font-semibold py-2 px-3 xl:px-4 rounded-lg transition-colors duration-300 text-sm xl:text-base whitespace-nowrap">
+                       class="text-gray-700 hover:text-emerald-600 font-sans font-medium tracking-wide py-2 px-3 xl:px-4 rounded-lg transition-colors duration-300 text-sm xl:text-base whitespace-nowrap">
                         Servicios
                     </a>
                     <div class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-gray-200">
@@ -40,7 +40,7 @@
                 </li>
                 <li class="group relative">
                     <a href="{{ route('mis-product') }}" 
-                       class="text-gray-700 hover:text-emerald-600 font-semibold py-2 px-3 xl:px-4 rounded-lg transition-colors duration-300 text-sm xl:text-base whitespace-nowrap">
+                       class="text-gray-700 hover:text-emerald-600 font-sans font-medium tracking-wide py-2 px-3 xl:px-4 rounded-lg transition-colors duration-300 text-sm xl:text-base whitespace-nowrap">
                         Productos
                     </a>
                 </li>
@@ -50,7 +50,7 @@
             <div class="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
                 
                 <a id="whatsapp" href="https://wa.me/573165771956" target="_blank"
-                   class="text-emerald-600 hover:text-white hover:bg-emerald-600 p-2 sm:px-3 sm:py-2 rounded-full transition-all duration-300 flex items-center space-x-2"
+                   class="text-emerald-600 hover:text-white hover:bg-emerald-600 p-2 sm:px-3 sm:py-2 rounded-full transition-all duration-300 flex items-center space-x-2 font-sans font-medium tracking-wide"
                    aria-label="Contáctanos por WhatsApp">
                     <i class="fa-brands fa-whatsapp text-lg sm:text-xl"></i>
                     <span class="hidden md:inline text-sm font-semibold">Contáctanos</span>
@@ -64,13 +64,13 @@
                     <div class="z-10 flex items-center">
                         @auth
                             <a href="{{ route('dashboard') }}" 
-                               class="bg-emerald-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg font-semibold hover:bg-emerald-700 transition-all duration-300 text-xs sm:text-sm shadow-sm whitespace-nowrap">
+                               class="bg-emerald-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg font-sans font-medium tracking-wide hover:bg-emerald-700 transition-all duration-300 text-xs sm:text-sm shadow-sm whitespace-nowrap">
                                 <span class="hidden sm:inline">Mi perfil</span>
                                 <span class="sm:hidden"><i class="fas fa-user"></i></span>
                             </a>
                         @else
                             <a href="{{ route('login') }}" 
-                               class="bg-emerald-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg font-semibold hover:bg-emerald-700 transition-all duration-300 text-xs sm:text-sm shadow-sm whitespace-nowrap">
+                               class="bg-emerald-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg font-sans font-medium tracking-wide hover:bg-emerald-700 transition-all duration-300 text-xs sm:text-sm shadow-sm whitespace-nowrap">
                                 <span class="hidden sm:inline">Iniciar sesión</span>
                                 <span class="sm:hidden"><i class="fas fa-sign-in-alt"></i></span>
                             </a>
@@ -91,7 +91,7 @@
         <div id="mobile-menu" class="lg:hidden hidden mt-4 bg-white rounded-lg shadow-xl border border-gray-200 p-4 animate-fadeIn">
             <div class="flex flex-col space-y-2">
                 <a href="{{ route('about') }}" 
-                   class="text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-semibold py-2 px-4 rounded-lg transition-all duration-300 flex items-center">
+                   class="text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-sans font-medium tracking-wide py-2 px-4 rounded-lg transition-all duration-300 flex items-center">
                     <i class="fas fa-info-circle mr-3 text-emerald-500"></i>
                     Sobre Nosotros
                 </a>
@@ -99,7 +99,7 @@
                 
                 <div class="relative">
                     <a href="{{ route('ruralServicios') }}" 
-                       class="text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-semibold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-between">
+                       class="text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-sans font-medium tracking-wide py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-between">
                         <span class="flex items-center">
                             <i class="fas fa-hands-helping mr-3 text-emerald-500"></i>
                             Servicios
@@ -123,7 +123,7 @@
                 
                 <div class="relative">
                     <a href="#" 
-                       class="text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-semibold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-between">
+                       class="text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-sans font-medium tracking-wide py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-between">
                         <span class="flex items-center">
                             <i class="fas fa-shopping-bag mr-3 text-emerald-500"></i>
                             Productos
@@ -156,7 +156,7 @@
                 
                 
                 <a href="https://wa.me/573008476257" target="_blank"
-                   class="bg-emerald-600 text-white px-4 py-2.5 rounded-lg font-semibold text-center hover:bg-emerald-700 transition-all duration-300 mt-2 flex items-center justify-center">
+                   class="bg-emerald-600 text-white px-4 py-2.5 rounded-lg font-sans font-medium tracking-wide text-center hover:bg-emerald-700 transition-all duration-300 mt-2 flex items-center justify-center">
                     <i class="fa-brands fa-whatsapp mr-2 text-lg"></i>
                     Contáctanos por WhatsApp
                 </a>
@@ -165,13 +165,13 @@
                 <div class="pt-3 border-t border-gray-200">
                     @auth
                         <a href="{{ route('dashboard') }}" 
-                           class="text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-semibold py-2 px-4 rounded-lg transition-all duration-300 flex items-center">
+                           class="text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-sans font-medium tracking-wide py-2 px-4 rounded-lg transition-all duration-300 flex items-center">
                             <i class="fas fa-user-circle mr-3 text-emerald-500"></i>
                             Mi perfil
                         </a>
                     @else
                         <a href="{{ route('login') }}" 
-                           class="text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-semibold py-2 px-4 rounded-lg transition-all duration-300 flex items-center">
+                           class="text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 font-sans font-medium tracking-wide py-2 px-4 rounded-lg transition-all duration-300 flex items-center">
                             <i class="fas fa-sign-in-alt mr-3 text-emerald-500"></i>
                             Iniciar sesión
                         </a>

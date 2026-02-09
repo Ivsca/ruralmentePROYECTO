@@ -10,10 +10,10 @@
             
             <div class="relative z-10 container mx-auto px-4">
                 <div class="max-w-2xl mx-auto text-center">
-                    <h1 class="text-5xl md:text-6xl font-serif font-bold tracking-wide mb-6 bg-gradient-to-r from-green-800 via-emerald-700 to-teal-800 bg-clip-text text-transparent">
+                    <h1 class="text-5xl md:text-6xl font-rural font-bold tracking-wide mb-6 bg-gradient-to-r from-green-800 via-emerald-700 to-teal-800 bg-clip-text text-transparent">
                         Soluciones integrales de bienestar
                     </h1>
-                    <p class="text-xl leading-relaxed text-gray-700 font-medium">
+                    <p class="text-xl font-sans leading-relaxed text-gray-700 font-medium">
                         Servicios especializados diseñados para mejorar la salud mental y el bienestar psicosocial de las comunidades campesinas.
                     </p>
                 </div>
@@ -23,7 +23,7 @@
         
         <section class="w-full py-20 bg-gradient-to-b from-white to-gray-50/80">
             <div class="container mx-auto px-6 md:px-12 lg:px-16 max-w-7xl">
-                <h2 class="sr-only">Servicios de Salud Mental de Ruralmente</h2>
+                <h2 class="sr-only font-rural font-semibold">Servicios de Salud Mental de Ruralmente</h2>
                 
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
@@ -33,8 +33,8 @@
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-emerald-400"></div>
                         <div class="absolute -right-10 -top-10 w-20 h-20 bg-green-100/30 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
                         
-                        <h3 class="text-xl font-bold text-gray-900 mb-4 relative z-10">Diagnóstico de Entrada y Salida</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed flex-grow relative z-10">
+                        <h3 class="text-xl font-sans font-semibold text-gray-900 mb-4 relative z-10 ">Diagnóstico de Entrada y Salida</h3>
+                        <p class="text-gray-600 mb-6 font-sans leading-relaxed flex-grow relative z-10">
                             Valoración psicológica inicial y de cierre para evaluar el impacto de la intervención.
                         </p>
                         <ul class="space-y-3 relative z-10">
@@ -78,8 +78,8 @@
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400"></div>
                         <div class="absolute -right-10 -top-10 w-20 h-20 bg-blue-100/30 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
                         
-                        <h3 class="text-xl font-bold text-gray-900 mb-4 relative z-10">Teleatención en Salud Mental</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed flex-grow relative z-10">
+                        <h3 class="text-xl font-sans font-semibold text-gray-900 mb-4 relative z-10">Teleatención en Salud Mental</h3>
+                        <p class="text-gray-600 mb-6 font-sans leading-relaxed flex-grow relative z-10">
                             Atención psicológica individual mediante telemedicina desde cualquier ubicación.
                         </p>
                         <ul class="space-y-3 relative z-10">
@@ -131,8 +131,8 @@
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-500 to-yellow-400"></div>
                         <div class="absolute -right-10 -top-10 w-20 h-20 bg-amber-100/30 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
                         
-                        <h3 class="text-xl font-bold text-gray-900 mb-4 relative z-10">Talleres Psicoeducativos en Comunidad</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed flex-grow relative z-10">
+                        <h3 class="text-xl font-sans font-semibold text-gray-900 mb-4 relative z-10">Talleres Psicoeducativos en Comunidad</h3>
+                        <p class="text-gray-600 mb-6 font-sans leading-relaxed flex-grow relative z-10">
                             Visitas presenciales a comunidades campesinas para fortalecer habilidades emocionales y psicosociales.
                         </p>
                         <ul class="space-y-3 relative z-10">
@@ -184,8 +184,8 @@
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-indigo-400"></div>
                         <div class="absolute -right-10 -top-10 w-20 h-20 bg-purple-100/30 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
                         
-                        <h3 class="text-xl font-bold text-gray-900 mb-4 relative z-10">Talleres de Desarrollo Comunitario</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed flex-grow relative z-10">
+                        <h3 class="text-xl font-sans font-semibold text-gray-900 mb-4 relative z-10">Talleres de Desarrollo Comunitario</h3>
+                        <p class="text-gray-600 mb-6 font-sans leading-relaxed flex-grow relative z-10">
                             Programas diseñados para fortalecer el capital social, la organización comunitaria y el desarrollo sostenible.
                         </p>
                         <ul class="space-y-3 relative z-10">
@@ -253,12 +253,12 @@
             <div class="w-full py-24 relative z-10">
                 <div class="container mx-auto px-4">
                     <header class="max-w-4xl mx-auto text-center">
-                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight mb-6">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-rural font-bold tracking-tight mb-6">
                             <span class="bg-gradient-to-r from-green-800 via-emerald-700 to-teal-700 bg-clip-text text-transparent">
                                 Recursos para el bienestar integral
                             </span>
                         </h1>
-                        <p class="text-xl md:text-2xl leading-relaxed text-gray-700 font-light">
+                        <p class="text-xl md:text-2xl font-sans leading-relaxed text-gray-700 font-light">
                             Herramientas innovadoras diseñadas para promover el autocuidado y el bienestar emocional en comunidades.
                         </p>
                     </header>
@@ -278,13 +278,13 @@
                         <span class="text-sm font-semibold text-green-800">Destacado</span>
                     </div>
                     
-                    <h3 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6 relative z-10">Tarjetas Psicoeducativas</h3>
-                    <p class="text-lg text-gray-600 leading-relaxed mb-6 relative z-10">
+                    <h3 class="text-2xl lg:text-3xl font-sans font-semibold text-gray-900 mb-6 relative z-10">Tarjetas Psicoeducativas</h3>
+                    <p class="text-lg text-gray-600 font-sans leading-relaxed mb-6 relative z-10">
                         Material didáctico visual diseñado para enseñar sobre salud mental de manera asequible y comprensible.
                     </p>
                     
                     <div class="mt-6 p-6 bg-white/60 rounded-2xl border border-green-200/50 backdrop-blur-sm shadow-sm relative z-10">
-                        <p class="text-gray-700 text-base leading-relaxed font-medium mb-4">
+                        <p class="text-gray-700 text-base font-sans leading-relaxed font-medium mb-4">
                             <span class="text-green-700">Temas incluidos:</span>
                         </p>
                         <div class="space-y-3">
@@ -330,13 +330,13 @@
                         <span class="text-sm font-semibold text-amber-800">Innovador</span>
                     </div>
                     
-                    <h3 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6 relative z-10">Remedios Benditos</h3>
-                    <p class="text-lg text-gray-600 leading-relaxed mb-6 relative z-10">
+                    <h3 class="text-2xl lg:text-3xl font-sans font-semibold text-gray-900 mb-6 relative z-10">Remedios Benditos</h3>
+                    <p class="text-lg text-gray-600 font-sans leading-relaxed mb-6 relative z-10">
                         Audios personalizados enviados individualmente a cada participante con estrategias prácticas de manejo emocional y psicosocial.
                     </p>
                     
                     <div class="mt-6 p-6 bg-white/60 rounded-2xl border border-amber-200/50 backdrop-blur-sm shadow-sm relative z-10">
-                        <p class="text-gray-700 text-base leading-relaxed font-medium mb-4">
+                        <p class="text-gray-700 text-base font-sans leading-relaxed font-medium mb-4">
                             <span class="text-amber-700">Áreas de Trabajo:</span>
                         </p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -383,16 +383,6 @@
         </section>
 
         
-        <div id="unpin-popup" class="fixed top-6 right-6 bg-gradient-to-r from-gray-900 to-slate-800 text-white px-6 py-4 rounded-2xl shadow-2xl z-50 transition-all duration-500 border border-gray-700 backdrop-blur-sm">
-            <div class="flex items-center justify-between">
-                <span class="text-sm font-medium text-gray-100">Unpin Ruralmente Colombia's presentation from your main screen.</span>
-                <button onclick="closePopup()" class="ml-4 text-gray-400 hover:text-white transition-colors duration-300 hover:scale-110" aria-label="Cerrar notificación">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
 
         <script>
             

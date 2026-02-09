@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\EventCalendarController;
+
 use App\Http\Controllers\TriajeController;
 use App\Livewire\Admin\AdminIndex;
 use App\Livewire\Admin\ProductAdmin;
@@ -18,6 +18,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\Admin\TriajeController as AdminTriajeController;
 use App\Http\Controllers\CotizacionController;
+use App\Http\Controllers\Admin\PedidoController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\MercadoPagoWebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,11 +93,6 @@ Route::get('/searchProducts', [ProductController::class, 'searchProducts'])->nam
 
 
 
-// Sistema de pago
-Route::get('/Sistema_de_pago/{id}', [SystemPago::class, 'render'])->name('pago');
-
-// Eventos de pago
-Route::post('/Pago_Evento/{id}', [EventCalendarController::class, 'view'])->middleware('auth')->name('ViewEventPay');
 
 
 // RUTAS PROTEGIDAS (requieren autenticación)
@@ -110,8 +108,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         ->name('carrito.toggleSelected');
     Route::get('/carrito/cantidad/{id}', [CartController::class, 'cantidad'])->name('carrito.cantidad');
     // Checkout
-    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
-    Route::get('/cantidad-productos-carrito/{id}', [CartController::class, 'cantidad'])->name('carrito.cantidad');
+    // Checkout Mercado Pago
+    Route::post('/checkout/iniciar', [CheckoutController::class, 'iniciar'])->name('checkout.iniciar');
+    Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+    Route::get('/checkout/pending', [CheckoutController::class, 'pending'])->name('checkout.pending');
+    Route::get('/checkout/failure', [CheckoutController::class, 'failure'])->name('checkout.failure');
 
 
     
@@ -152,6 +153,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/productos/vendidos', [ProductAdminController::class, 'sold'])->name('products.sold');
         Route::get('/exportar/productos', [ProductAdminController::class, 'export'])->name('export.products');
         
+        Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
+
         
         // GESTIÓN DE TRIAJES PARA ADMINISTRADORES (todos los triajes)
         
@@ -182,10 +185,21 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/productos/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
         Route::put('/productos/{id}', [ProductController::class, 'update'])->name('products.update');
         Route::delete('/productos/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+        //Pedidos
+        Route::get('/pedidos', [PedidoController::class, 'index'])
+            ->name('pedidos.index');
+
+        Route::get('/pedidos/{pedido}', [PedidoController::class, 'show'])
+            ->name('pedidos.show');
+
+        Route::post('/pedidos/{pedido}/estado', [PedidoController::class, 'updateEstado'])
+            ->name('pedidos.estado');
+
     });
-    
-    
-    
+
+
+        
     // Rutas por roles específicos
     Route::middleware(['role:admin'])->group(function () {
         Route::get('/admin/dashboard-old', function () {
@@ -200,9 +214,17 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     });
 });
 
+
+// ========================
+// WEBHOOK MERCADO PAGO (PUBLICO)
+// ========================
+Route::post('/mercadopago/webhook', [MercadoPagoWebhookController::class, 'handle'])
+    ->name('webhook.mercadopago');
+
+
 // ============================================================================
 // RUTAS DE FALLBACK
 // ============================================================================
 Route::fallback(function () {
-    return response()->view('errors.404', [], 404);
+    abort(404);
 });

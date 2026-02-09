@@ -14,11 +14,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="{{ asset('logos/Ruralmente_logo_negro.png') }}" type="image/x-icon">
 
-    <!-- Scripts -->
+    <!-- Scripts / Styles (Vite) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Styles -->
     @livewireStyles
+
+    {{-- Meta Debug --}}
+    <meta name="layout-debug" content="LAYOUT_GUEST">
 
     <style>
         body {
@@ -166,7 +169,6 @@
         <script>
             Swal.fire({
                 title: "{{ session('success') }}",
-                text: "Nos estaremos comunicando contigo en los próximos días.",
                 icon: "success",
                 confirmButtonText: "Aceptar",
                 customClass: {

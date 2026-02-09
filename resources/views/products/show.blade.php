@@ -59,6 +59,25 @@
         color: #059669;
         margin-bottom: 0.5rem;
     }
+
+    .swal-login-confirm {
+      background-color: #15803d !important; /* verde */
+      color: white !important;
+      border: none !important;
+    }
+
+    .swal-login-cancel {
+      background-color: #e5e7eb !important; /* gris */
+      color: #111827 !important;
+      border: none !important;
+    }
+
+    /* Mantener mismo color en hover */
+    .swal-login-confirm:hover,
+    .swal-login-cancel:hover {
+      background-color: inherit !important;
+      filter: brightness(0.95);
+    }
     
     @media (max-width: 768px) {
         .products-grid-shein {
@@ -115,7 +134,7 @@
             <div>
               <span class="font-semibold text-gray-900">Precio:</span><br>
               <span class="text-2xl font-bold text-green-600">
-                $ {{ number_format($product->price ?? 0, 2) }}
+                $ {{ number_format($product->price ?? 0, 0, ',', '.') }}
               </span>
             </div>
 
@@ -183,50 +202,12 @@
               </button>
             </div>
           </form>
-
-          <!-- AJAX -->
-          <script>
-            (function () {
-              const form = document.getElementById("add-to-cart-form");
-              if (!form) return;
-
-              form.addEventListener("submit", async function (e) {
-                e.preventDefault();
-
-                const url = form.action;
-                const data = new FormData(form);
-
-                try {
-                  const response = await fetch(url, {
-                    method: "POST",
-                    headers: {
-                      "X-Requested-With": "XMLHttpRequest",
-                      "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value
-                    },
-                    body: data
-                  });
-
-                  const json = await response.json();
-
-                  if (!response.ok) {
-                    alert(json?.message || "Error al agregar al carrito.");
-                    return;
-                  }
-
-                  alert("Agregado al carrito ✓");
-                } catch (err) {
-                  alert("Error de red.");
-                }
-              });
-            })();
-          </script>
-
         </div>
       </div>
 
       <!-- Productos relacionados -->
       <div class="related-products-section">
-        <h2 class="section-title">Productos que podrían interesarte</h2>
+        <h2 class="section-title font-rural font-semibold">Productos que podrían interesarte</h2>
 
         <div class="products-grid-shein">
           @php
@@ -263,4 +244,102 @@
 
     </div>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    (function () {
+      const form = document.getElementById("add-to-cart-form");
+      if (!form) return;
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const url = form.action;
+        const data = new FormData(form);
+        const loginUrl = "{{ route('login') }}";
+        const cartUrl  = "{{ route('carrito.ver') }}";
+
+        try {
+          const response = await fetch(url, {
+            method: "POST",
+            headers: {
+              "X-Requested-With": "XMLHttpRequest",
+              "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
+              "Accept": "application/json"
+            },
+            body: data
+          });
+
+          // Si el servidor devuelve HTML (por ejemplo redirect), intentamos leer como texto
+          const contentType = response.headers.get("content-type") || "";
+          const payload = contentType.includes("application/json")
+            ? await response.json()
+            : { message: await response.text() };
+
+          // 401 -> no logueado
+          if (response.status === 401) {
+            Swal.fire({
+                  icon: "warning",
+                  title: "No has iniciado sesión",
+                  text: "Inicia sesión para agregar productos al carrito.",
+                  showCancelButton: true,
+                  confirmButtonText: "Iniciar sesión",
+                  cancelButtonText: "Cancelar",
+                  customClass: {
+                    confirmButton: "swal-login-confirm",
+                    cancelButton: "swal-login-cancel"
+                  },
+                  buttonsStyling: false
+                });
+            }).then((result) => {
+              if (result.isConfirmed) window.location.href = loginUrl;
+            });
+            return;
+          }
+
+          // Errores de validación u otros
+          if (!response.ok) {
+            // si viene message
+            let msg = payload?.message || "Error al agregar al carrito.";
+
+            // si viene errors (validación laravel)
+            if (payload?.errors) {
+              const firstKey = Object.keys(payload.errors)[0];
+              if (firstKey && payload.errors[firstKey]?.[0]) msg = payload.errors[firstKey][0];
+            }
+
+            Swal.fire({
+              icon: "error",
+              title: "No se pudo agregar",
+              text: msg
+            });
+            return;
+          }
+
+          // OK
+          Swal.fire({
+            icon: "success",
+            title: "Agregado al carrito",
+            text: "Producto agregado correctamente",
+            showCancelButton: true,
+            confirmButtonText: "Ver carrito",
+            cancelButtonText: "Seguir viendo",
+          }).then((result) => {
+            if (result.isConfirmed) window.location.href = cartUrl;
+          });
+
+          // (Opcional) si tienes contador flotante, actualízalo aquí con payload.count
+          // document.querySelector('.contador-carrito').textContent = payload.count ?? 0;
+
+        } catch (err) {
+          Swal.fire({
+            icon: "error",
+            title: "Error de red",
+            text: "No se pudo conectar. Intenta de nuevo."
+          });
+        }
+      });
+    })();
+  </script>
 </x-guest-layout>

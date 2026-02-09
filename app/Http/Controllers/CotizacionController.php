@@ -21,7 +21,7 @@ class CotizacionController extends Controller
             'politicas' => 'accepted',
         ]);
 
-        $adminEmail = "pruebas12sof@gmail.com"; 
+        $adminEmail = "campesinosfelices@ruralmente.com.co"; 
 
         Mail::to($adminEmail)->send(new CotizacionMail($data));
 

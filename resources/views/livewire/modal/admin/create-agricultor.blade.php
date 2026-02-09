@@ -31,7 +31,7 @@
                     
                 </div>
                 <div class="my-5">
-                    <h2 class="text-xl font-bold text-center underline underline-offset-2">Datos personales del agricultor</h2>
+                    <h2 class="text-xl font-rural font-bold text-center underline underline-offset-2">Datos personales del agricultor</h2>
                 </div>
                 <div class="grid grid-cols-4 gap-2 my-2">
                     <div>

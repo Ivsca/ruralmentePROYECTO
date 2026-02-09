@@ -1,13 +1,16 @@
 <x-guest-layout>
     <x-navbar-welcome :seeButton="2" :register="false"/>
 
-    <!-- Barra flotante del carrito -->
-    <div class="carrito-fijo">
-        <div class="carrito-icono">
-            <i class="bi bi-cart3"></i>
-            <span class="contador-carrito">0</span>
-        </div>
-    </div>
+   <!-- Barra flotante del carrito -->
+<div class="carrito-fijo">
+    <a href="{{ route('carrito.ver') }}" class="carrito-icono text-decoration-none">
+        <i class="bi bi-cart3"></i>
+        <span class="contador-carrito" id="floating-cart-count">
+            {{ $cartCount ?? 0 }}
+        </span>
+    </a>
+</div>
+
 
     @php
         // Obtén el id del usuario (null si no está autenticado)
@@ -480,7 +483,7 @@
         <div class="max-w-7xl mx-auto mb-10 px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center mb-8">
                 <div class="text-center md:text-left mb-6 md:mb-0">
-                    <h1 class="text-4xl md:text-5xl font-serif font-bold tracking-wide mb-4 bg-gradient-to-r from-green-800 via-emerald-700 to-teal-800 bg-clip-text text-transparent">
+                    <h1 class="text-4xl md:text-5xl font-rural font-bold tracking-wide mb-4 bg-gradient-to-r from-green-800 via-emerald-700 to-teal-800 bg-clip-text text-transparent">
                         Nuestros Productos
                     </h1>
                     <p class="text-gray-600 text-lg max-w-2xl">

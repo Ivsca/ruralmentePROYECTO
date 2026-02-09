@@ -3,7 +3,7 @@
 
         <div class="flex justify-center mb-6">
             <a href="{{ route('login') }}"
-               class="text-sm font-semibold text-indigo-500 hover:text-indigo-700 hover:underline transition-all duration-200">
+               class="text-sm font-sans font-medium tracking-wide text-indigo-500 hover:text-indigo-700 hover:underline transition-all duration-200">
                 ← Volver al inicio de sesión
             </a>
         </div>
@@ -24,7 +24,7 @@
             </div>
 
 
-            <div class="mt-4">
+            <div class="mt-4 font-sans font-medium tracking-wide">
                 <x-label for="document_type" value="Tipo de documento" />
 
                 <select id="document_type" name="document_type"
@@ -41,13 +41,13 @@
                 </select>
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4 font-sans font-medium tracking-wide">
                 <x-label for="document" value="Número de documento" />
                 <x-input id="document" class="block mt-1 w-full" type="text"
                     name="document" :value="old('document')" required autocomplete="off" />
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4 font-sans font-medium tracking-wide">
                 <x-label for="phone" value="Teléfono" />
 
                 <div class="flex">
@@ -62,28 +62,28 @@
                 </div>
             </div>
            
-            <div class="mt-4">
+            <div class="mt-4 font-sans font-medium tracking-wide">
                 <x-label for="address" value="Dirección" />
                 <x-input id="address" class="block mt-1 w-full" type="text"
                     name="address" :value="old('address')" required autocomplete="street-address" />
             </div>
 
 
-            <div class="mt-4">
+            <div class="mt-4 font-sans font-medium tracking-wide">
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email"
                     name="email" :value="old('email')" required autocomplete="username" />
             </div>
 
             
-            <div class="mt-4">
+            <div class="mt-4 font-sans font-medium tracking-wide">
                 <x-label for="password" value="{{ __('Password') }}" />
                 <x-input id="password" class="block mt-1 w-full" type="password"
                     name="password" required autocomplete="new-password" />
             </div>
 
             
-            <div class="mt-4">
+            <div class="mt-4 font-sans font-medium tracking-wide">
                 <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                 <x-input id="password_confirmation" class="block mt-1 w-full"
                     type="password" name="password_confirmation" required autocomplete="new-password" />
@@ -91,7 +91,7 @@
 
             
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
+                <div class="mt-4 font-sans font-medium tracking-wide">
                     <x-label for="terms">
                         <div class="flex items-center">
                             <x-checkbox name="terms" id="terms" required />
@@ -111,13 +111,13 @@
             @endif
 
             
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-end mt-4 font-sans font-medium tracking-wide">
                 <a href="{{ route('login') }}" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    {{ __('Already registered?') }}
+                    {{ __('¿Ya estás registrado?') }}
                 </a>
 
-                <x-button class="ml-4">
-                    {{ __('Register') }}
+                <x-button class="ml-4 font-sans font-medium tracking-wide">
+                    {{ __('Registrarse') }}
                 </x-button>
             </div>
         </form>

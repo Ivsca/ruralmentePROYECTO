@@ -6,6 +6,11 @@
 
 @push('styles')
 <style>
+
+    html, body {
+        overflow-x: hidden;
+    }
+
     :root {
         --card-radius: 20px;
         --card-padding: 1.75rem;
@@ -84,6 +89,17 @@
         gap: 1.5rem;
         margin-bottom: 2.5rem;
     }
+
+    .main-content{
+        flex: 1;
+        margin-left: var(--sidebar-width);
+        transition: margin-left 0.3s ease;
+        min-height: 100vh;
+
+        min-width: 0;          /* CLAVE: permite que flex-item encoja */
+        overflow-x: hidden;    /* evita desbordes internos */
+    }
+
 
     .stat-box {
         background: var(--bg-card);
@@ -191,6 +207,36 @@
         gap: 1.75rem;
         margin-bottom: 2.5rem;
     }
+
+    .content-wrapper{
+        padding: 2.5rem;
+        min-height: calc(100vh - var(--header-height));
+        min-width: 0;          /* CLAVE para grids adentro */
+    }
+
+    /* CLAVE: evita que los items del grid obliguen overflow */
+    .quick-actions,
+    .main-stats,
+    .content-grid,
+    .cards-grid {
+    min-width: 0;
+    }
+
+    .dashboard-card,
+    .chart-container,
+    .stat-box {
+    min-width: 0;
+    }
+
+    /* Si algún texto largo (email, etc.) empuja el ancho */
+    .item-title,
+    .item-subtitle {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    }
+
+
 
     @media (max-width: 1024px) {
         .content-grid {
@@ -427,7 +473,156 @@
         .chart-wrapper {
             height: 280px;
         }
+
+        
     }
+
+    /* === Responsive para pantallas pequeñas/laptops (1366x768, 1280x720, etc.) === */
+    @media (max-width: 1200px) {
+        :root {
+            --card-radius: 16px;
+            --card-padding: 1.25rem;
+        }
+
+        .quick-actions {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .action-btn {
+            padding: 1rem;
+            gap: 0.75rem;
+        }
+
+        .action-icon {
+            width: 42px;
+            height: 42px;
+            font-size: 1.05rem;
+        }
+
+        .action-text {
+            font-size: 0.9rem;
+        }
+
+        .main-stats {
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .stat-icon {
+            width: 52px;
+            height: 52px;
+            font-size: 1.25rem;
+        }
+
+        .stat-value {
+            font-size: 2.05rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+        }
+
+        .card-header {
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+        }
+
+        .list-item {
+            padding: 0.8rem 0;
+            gap: 0.75rem;
+        }
+
+        .item-icon {
+            width: 42px;
+            height: 42px;
+            font-size: 1rem;
+        }
+
+        .item-title {
+            font-size: 0.9rem;
+        }
+
+        .item-subtitle {
+            font-size: 0.78rem;
+        }
+
+        .item-badge {
+            font-size: 0.72rem;
+            padding: 0.35rem 0.7rem;
+        }
+
+        .chart-wrapper {
+            height: 280px;
+        }
+
+        .cards-grid {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.25rem;
+        }
+    }
+
+    /* === Extra: pantallas MUY pequeñas en alto (laptops 768px de alto) === */
+    @media (max-height: 780px) {
+        .chart-wrapper {
+            height: 240px;
+        }
+        .empty-state {
+            padding: 2rem 1.5rem;
+        }
+    }
+
+    /* En pantallas no tan anchas, dale más espacio a la columna derecha */
+    @media (max-width: 1400px) {
+    .content-grid{
+        grid-template-columns: 1.6fr 1.2fr; /* antes 2fr 1fr */
+    }
+    }
+
+    /* En pantallas más pequeñas, mejor apilarlas (ya tienes 1024px, pero subimos el corte) */
+    @media (max-width: 1180px) {
+    .content-grid{
+        grid-template-columns: 1fr;
+    }
+    }
+
+    /* Evita que un texto largo (email) rompa el layout del flex */
+    .list-item{
+    min-width: 0;
+    }
+
+    .item-info{
+    min-width: 0;
+    flex: 1;
+    }
+
+    /* Permite que el subtitle (email) rompa línea en vez de empujar */
+    .item-subtitle{
+    white-space: normal;          /* antes puede estar heredando nowrap */
+    overflow-wrap: anywhere;      /* rompe emails largos */
+    word-break: break-word;
+    }
+
+    /* Si prefieres que NO rompa línea y solo ponga "..." */
+    .item-title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    }
+
+    /* Opcional: también en subtitle con ellipsis (si lo quieres en 1 línea) */
+    /*
+    .item-subtitle{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    }
+    */
+
+
+
 </style>
 @endpush
 
@@ -466,7 +661,7 @@
             <div class="stat-icon primary">
                 <i class="fas fa-clipboard-check"></i>
             </div>
-            <div class="stat-content">
+            <div class="stat-content font-sans font-semibold">
                 <h3>Total de Triajes</h3>
                 <div class="stat-value">{{ $stats['total_triajes'] }}</div>
                 <div class="stat-change positive">
@@ -483,7 +678,7 @@
             <div class="stat-icon success">
                 <i class="fas fa-box-open"></i>
             </div>
-            <div class="stat-content">
+            <div class="stat-content font-sans font-semibold">
                 <h3>Productos Registrados</h3>
                 <div class="stat-value">{{ $stats['total_productos'] }}</div>
                 <div class="stat-change positive">
@@ -500,7 +695,7 @@
             <div class="stat-icon warning">
                 <i class="fas fa-users"></i>
             </div>
-            <div class="stat-content">
+            <div class="stat-content font-sans font-semibold">
                 <h3>Usuarios Registrados</h3>
                 <div class="stat-value">{{ $stats['total_usuarios'] }}</div>
             </div>
@@ -513,7 +708,7 @@
             <div class="stat-icon danger">
                 <i class="fas fa-exclamation-triangle"></i>
             </div>
-            <div class="stat-content">
+            <div class="stat-content font-sans font-semibold">
                 <h3>Casos Urgentes</h3>
                 <div class="stat-value">{{ $stats['triajes_urgentes'] }}</div>
                 <div class="stat-change negative">
@@ -529,7 +724,7 @@
 <div class="content-grid">
     <div class="chart-container">
         <div class="card-header">
-            <h3 class="card-title">
+            <h3 class="card-title font-sans font-semibold">
                 <i class="fas fa-chart-pie"></i>
                 Distribución por Nivel de Atención
             </h3>
@@ -542,7 +737,7 @@
     
     <div class="dashboard-card">
         <div class="card-header">
-            <h3 class="card-title">
+            <h3 class="card-title font-sans font-semibold">
                 <i class="fas fa-tachometer-alt"></i>
                 Resumen del Sistema
             </h3>
@@ -608,7 +803,7 @@
 <div class="cards-grid">
     <div class="dashboard-card">
         <div class="card-header">
-            <h3 class="card-title">
+            <h3 class="card-title font-sans font-semibold">
                 <i class="fas fa-history"></i>
                 Triajes Recientes
             </h3>
@@ -651,7 +846,7 @@
    
     <div class="dashboard-card">
         <div class="card-header">
-            <h3 class="card-title">
+            <h3 class="card-title font-sans font-semibold">
                 <i class="fas fa-users"></i>
                 Usuarios Recientes
             </h3>
@@ -689,7 +884,7 @@
 
 <div class="dashboard-card">
     <div class="card-header">
-        <h3 class="card-title">
+        <h3 class="card-title font-sans font-semibold">
             <i class="fas fa-box-open"></i>
             Productos Recientes
         </h3>
